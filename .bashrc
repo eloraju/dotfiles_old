@@ -32,7 +32,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 PATH="$PATH:/home/juuso/.scripts:/home/juuso/.dotX/executables"; export PATH
-
+source ~/.dotX/git-completion.bash
 ##### Automatically added lines #####
 export EDITOR=nvim
 

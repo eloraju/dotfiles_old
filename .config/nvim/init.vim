@@ -1,8 +1,7 @@
 call plug#begin('~/.config/nvim/plugs')
 
 " vim plugins
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'branch': 'release' }
 " TYPESCRIPT
 " REQUIRED: Add a syntax file. YATS is the best
 Plug 'HerringtonDarkholme/yats.vim'
@@ -58,24 +57,8 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 " Custom keybinds
 
-" Indent document
-map <C-M-l> magg=G'a
 " Tab movement and creation
 noremap <M-k> :tabn<CR>
 noremap <M-j> :tabp<CR>
 noremap <M-t> :tabnew<CR>
 
-" -------------- TYPESCRIPT SPESIFIC STUFF --------------
-" Show TypeScript diagnostics
-noremap <M-.> :TSGetDiagnostics<CR>
-" Open TSDoc
-noremap <M-q> :TSDoc<CR>
-" Jump to definition
-noremap <M-d> :TSDef<CR>
-" Rename
-noremap <M-r> :TSRename<CR>
-" Show references
-noremap <M-f> :TSRefs<CR>
-" Show error diagnostics
-noremap <M-CR> :TSGetCodeFix<CR>
-" -------------- End TS  --------------
