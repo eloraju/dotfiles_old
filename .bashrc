@@ -43,6 +43,7 @@ alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 alias config='/usr/bin/git --git-dir=/home/juuso/.dotfiles/ --work-tree=$HOME'
+alias pacman='sudo pacman'
 
 if [ "$TERM" != "linux" ]; then
 	source ~/.dotX/pureline ~/.config/pureline.conf
