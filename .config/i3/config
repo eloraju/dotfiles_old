@@ -27,7 +27,7 @@ floating_modifier $mod
 bindsym $mod+Return exec $terminal 
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym $mod+Ctrl+x xkill
+bindsym $mod+Ctrl+x exec --no-startup-id xkill
 
 # start program launcher
 bindsym $mod+a exec --no-startup-id rofi -show drun
@@ -37,11 +37,7 @@ bindsym $mod+Shift+e exec --no-startup-id rofimoji --skin-tone neutral
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec $terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
@@ -195,7 +191,7 @@ for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [urgent=latest] focus
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart; exec --no-startup-id ~/.scripts/polystart
 
 bindsym $mod+Shift+o resize grow height 5 px or 5 ppt
 bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
@@ -251,37 +247,7 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-	i3bar_command polybar example
-	#status_command i3status
-	position top
-
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-#   font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
-
-    colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
-
-#                      border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
-    }
-}
-
-# hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+### Start polybar
 
 ################
 ### THEMEING ###
@@ -327,3 +293,4 @@ smart_borders on
 
 exec_always --no-startup-id ~/.scripts/on-startup
 exec_always --no-startup-id ~/.scripts/monconf
+exec_always --no-startup-id ~/.scripts/polystart

@@ -1,5 +1,14 @@
 #!/bin/bash
+killall -q polybar
+LAPTOP_LOG="/home/juuso/.config/polybar/laptop.log"
+OFFICE_LOG="/home/juuso/.config/polybar/office.log"
 
-for m in $(polybar --list-monitors | cut -d":" -f1; do
-	MONITOR=$m polybar --reload example &
+while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
+
+for m in $(polybar --list-monitors | cut -d : -f1); do
+	if [ $m == "eDP1" ]; then
+		polybar --reload laptop & >> $LAPTOP_LOG
+	elif [ $m == "DP1" ]; then
+		polybar --reload office & >> $OFFICE_LOG
+	fi
 done
