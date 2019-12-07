@@ -292,5 +292,3 @@ smart_borders on
 #######################
 
 exec_always --no-startup-id ~/.scripts/on-startup
-exec_always --no-startup-id ~/.scripts/monconf
-exec_always --no-startup-id ~/.scripts/polystart

@@ -32,11 +32,11 @@ alert = #bd2c40
 [bar/laptop]
 monitor = eDP1 
 width = 100%
-height = 24
+height = 25
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -56,6 +56,7 @@ module-margin-right = 2
 font-0 = SauceCodePro Nerd Font:size=13;2
 font-1 = TerminessTTFNerdFontMono:size=13;0
 font-2 = FuraCode Nerd Font: size=13;0
+font-3 = SauceCodePro Nerd Font: size=18;4
 
 modules-left = i3
 modules-center = date
@@ -85,13 +86,13 @@ cursor-scroll = ns-resize
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; START OFFICE
 [bar/office]
-monitor = DP1 
+monitor = DP1
 width = 100%
-height = 24
+height = 25:
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -108,16 +109,17 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=12;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=12;1
+font-0 = SauceCodePro Nerd Font:size=13;2
+font-1 = TerminessTTFNerdFontMono:size=13;0
+font-2 = FuraCode Nerd Font: size=13;0
+font-3 = SauceCodePro Nerd Font: size=18;4
 
-modules-left = bspwm i3
-modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = i3
+modules-center = date
+modules-right = memory cpu wlan battery
 
-tray-position = right
-tray-padding = 2
+;tray-position = right
+;tray-padding = 2
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
@@ -133,54 +135,50 @@ tray-padding = 2
 
 cursor-click = pointer
 cursor-scroll = ns-resize
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; END OFFICE
 
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
+pin-workspaces = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 1
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
-label-unfocused-padding = 2
+label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
+label-visible-padding = 1
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
-
-label-song-maxlen = 25
-label-song-ellipsis = true
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-font = 4
 label = %percentage:2%%
 
 [module/memory]
@@ -188,6 +186,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-font = 4
 label = %gb_used%/%gb_free%
 
 [module/wlan]
@@ -196,6 +195,7 @@ interface = wlp0s20f3
 interval = 3.0
 
 format-connected-prefix = "說 "
+format-connected-prefix-font = 4
 format-connected-prefix-foreground = ${colors.foreground-alt}
 format-connected = <label-connected>
 label-connected = %essid%
@@ -220,23 +220,24 @@ type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-time-format= %-Hh %-mmin
+time-format= %-Hh
 
-label-charging=%percentage%
+label-charging=%percentage%%
 format-charging =<ramp-capacity> <label-charging>
 format-charging-prefix = 
-format-charging-prefix-foreground = #c9c347
+format-charging-prefix-foreground = #2e943f
 
-label-discharging =%percentage%% ~ %time%
+label-discharging =%percentage%% ~%time%
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-prefix = 
 format-discharging-prefix-foreground = #943e2c
 
-label-full = "Charged"
+label-full = 100%
 
 format-full-prefix = "異 "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = #2e943f
+format-full-prefix-font = 4
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -248,6 +249,7 @@ ramp-capacity-6 = 
 ramp-capacity-7 = 
 ramp-capacity-8 = 
 ramp-capacity-9 = 
+ramp-capacity-font = 4
 
 
 
