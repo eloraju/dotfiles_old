@@ -39,10 +39,29 @@ set number
 " Copied from https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f
 set smarttab
 set cindent
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 " always uses spaces instead of tab characters
 set expandtab
+
+
+" sync open file with NERDTree
+" " Check if NERDTree is open or active
+function! IsNERDTreeOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()
 
 " Set ctrlp to skip files in .gitignore
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -91,4 +110,58 @@ let g:lightline = {
       \ }
 
 " CoC stuff
-inoremap <silent><C-space> coc#refresh()
+inoremap <silent><expr> <C-space> coc#refresh()
+" Remap goto
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+nnoremap <silent> <C-M-i> :call CocAction('format')<CR>
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" from readme
+" if hidden is not set, TextEdit might fail.
+" Some servers have issues with backup files, see #649 set nobackup set nowritebackup 
+set hidden 
+" Better display for messages
+set cmdheight=2 
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
