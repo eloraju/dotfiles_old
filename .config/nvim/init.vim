@@ -44,6 +44,25 @@ set shiftwidth=4
 " always uses spaces instead of tab characters
 set expandtab
 
+let g:NERDTreeIgnore = ['^node_modules$']
+
+" open NERDTree automatically
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree
+
+let g:NERDTreeGitStatusWithFlags = 1
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"let g:NERDTreeGitStatusNodeColorization = 1
+"let g:NERDTreeColorMapCustom = {
+    "\ "Staged"    : "#0ee375",  
+    "\ "Modified"  : "#d9bf91",  
+    "\ "Renamed"   : "#51C9FC",  
+    "\ "Untracked" : "#FCE77C",  
+    "\ "Unmerged"  : "#FC51E6",  
+    "\ "Dirty"     : "#FFBD61",  
+    "\ "Clean"     : "#87939A",   
+    "\ "Ignored"   : "#808080"   
+    "\ }                         
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
@@ -78,7 +97,7 @@ map <Leader> <Plug>(easymotion-prefix)
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-inoremap <C-M-i> <esc>
+inoremap jk <esc>
 
 " Move lines up and down
 nnoremap <C-M-j> :m+<cr>

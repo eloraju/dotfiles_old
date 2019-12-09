@@ -27,6 +27,7 @@ foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+active = #3e943f
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; START LAPTOP
 [bar/laptop]
@@ -153,7 +154,7 @@ label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.active}
 label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
@@ -162,7 +163,7 @@ label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
-label-visible-background = ${self.label-focused-background}
+label-visible-background = ${colors.background-alt}
 label-visible-padding = 1
 
 ; urgent = Workspace with urgency hint set
@@ -236,7 +237,7 @@ format-discharging-prefix-foreground = #943e2c
 label-full = 100%
 
 format-full-prefix = "異 "
-format-full-prefix-foreground = #2e943f
+format-full-prefix-foreground = ${colors.active}
 format-full-prefix-font = 4
 
 ramp-capacity-0 = 
