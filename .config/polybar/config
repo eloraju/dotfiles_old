@@ -192,7 +192,7 @@ label = %gb_used%/%gb_free%
 [module/wlan]
 type = internal/network
 interface = wlp0s20f3
-interval = 3.0
+interval = 1.0
 
 format-connected-prefix = "說 "
 format-connected-prefix-font = 4

@@ -2,14 +2,6 @@ call plug#begin('~/.config/nvim/plugs')
 
 " vim plugins
 Plug 'neoclide/coc.nvim', {'branch': 'release' }
-" TYPESCRIPT
-" REQUIRED: Add a syntax file. YATS is the best
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" For async completion
-Plug 'Shougo/deoplete.nvim'
-" For Denite features
-Plug 'Shougo/denite.nvim'
 " Git blame
 Plug 'APZelos/blamer.nvim'
 
@@ -23,7 +15,13 @@ Plug 'morhetz/gruvbox'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'jacoborus/tender.vim'
 Plug 'tomasiser/vim-code-dark'
-
+Plug 'itchyny/lightline.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'sinetoami/lightline-hunks'
 
 call plug#end()
 
@@ -38,10 +36,17 @@ colorscheme codedark
 set relativenumber
 set number
 
+" Copied from https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f
+set smarttab
+set cindent
+set tabstop=2
+set shiftwidth=2
+" always uses spaces instead of tab characters
+set expandtab
+
 " Set ctrlp to skip files in .gitignore
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_complete_snippet = 1
 
 let g:blamer_enabled = 1
@@ -54,11 +59,36 @@ map <Leader> <Plug>(easymotion-prefix)
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <C-M-i> <esc>
 
-" Custom keybinds
+" Move lines up and down
+nnoremap <C-M-j> :m+<cr>
+nnoremap <C-M-k> :m-2<cr>
 
 " Tab movement and creation
 noremap <M-k> :tabn<CR>
 noremap <M-j> :tabp<CR>
 noremap <M-t> :tabnew<CR>
 
+set noshowmode
+
+" Lightline + CoC
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'lightline_hunks','cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'lightline_hunks': 'lightline#hunks#composer'
+      \ },
+      \ }
+
+" CoC stuff
+inoremap <silent><C-space> coc#refresh()
