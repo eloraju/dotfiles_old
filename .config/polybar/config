@@ -29,6 +29,10 @@ secondary = #e60053
 alert = #bd2c40
 active = #3e943f
 
+[scripts]
+bluetooth = ~/.config/polybar/modules/poly-bt.sh
+bluetooth-toggle = ~/.config/polybar/modules/poly-bt.sh --toggle &
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; START LAPTOP
 [bar/laptop]
 monitor = eDP1 
@@ -61,7 +65,7 @@ font-3 = SauceCodePro Nerd Font: size=18;4
 
 modules-left = i3
 modules-center = date
-modules-right = memory cpu wlan battery
+modules-right = bt memory cpu wlan battery
 
 ;tray-position = right
 ;tray-padding = 2
@@ -252,6 +256,12 @@ ramp-capacity-8 = 
 ramp-capacity-9 = 
 ramp-capacity-font = 4
 
+[module/bt]
+type = custom/script
+exec = ${scripts.bluetooth}
+tail = true
+click-right = exec blueman-manager
+click-left =  ~/.config/polybar/modules/poly-bt.sh --toggle & 
 
 
 [settings]
