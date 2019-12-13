@@ -30,8 +30,13 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Ctrl+x exec --no-startup-id xkill
 
 # start program launcher
-bindsym $mod+a exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+e exec --no-startup-id rofimoji --skin-tone neutral
+# web-search
+bindsym $mod+Ctrl+Return exec --no-startup-id ~/.scripts/web-search.sh
+
+# Bind most used programs to function keys
+bindsym $mod+F1 exec chromium
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -201,7 +206,7 @@ bindsym $mod+o resize grow width 5 px or 5 ppt
 
 
 # Lock screen
-bindsym $mod+Ctrl+Mod1+l exec --no-startup-id ~/.scripts/blurlock 
+bindsym $mod+Ctrl+Mod1+l exec --no-startup-id dm-tool lock
 
 # Autostart applications
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -291,3 +296,4 @@ smart_borders on
 #######################
 #### STARTUP STUFF ####
 #######################
+exec --no-startup-id ~/.scripts/on-startup

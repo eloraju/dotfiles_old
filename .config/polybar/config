@@ -29,10 +29,6 @@ secondary = #e60053
 alert = #bd2c40
 active = #3e943f
 
-[scripts]
-bluetooth = ~/.config/polybar/modules/poly-bt.sh
-bluetooth-toggle = ~/.config/polybar/modules/poly-bt.sh --toggle &
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; START LAPTOP
 [bar/laptop]
 monitor = eDP1 
@@ -65,7 +61,7 @@ font-3 = SauceCodePro Nerd Font: size=18;4
 
 modules-left = i3
 modules-center = date
-modules-right = bt memory cpu wlan battery
+modules-right = memory cpu wlan battery
 
 ;tray-position = right
 ;tray-padding = 2
@@ -205,16 +201,16 @@ format-connected-prefix-foreground = ${colors.foreground-alt}
 format-connected = <label-connected>
 label-connected = %essid%
 
-format-disconnected ="No connection"
-;format-disconnected = <label-disconnected>
-;label-disconnected = %ifname% disconnected
+;format-disconnected ="No connection"
+format-disconnected = <label-disconnected>
+label-disconnected = "No connection"
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
 interval = 1
 
-date = %a %d. %b
+date = %a %e. %b
 
 time = %H:%M
 

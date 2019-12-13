@@ -99,6 +99,7 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 inoremap jk <esc>
 
+
 " Move lines up and down
 nnoremap <C-M-j> :m+<cr>
 nnoremap <C-M-k> :m-2<cr>
@@ -109,6 +110,10 @@ noremap <M-j> :tabp<CR>
 noremap <M-t> :tabnew<CR>
 
 set noshowmode
+
+" Run current script and print the output to new buffer
+nnoremap <F5> :tabe\|read !bash #<CR>
+nnoremap <M-F5> :source ~/.config/nvim/init.vim<CR>
 
 " Lightline + CoC
 function! CocCurrentFunction()
@@ -169,6 +174,8 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+nnoremap <silent> <M-f> :CocAction<CR>
 
 " from readme
 " if hidden is not set, TextEdit might fail.
