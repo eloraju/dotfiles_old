@@ -18,6 +18,9 @@ super + shift + e
 super + ctrl + Return
     ~/.scripts/web-search.sh
 
+super + alt + Return
+    ~/.scripts/open-config
+
 # Quicklaunch programs
 super + F1
     chromium

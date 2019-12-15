@@ -59,7 +59,7 @@ font-1 = TerminessTTFNerdFontMono:size=13;0
 font-2 = FuraCode Nerd Font: size=13;0
 font-3 = SauceCodePro Nerd Font: size=18;4
 
-modules-left = i3
+modules-left = bspwm
 modules-center = date
 modules-right = memory cpu wlan battery
 
@@ -67,7 +67,7 @@ modules-right = memory cpu wlan battery
 ;tray-padding = 2
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -115,7 +115,7 @@ font-1 = TerminessTTFNerdFontMono:size=13;0
 font-2 = FuraCode Nerd Font: size=13;0
 font-3 = SauceCodePro Nerd Font: size=18;4
 
-modules-left = i3
+modules-left = bspwm
 modules-center = date
 modules-right = memory cpu wlan battery
 
@@ -123,7 +123,7 @@ modules-right = memory cpu wlan battery
 ;tray-padding = 2
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -173,6 +173,19 @@ label-urgent-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
+
+[module/bspwm]
+type = internal/bspwm
+enable-scroll = false
+
+label-focused = %index%
+label-focused-background = ${colors.active}
+label-focused-padding = 1
+
+label-empty-padding = 1
+label-occupied-padding = 1
+label-urgent-padding = 1
+label-dimmed-padding = 1
 
 [module/cpu]
 type = internal/cpu
@@ -260,6 +273,7 @@ click-right = exec blueman-manager
 click-left =  ~/.config/polybar/modules/poly-bt.sh --toggle & 
 
 
+
 [settings]
 screenchange-reload = true
 ;compositing-background = xor
@@ -269,7 +283,4 @@ screenchange-reload = true
 ;pseudo-transparency = false
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
-
-; vim:ft=dosini
+margin-bottom = 0
