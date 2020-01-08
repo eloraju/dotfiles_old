@@ -32,7 +32,7 @@ super + F1
 #
 
 # quit/restart bspwm
-super + shift + r
+super + alt + ctrl + r
 	bspc wm -r
 
 # close and kill
@@ -51,9 +51,44 @@ super + y
 super + g
 	bspc node -s biggest
 
-# focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+# Change focus to montor
+#super + ctrl + {h, l}
+#    bspc monitor -f {west, east}
+
+# Change focus to window OR monitor
+# Switches focus to monitor if there are no windows to move to
+super + shift + {h,j,k,l}
+    bspc config pointer_follows_focus true; \
+    cur_win=$(bspc query -N -n); \
+    cur_mon=$(bspc query -M -m); \
+    dir={west,south,north,east}; \
+    if ! bspc node -f $dir; then \
+        bspc node -m $dir; \
+        bspc monitor -f $dir; \
+    else \
+        new_mon=$(bspc query -M -m); \
+        [ "$new_mon" = "$cur_mon" ] && \
+            bspc node -s $cur_win || \
+            bspc node $cur_win -m $new_mon; \
+        bspc node -f $cur_win; \
+    fi; \
+    bspc config pointer_follows_focus false
+
+super +  {h,j,k,l}
+    bspc config pointer_follows_monitor true; \
+    bspc config pointer_follows_focus true; \
+    dir={west,south,north,east}; \
+    bspc node -f $dir || bspc monitor -f $dir; \
+    bspc config pointer_follows_monitor false; \
+    bspc config pointer_follows_focus false
+
+## focus the node in the given direction
+#super + {_,shift + }{h,j,k,l}
+#	bspc node -{f,s} {west,south,north,east}
+#
+## focus the node in the given direction
+#super + {_,shift + }{Left,Down,Up,Right}
+#	bspc node -{f,s} {west,south,north,east}
 
 # focus or send to the given workspace
 super + {_,shift + }{1-9,0}

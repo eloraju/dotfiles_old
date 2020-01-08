@@ -2,5 +2,14 @@
 /home/juuso/.scripts/on-startup
 sxhkd &
 
-bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9
 
+if [[ (xrandr | grep ' connected' | wc -l) -gt 1 ]];
+then
+    bspwm-set-monitors 2
+    notify-send "Using two monitors"
+else
+    bspwm-set-monitors 1
+    notify-send "Using one monitor"
+fi
+
+bspc rule -a emacs state=tiled

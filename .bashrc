@@ -31,7 +31,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-PATH="$PATH:/home/juuso/.scripts:/home/juuso/.dotX/executables"; export PATH
+PATH="$PATH:/home/juuso/.scripts:/home/juuso/.dotX/executables:/home/juuso/.gem/ruby/2.6.0/bin"; export PATH
 source ~/.dotX/git-completion.bash
 ##### Automatically added lines #####
 export EDITOR=nvim
@@ -51,7 +51,5 @@ fi
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
-pfetch
 
 ##### End #####
