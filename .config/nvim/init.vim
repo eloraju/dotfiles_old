@@ -191,3 +191,6 @@ set shortmess+=c
 
 " always show signcolumns
 set signcolumn=yes
+
+" Mouse scrolling
+set mouse=a

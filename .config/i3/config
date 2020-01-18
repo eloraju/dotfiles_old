@@ -31,7 +31,7 @@ bindsym $mod+Ctrl+x exec --no-startup-id xkill
 
 # start program launcher
 bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun
-bindsym $mod+Shift+e exec --no-startup-id rofimoji --skin-tone neutral
+bindsym $mod+Shift+e exec --no-startup-id rofimoji
 # web-search
 bindsym $mod+Ctrl+Return exec --no-startup-id ~/.scripts/web-search.sh
 # script editor
@@ -39,6 +39,10 @@ bindsym $mod+Mod1+Return exec --no-startup-id ~/.scripts/open-config
 
 # Bind most used programs to function keys
 bindsym $mod+F1 exec chromium
+
+# Screenshots
+bindsym $mod+Print exec --no-startup-id scrot ~/Pictures/screenshots/%Y-%m-%d-%T.png
+bindsym --release $mod+Shift+Print exec --no-startup-id scrot --select ~/Pictures/screenshots/%Y-%m-%d-%T.png
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
