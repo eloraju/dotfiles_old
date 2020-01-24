@@ -4,7 +4,6 @@ call plug#begin('~/.config/nvim/plugs')
 Plug 'neoclide/coc.nvim', {'branch': 'release' }
 " Git blame
 Plug 'APZelos/blamer.nvim'
-
 Plug 'scrooloose/nerdTree'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
@@ -16,8 +15,6 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'jacoborus/tender.vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'itchyny/lightline.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -93,7 +90,8 @@ let g:blamer_delay = 250
 " Remaps
 nmap <C-b> :NERDTreeToggle<CR> 
 
-map <Leader> <Plug>(easymotion-prefix)
+map <C-g> <Plug>(easymotion-prefix)w
+map <M-g> <Plug>(easymotion-prefix)b
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
@@ -107,12 +105,15 @@ nnoremap <C-M-k> :m-2<cr>
 " Tab movement and creation
 noremap <M-k> :tabn<CR>
 noremap <M-j> :tabp<CR>
-noremap <M-t> :tabnew<CR>
+noremap <M-t> :tabnew<CR>:CtrlP<CR>
+
+" Split creation
+noremap <C-s>j :split<CR><C-w>j:CtrlP<CR>
+noremap <C-s>l :vsplit<CR><C-w>l:CtrlP<CR>
 
 set noshowmode
 
-" Run current script and print the output to new buffer
-nnoremap <F5> :tabe\|read !bash #<CR>
+" Reload vimrc
 nnoremap <M-F5> :source ~/.config/nvim/init.vim<CR>
 
 " Lightline + CoC
@@ -123,15 +124,19 @@ endfunction
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'lightline_hunks','cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \   'left': [ ['mode', 'paste'],
+      \             ['filename', 'modified']],
+      \  'right': [['lineinfo'],
+      \           ['filetype'],
+      \           ['lightline_hunks']]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
       \   'currentfunction': 'CocCurrentFunction',
       \   'lightline_hunks': 'lightline#hunks#composer'
       \ },
       \ }
+
+let g:lightline#hunks#only_branch = 1
 
 " CoC stuff
 inoremap <silent><expr> <C-space> coc#refresh()
@@ -140,6 +145,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nnoremap sag :w<CR>:!git add %<CR>
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
