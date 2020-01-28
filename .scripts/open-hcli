@@ -1,0 +1,16 @@
+#!/bin/bash
+declare -A CORES
+USER="juuso.elo-rauta@hailer.com"
+CORES[dev]="https://api.hailer.biz"
+CORES[prod]="https://api.hailer.com"
+
+case "$1" in
+    "prod")
+        CORE=${CORES[prod]} hailer-cli
+        ;;
+    "dev")
+        CORE=${CORES[dev]} hailer-cli
+        ;;
+    *)
+        echo "Invalid argument or no argument. Usage: open-hcli [dev|prod]"
+esac

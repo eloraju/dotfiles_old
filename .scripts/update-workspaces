@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ $1 -eq 1 ]]; then
+    i3-msg 'workspace 1 output DP1'
+    i3-msg 'workspace 2 output DP1'
+    i3-msg 'workspace 3 output DP1'
+    i3-msg 'workspace 4 output DP1'
+    i3-msg 'workspace 5 output DP1'
+else
+    i3-msg 'workspace 1 output primary'
+    i3-msg 'workspace 2 output primary'
+    i3-msg 'workspace 3 output primary'
+    i3-msg 'workspace 4 output primary'
+    i3-msg 'workspace 5 output primary'
+fi
+

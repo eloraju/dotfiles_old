@@ -1,0 +1,13 @@
+#!/bin/bash
+
+reflector --country Finland \
+              --country Sweden \
+              --country Germany \
+              --country Norway \
+              --country Denmark \
+              --country 'United Kingdom' \
+              --country Netherlands \
+              --country Poland \
+              --latest 50 \
+              --sort rate \
+              --save /etc/pacman.d/mirrorlist
