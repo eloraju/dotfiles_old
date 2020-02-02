@@ -90,8 +90,8 @@ let g:blamer_delay = 250
 " Remaps
 nmap <C-b> :NERDTreeToggle<CR> 
 
-map <C-g> <Plug>(easymotion-prefix)w
-map <M-g> <Plug>(easymotion-prefix)b
+map <space>m <Plug>(easymotion-prefix)w
+map <C-space>m <Plug>(easymotion-prefix)b
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
@@ -114,7 +114,7 @@ noremap <C-s>l :vsplit<CR><C-w>l:CtrlP<CR>
 set noshowmode
 
 " Reload vimrc
-nnoremap <M-F5> :source ~/.config/nvim/init.vim<CR>
+nnoremap <M-5> :source ~/.config/nvim/init.vim<CR>
 
 " Lightline + CoC
 function! CocCurrentFunction()
@@ -126,9 +126,9 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['filename', 'modified']],
-      \  'right': [['lineinfo'],
-      \           ['filetype'],
-      \           ['lightline_hunks']]
+      \  'right': [ ['lineinfo'],
+      \             ['filetype'],
+      \             ['lightline_hunks']]
       \ },
       \ 'component_function': {
       \   'currentfunction': 'CocCurrentFunction',
@@ -176,9 +176,9 @@ nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <space>j  <Plug>(coc-diagnostic-next)
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <space>k  <Plug>(coc-diagnostic-prev)
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
