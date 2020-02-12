@@ -4,7 +4,7 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $font "pango: SauceCodePro Nerd Font Mono 12"
-set $terminal "termite"
+set $terminal "alacritty"
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -41,8 +41,8 @@ bindsym $mod+Mod1+Return exec --no-startup-id ~/.scripts/open-config
 bindsym $mod+F1 exec chromium
 
 # Screenshots
-bindsym $mod+Print exec --no-startup-id scrot ~/Pictures/screenshots/%Y-%m-%d-%T.png
-bindsym --release $mod+Shift+Print exec --no-startup-id scrot --select ~/Pictures/screenshots/%Y-%m-%d-%T.png
+bindsym Print --release exec "scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Shift+Print exec "scrot ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
