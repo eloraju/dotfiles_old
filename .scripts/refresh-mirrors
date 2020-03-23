@@ -1,0 +1,16 @@
+#!/bin/bash
+
+sudo reflector --country Finland \
+              --country Sweden \
+              --country Germany \
+              --country Norway \
+              --country Denmark \
+              --country 'United Kingdom' \
+              --country Netherlands \
+              --country Poland \
+              --latest 50 \
+              --sort rate \
+              --save /etc/pacman.d/mirrorlist
+
+echo "Done. Wrote the following mirrors to /etc/pacman.d/mirrorlist"
+cat /etc/pacman.d/mirrorlist

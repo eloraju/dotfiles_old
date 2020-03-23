@@ -1,0 +1,56 @@
+#!/bin/env bash
+
+declare -A CONFIGS
+
+CONFIGS=(
+        ["i3"]=~/.config/i3/config
+        ["bspwm"]=~/.config/bspwm/bspwmrc
+        ["sxhkd"]=~/.config/sxhkd/sxhkdrc
+        ["nvim"]=~/.config/nvim/init.vim
+        ["polybar"]=~/.config/polybar/config
+)
+
+gen_confs() {
+    for c in "${!CONFIGS[@]}"
+    do
+        echo "$c"
+    done
+}
+
+openScripts() {
+    script=$( (ls ~/.scripts) | rofi -dmenu -matching fuzzy -no-custom -location o -p "Select script or type a new for new one")
+
+    if [[ -n "$script" ]];
+    then
+        openInEditor ~/.scripts/$script
+    else
+        touch ~/.script/$script
+        chmod 755 ~/.scripts/$script
+        openInEditor ~/.scripts/$script
+    fi
+}
+
+openConfig() {
+    sel=$( (gen_confs) | rofi -dmenu -matching fuzzy -no-custom -location o -p "Select config")
+    if [[ -n "$sel" ]]; then
+        path=${CONFIGS[$sel]}
+        openInEditor $path
+    fi
+}
+
+openInEditor() {
+    $TERM -e nvim $1
+}
+
+main() {
+    choice=$( (echo "scripts" && echo "confs") | rofi -dmenu -matching fuzzy -no-custom -location 0 -p "Type")
+
+    if [[ "$choice" == "scripts" ]]; then
+        openScripts
+    elif [[ "$choice" == "confs" ]]; then
+        openConfig
+    fi
+
+}
+main
+exit 0

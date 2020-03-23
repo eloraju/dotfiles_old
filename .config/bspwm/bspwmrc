@@ -12,4 +12,4 @@ else
     notify-send "Using one monitor"
 fi
 
-bspc rule -a emacs state=tiled
+bspc rule -a urxvt state=tiled

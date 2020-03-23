@@ -1,0 +1,14 @@
+#!/bin/bash
+
+img="$HOME/.cache/i3lock.png"
+
+# Remove the old image to prevent scrot from
+# appending numbers to the name
+rm $img
+
+scrot $img
+# Pixelate image
+convert $img -scale 10% -scale 1000% $img
+# Blur image
+#convert $img -blur 0x4 500% $img
+i3lock -i $img

@@ -41,8 +41,8 @@ bindsym $mod+Mod1+Return exec --no-startup-id ~/.scripts/open-config
 bindsym $mod+F1 exec brave
 
 # Screenshots
-bindsym $mod+Print exec --no-startup-id scrot ~/Pictures/screenshots/%Y-%m-%d-%T.png
-bindsym --release $mod+Shift+Print exec --no-startup-id scrot --select ~/Pictures/screenshots/%Y-%m-%d-%T.png
+bindsym Print --release exec "scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Shift+Print exec "scrot ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 # Screenshots for desktop. I'm lazy and didn't program print screen on my keyboard 🤷
 bindsym $mod+p exec --no-startup-id scrot ~/Pictures/screenshots/%Y-%m-%d-%T.png
