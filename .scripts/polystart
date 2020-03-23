@@ -10,5 +10,9 @@ for m in $(polybar --list-monitors | cut -d : -f1); do
 		polybar --reload laptop & >> $LAPTOP_LOG
 	elif [ $m == "DP1" ]; then
 		polybar --reload office & >> $OFFICE_LOG
+	elif [ $m == "DP-0" ]; then
+		polybar --reload homesmall & >> $OFFICE_LOG
+	elif [ $m == "HDMI-0" ]; then
+		polybar --reload home4k & >> $OFFICE_LOG
 	fi
 done
