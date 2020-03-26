@@ -1,0 +1,4 @@
+#!/bin/sh
+export PATH=$HOME/.scripts:$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin/:$PATH
+
+export ZDOTDIR=$HOME/.config/zsh
