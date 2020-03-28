@@ -1,9 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.scripts:$HOME/bin:/usr/local/bin:$HOME/.emacs.d/bin/:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/juuso/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -143,10 +140,6 @@ bindkey '^e' edit-command-line
 # Add hidden files to autocomplete
 compinit
 _comp_options+=(globdots)
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
