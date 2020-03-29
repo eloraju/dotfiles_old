@@ -8,3 +8,17 @@ alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias sysus="systemctl suspend"
 
 alias grubdate="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+
+alias refresh-mirrors="sudo echo 'Refreshing mirrors...' &&\
+                sudo reflector --country Finland \
+                --country Sweden \
+                --country Germany \
+                --country Norway \
+                --country Denmark \
+                --country 'United Kingdom' \
+                --country Netherlands \
+                --country Poland \
+                --latest 50 \
+                --sort rate \
+                --save /etc/pacman.d/mirrorlist &&\
+                echo 'Mirrors refreshed.'"
