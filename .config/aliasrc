@@ -1,0 +1,10 @@
+alias ls="ls --color=auto"
+alias la="ls -la --color=auto"
+alias ll="ls -l --color=auto"
+alias pacman="sudo pacman"
+alias update="sudo pacman -Suy"
+
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias sysus="systemctl suspend"
+
+alias grubdate="sudo grub-mkconfig -o /boot/grub/grub.cfg"
