@@ -1,0 +1,30 @@
+#!/bin/sh
+
+WP_PATH=$HOME/.config/wallpaper
+
+setWP() {
+    cp $1 $WP_PATH
+    pywalCheck
+}
+
+setRandomWP() {
+    cp "$(find "$1" -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -type f | shuf -n 1)" "$WP_PATH"
+    pywalCheck
+}
+
+pywalCheck() {
+    walInstalled="$(which wal)"
+    if [ -z "$walInstalled" ]; then
+        feh --bg-scaled $WP_PATH
+    else
+        wal -c
+        wal -i "$WP_PATH"
+        # Should add a postrun script with "-o path/to/script/"?
+    fi
+
+    notify-send -i $WP_PATH "Wallpaper changed"
+}
+
+
+[ -f "$1" ] && setWP $1
+[ -d "$1" ] && setRandomWP $1
