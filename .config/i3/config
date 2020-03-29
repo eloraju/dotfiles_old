@@ -31,7 +31,7 @@ bindsym $mod+Ctrl+x exec --no-startup-id xkill
 
 # start program launcher
 bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun
-bindsym $mod+Shift+e exec --no-startup-id rofimoji -c
+bindsym $mod+Shift+e exec --no-startup-id rofimoji
 # web-search
 bindsym $mod+Ctrl+Return exec --no-startup-id ~/.scripts/web-search.sh
 # script editor

@@ -1,13 +1,14 @@
 #!/bin/env bash
 
 declare -A CONFIGS
+TERM='alacritty'
 
 CONFIGS=(
-        ["i3"]=~/.config/i3/config
-        ["bspwm"]=~/.config/bspwm/bspwmrc
-        ["sxhkd"]=~/.config/sxhkd/sxhkdrc
-        ["nvim"]=~/.config/nvim/init.vim
-        ["polybar"]=~/.config/polybar/config
+        ["i3"]=$HOME/.config/i3/config
+        ["bspwm"]=$HOME/.config/bspwm/bspwmrc
+        ["sxhkd"]=$HOME/.config/sxhkd/sxhkdrc
+        ["nvim"]=$HOME/.config/nvim/init.vim
+        ["polybar"]=$HOME/.config/polybar/config
 )
 
 gen_confs() {
@@ -39,6 +40,7 @@ openConfig() {
 }
 
 openInEditor() {
+    echo $TERM
     $TERM -e nvim $1
 }
 
