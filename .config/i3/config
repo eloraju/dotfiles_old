@@ -228,20 +228,6 @@ bindsym $mod+o resize grow width 5 px or 5 ppt
 # Lock screen
 bindsym $mod+Ctrl+Mod1+l exec --no-startup-id dm-tool lock
 
-# Autostart applications
-#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-#exec --no-startup-id manjaro-hello
-#exec --no-startup-id nm-applet
-#exec --no-startup-id xfce4-power-manager
-#exec --no-startup-id pamac-tray
-#exec --no-startup-id clipit
-#exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
-#exec --no-startup-id xautolock -time 10 -locker blurlock
-#exec_always --no-startup-id ff-theme-util
-#exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id nitrogen --restore
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -317,4 +303,4 @@ smart_borders on
 #######################
 #### STARTUP STUFF ####
 #######################
-exec --no-startup-id ~/.scripts/on-startup
+#exec --no-startup-id ~/.scripts/on-startup
