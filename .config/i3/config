@@ -33,10 +33,8 @@ bindsym $mod+Ctrl+x exec --no-startup-id xkill
 #bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+Return exec dmenu_run -l 10 -p run: 
 bindsym $mod+Shift+e exec --no-startup-id rofimoji
-# web-search
-bindsym $mod+Ctrl+Return exec --no-startup-id ~/.scripts/web-search.sh
 # script editor
-bindsym $mod+Mod1+Return exec --no-startup-id ~/.scripts/open-config
+bindsym $mod+Mod1+Return exec --no-startup-id ~/bin/open-config
 
 # Bind most used programs to function keys
 bindsym $mod+F1 exec brave

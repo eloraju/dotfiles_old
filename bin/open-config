@@ -19,20 +19,20 @@ gen_confs() {
 }
 
 openScripts() {
-    script=$( (ls ~/.scripts) | rofi -dmenu -matching fuzzy -no-custom -location o -p "Select script or type a new for new one")
+   script=$( (ls ~/bin) | dmenu -l 10 )
 
-    if [[ -n "$script" ]];
+    if [[ -n "bin" ]];
     then
-        openInEditor ~/.scripts/$script
+        openInEditor ~/bin/$script
     else
-        touch ~/.script/$script
-        chmod 755 ~/.scripts/$script
-        openInEditor ~/.scripts/$script
+        touch ~/bin/$script
+        chmod 755 ~/bin/$script
+        openInEditor ~/bin/$script
     fi
 }
 
 openConfig() {
-    sel=$( (gen_confs) | rofi -dmenu -matching fuzzy -no-custom -location o -p "Select config")
+    sel=$( (gen_confs) | dmenu -l 10 ) 
     if [[ -n "$sel" ]]; then
         path=${CONFIGS[$sel]}
         openInEditor $path
@@ -45,7 +45,7 @@ openInEditor() {
 }
 
 main() {
-    choice=$( (echo "scripts" && echo "confs") | rofi -dmenu -matching fuzzy -no-custom -location 0 -p "Type")
+    choice=$( (echo "scripts" && echo "confs") | dmenu -l 10 )
 
     if [[ "$choice" == "scripts" ]]; then
         openScripts
