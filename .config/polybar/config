@@ -92,7 +92,7 @@ modules-left = i3
 [bar/homesmall]
 monitor = DP-0
 width = 100%
-height = 26
+height = 18
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
@@ -113,10 +113,10 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = JetBrainsMono Nerd Font Mono:size=12;2
-font-1 = TerminessTTFNerdFontMono:size=11;0
-font-2 = FuraCode Nerd Font: size=11;0
-font-3 = SauceCodePro Nerd Font: size=15;4
+font-0 = JetBrainsMono Nerd Font Mono:size=9;2
+font-1 = TerminessTTFNerdFontMono:size=9;0
+font-2 = FuraCode Nerd Font: size=9;0
+font-3 = SauceCodePro Nerd Font: size=9;4
 
 modules-center = date
 modules-right = memory cpu wlan battery
@@ -203,7 +203,7 @@ modules-left = i3
 [bar/home4k]
 monitor = HDMI-0
 width = 100%
-height = 20:
+height = 20
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
@@ -212,7 +212,7 @@ fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
+line-size = 1
 line-color = #f00
 
 border-size = 0
@@ -224,10 +224,10 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = JetBrainsMono Nerd Font Mono:size=15;0
-font-1 = TerminessTTFNerdFontMono:size=13;0
-font-2 = FuraCode Nerd Font: size=13;0
-font-3 = SauceCodePro Nerd Font: size=15;4
+font-0 = JetBrainsMono Nerd Font Mono:size=11;3
+font-1 = TerminessTTFNerdFontMono:size=11;0
+font-2 = FuraCode Nerd Font: size=11;0
+font-3 = SauceCodePro Nerd Font: size=11;4
 
 modules-center = date
 modules-right = memory cpu 
