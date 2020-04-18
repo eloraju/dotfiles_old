@@ -1,208 +1,196 @@
-if exists('g:vscode')
-    " VS Code plugins
-else
-    call plug#begin('~/.config/nvim/plugs')
+call plug#begin('~/.config/nvim/plugs')
 
-    " vim plugins
-    Plug 'neoclide/coc.nvim', {'branch': 'release' }
-    " Git blame
-    Plug 'APZelos/blamer.nvim'
-    Plug 'scrooloose/nerdTree'
-    Plug 'mattn/emmet-vim'
-    Plug 'tpope/vim-surround'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'easymotion/vim-easymotion'
-    Plug 'dracula/vim', {'as': 'dracula'}
-    Plug 'morhetz/gruvbox'
-    Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'jacoborus/tender.vim'
-    Plug 'tomasiser/vim-code-dark'
-    Plug 'itchyny/lightline.vim'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'tpope/vim-fugitive'
-    Plug 'sinetoami/lightline-hunks'
+" vim plugins
+Plug 'neoclide/coc.nvim', {'branch': 'release' }
+" Git blame
+Plug 'APZelos/blamer.nvim'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'morhetz/gruvbox'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'jacoborus/tender.vim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'sinetoami/lightline-hunks'
+Plug 'lokikl/vim-ctrlp-ag'
+Plug 'preservim/nerdcommenter'
 
-    call plug#end()
+call plug#end()
 
-    syntax on
+syntax on
 
-    colorscheme codedark
-    "colorscheme dracula 
-    "colorscheme gruvbox 
-    "colorscheme tender 
+let mapleader=" "
+filetype plugin on
 
-    " Set relative linenumbers
-    set relativenumber
-    set number
+colorscheme codedark
+"colorscheme dracula 
+"colorscheme gruvbox 
+"colorscheme tender 
 
-    " Copied from https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f
-    set smarttab
-    set cindent
-    set tabstop=4
-    set shiftwidth=4
-    " always uses spaces instead of tab characters
-    set expandtab
+" Set relative linenumbers
+set relativenumber
+set number
 
-    let g:NERDTreeIgnore = ['^node_modules$']
+" Copied from https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f
+set smarttab
+set cindent
+set tabstop=4
+set shiftwidth=4
+" always uses spaces instead of tab characters
+set expandtab
 
-    " open NERDTree automatically
-    "autocmd StdinReadPre * let s:std_in=1
-    "autocmd VimEnter * NERDTree
+" set automatic folding
+set foldmethod=syntax
 
-    let g:NERDTreeGitStatusWithFlags = 1
-    "let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-    "let g:NERDTreeGitStatusNodeColorization = 1
-    "let g:NERDTreeColorMapCustom = {
-                "\ "Staged"    : "#0ee375",  
-                "\ "Modified"  : "#d9bf91",  
-                "\ "Renamed"   : "#51C9FC",  
-                "\ "Untracked" : "#FCE77C",  
-                "\ "Unmerged"  : "#FC51E6",  
-                "\ "Dirty"     : "#FFBD61",  
-                "\ "Clean"     : "#87939A",   
-                "\ "Ignored"   : "#808080"   
-                "\ }                         
+" Set ctrlp to skip files in .gitignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-    " sync open file with NERDTree
-    " " Check if NERDTree is open or active
-    function! IsNERDTreeOpen()        
-        return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-    endfunction
+" ctrlp and ag bindings
 
-    " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-    " file, and we're not in vimdiff
-    function! SyncTree()
-        if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-            NERDTreeFind
-            wincmd p
-        endif
-    endfunction
+nnoremap <c-f> :CtrlPag<cr>
+vnoremap <c-f> :CtrlPagVisual<cr>
+let g:ctrlp_ag_ignores = '--ignore .git
+    \ --ignore "deps/*"
+    \ --ignore "_build/*"
+    \ --ignore "dist/*"
+    \ --ignore "node_modules/*"
+    \ --ignore "node/*"'
+" By default ag will search from PWD
+" But you may enable one of below line to use an arbitrary directory or,
+" Using the magic word 'current-file-dir' to use current file base directory
+" let g:ctrlp_ag_search_base = 'current-file-dir'
+" let g:ctrlp_ag_search_base = 'app/controllers' " both relative and absolute path supported
 
-    " Highlight currently open buffer in NERDTree
-    autocmd BufEnter * call SyncTree()
+let g:neosnippet#enable_complete_snippet = 1
 
-    " Set ctrlp to skip files in .gitignore
-    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-    let g:neosnippet#enable_complete_snippet = 1
-
-    let g:blamer_enabled = 1
-    let g:blamer_delay = 250
-
-    " Remaps
-    nmap <C-b> :NERDTreeToggle<CR> 
-
-    map <C-g> <Plug>(easymotion-prefix)w
-    map <M-g> <Plug>(easymotion-prefix)b
-
-    inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-    inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-    inoremap jk <esc>
+let g:blamer_enabled = 1
+let g:blamer_delay = 250
 
 
-    " Move lines up and down
-    nnoremap <C-M-j> :m+<cr>
-    nnoremap <C-M-k> :m-2<cr>
+" Remaps
+nmap <C-b> :NERDTreeToggle<CR> 
 
-    " Tab movement and creation
-    noremap <M-k> :tabn<CR>
-    noremap <M-j> :tabp<CR>
-    noremap <M-t> :tabnew<CR>:CtrlP<CR>
+map <C-g> <Plug>(easymotion-prefix)w
+map <M-g> <Plug>(easymotion-prefix)b
 
-    " Split creation
-    noremap <C-s>j :split<CR><C-w>j:CtrlP<CR>
-    noremap <C-s>l :vsplit<CR><C-w>l:CtrlP<CR>
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap jk <esc>
 
-    set noshowmode
 
-    " Reload vimrc
-    nnoremap <M-F5> :source ~/.config/nvim/init.vim<CR>
+" Fold code
+nnoremap ff za 
 
-    " Lightline + CoC
-    function! CocCurrentFunction()
-        return get(b:, 'coc_current_function', '')
-    endfunction
+" Move lines up and down
+nnoremap <C-M-j> :m+<cr>
+nnoremap <C-M-k> :m-2<cr>
 
-    let g:lightline = {
-                \ 'colorscheme': 'one',
-                \ 'active': {
-                \   'left': [ ['mode', 'paste'],
-                \             ['filename', 'modified']],
-                \  'right': [['lineinfo'],
-                \           ['filetype'],
-                \           ['lightline_hunks']]
-                \ },
-                \ 'component_function': {
-                \   'currentfunction': 'CocCurrentFunction',
-                \   'lightline_hunks': 'lightline#hunks#composer'
-                \ },
-                \ }
+" Tab movement and creation
+noremap <M-k> :tabn<CR>
+noremap <M-j> :tabp<CR>
+noremap <M-t> :tabnew<CR>:CtrlP<CR>
 
-    let g:lightline#hunks#only_branch = 1
+" Split creation
+noremap <C-s>j :split<CR><C-w>j:CtrlP<CR>
+noremap <C-s>l :vsplit<CR><C-w>l:CtrlP<CR>
 
-    " CoC stuff
-    inoremap <silent><expr> <C-space> coc#refresh()
-    " Remap goto
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
+set noshowmode
 
-    nnoremap sag :w<CR>:!git add %<CR>
+" Reload vimrc
+nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
 
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
+" Lightline + CoC
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-    " Remap for rename current word
-    nmap <F2> <Plug>(coc-rename)
-    " Use `:Format` to format current buffer
-    command! -nargs=0 Format :call CocAction('format')
-    nnoremap <silent> <C-M-i> :call CocAction('format')<CR>
+let g:lightline = {
+            \ 'colorscheme': 'one',
+            \ 'active': {
+            \   'left': [ ['mode', 'paste'],
+            \             ['filename', 'modified']],
+            \  'right': [['lineinfo'],
+            \           ['filetype'],
+            \           ['lightline_hunks']]
+            \ },
+            \ 'component_function': {
+            \   'currentfunction': 'CocCurrentFunction',
+            \   'lightline_hunks': 'lightline#hunks#composer'
+            \ },
+            \ }
 
-    " Using CocList
-    " Show all diagnostics
-    nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-    " Manage extensions
-    nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-    " Show commands
-    nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-    " Find symbol of current document
-    nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-    " Search workspace symbols
-    nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-    " Do default action for next item.
-    nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-    " Do default action for previous item.
-    nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-    " Resume latest coc list
-    nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+let g:lightline#hunks#only_branch = 1
 
-    nnoremap <silent> <M-f> :CocAction<CR>
+" CoC stuff
+inoremap <silent><expr> <C-space> coc#refresh()
+" Remap goto
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-    " from readme
-    " if hidden is not set, TextEdit might fail.
-    " Some servers have issues with backup files, see #649 set nobackup set nowritebackup 
-    set hidden 
-    " Better display for messages
-    set cmdheight=2 
-    " You will have bad experience for diagnostic messages when it's default 4000.
-    set updatetime=300
+nnoremap sag :w<CR>:!git add %<CR>
 
-    " don't give |ins-completion-menu| messages.
-    set shortmess+=c
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
 
-    " always show signcolumns
-    set signcolumn=yes
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+nnoremap <silent> <C-M-i> :call CocAction('format')<CR>
 
-    " Mouse scrolling
-    set mouse=a
-endif
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+nnoremap <silent> <M-f> :CocAction<CR>
+
+" from readme
+" if hidden is not set, TextEdit might fail.
+" Some servers have issues with backup files, see #649 set nobackup set nowritebackup 
+set hidden 
+" Better display for messages
+set cmdheight=2 
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Mouse scrolling
+set mouse=a
+
+" Automatically copy the saved file to the dist folder
+autocmd BufWritePost /home/juuso/hailer/front/src/pwa/* !cp -a %:h/. ~/hailer/front/dist/hailer-frontend2/

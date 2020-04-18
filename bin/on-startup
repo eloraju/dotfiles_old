@@ -1,9 +1,0 @@
-#!/bin/bash
-#setxkbmap fi
-#setxkbmap -option "ctrl:nocaps"
-xrandr --output eDP1 --primary --mode 2048x1152
-/home/juuso/.scripts/monconf &
-/home/juuso/.scripts/polystart
-nitrogen --restore &
-compton -b 
-dunst &

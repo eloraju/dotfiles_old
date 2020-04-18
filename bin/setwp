@@ -18,7 +18,7 @@ pywalCheck() {
         feh --bg-scaled $WP_PATH
     else
         wal -c
-        wal -i "$WP_PATH" >> /dev/null
+        wal -s -i "$WP_PATH" >> /dev/null
     fi
 
     notify-send -i $WP_PATH "Wallpaper changed"

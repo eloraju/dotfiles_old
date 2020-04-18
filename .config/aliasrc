@@ -1,8 +1,15 @@
+#!/bin/sh
+
 alias ls="ls --color=auto"
 alias la="ls -la --color=auto"
 alias ll="ls -l --color=auto"
 alias pacman="sudo pacman"
 alias update="sudo pacman -Suy"
+
+# You never know what you might type
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
 
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias sysus="systemctl suspend"
@@ -22,3 +29,4 @@ alias refresh-mirrors="sudo echo 'Refreshing mirrors...' &&\
                 --sort rate \
                 --save /etc/pacman.d/mirrorlist &&\
                 echo 'Mirrors refreshed.'"
+

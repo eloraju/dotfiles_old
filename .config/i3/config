@@ -32,7 +32,9 @@ bindsym $mod+Ctrl+x exec --no-startup-id xkill
 # start program launcher
 #bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+Return exec dmenu_run -l 10 -p run: 
-bindsym $mod+Shift+e exec --no-startup-id rofimoji
+bindsym $mod+Shift+e exec ~/bin/emenu
+bindsym $mod+Ctrl+Shift+w exec ~/bin/wikimenu
+#bindsym $mod+Shift+e exec --no-startup-id rofimoji
 # script editor
 bindsym $mod+Mod1+Return exec --no-startup-id ~/bin/open-config
 
@@ -40,12 +42,12 @@ bindsym $mod+Mod1+Return exec --no-startup-id ~/bin/open-config
 bindsym $mod+F1 exec brave
 
 # Screenshots
-bindsym Print --release exec "scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
-bindsym Shift+Print exec "scrot ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym $mod+Ctrl+p --release exec "scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"
+bindsym $mod+Ctrl+Shift+p exec "scrot ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -t image/png < $f'"
 
 # Screenshots for desktop. I'm lazy and didn't program print screen on my keyboard 🤷
-bindsym $mod+p exec --no-startup-id scrot ~/Pictures/screenshots/%Y-%m-%d-%T.png
-bindsym --release $mod+Shift+p exec --no-startup-id scrot --select ~/Pictures/screenshots/%Y-%m-%d-%T.png
+bindsym $mod+p exec scrot ~/Pictures/screenshots/%Y-%m-%d-%T.png
+bindsym --release $mod+Shift+p exec "scrot --select ~/Pictures/screenshots/%Y-%m-%d-%T.png -e 'xclip -selection clipboard -t image/png < $f'"
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
