@@ -1,0 +1,25 @@
+#!/bin/sh
+
+LRU=""
+[ -f ~/.cache/emenu_lru ] && LRU=$(tail ~/.cache/emenu_lru)
+
+
+prompt_emoji() {
+    cut -d ';' -f1 ~/.local/share/emoji | dmenu -l 15 -i | awk '{print $1}'| tr -d '\n' | xclip -selection clipboard
+    notify-send "$(xclip -o -selection clipboard) copied to clipboard" 
+}
+
+get_active_window() {
+    PASTE_TARGET=$(xdotool getactivewindow)
+    echo $PASTE_TARGET
+}
+
+paste_to_window() {
+    xdotool windowactivate $PASTE_TARGET
+    i3-msg "[id=\"$PASTE_TARGET\"] focus"
+    xdotool type --window $PASTE_TARGET --clearmodifiers $(xclip -o -selection clipboard)
+}
+
+get_active_window
+prompt_emoji
+paste_to_window
