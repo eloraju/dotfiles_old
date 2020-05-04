@@ -33,7 +33,6 @@ bindsym $mod+Ctrl+x exec --no-startup-id xkill
 #bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+Return exec dmenu_run -l 10 -p run: 
 bindsym $mod+Shift+e exec ~/bin/emenu
-bindsym $mod+Ctrl+Shift+w exec ~/bin/wikimenu
 #bindsym $mod+Shift+e exec --no-startup-id rofimoji
 # script editor
 bindsym $mod+Mod1+Return exec --no-startup-id ~/bin/open-config
