@@ -52,7 +52,7 @@ bindsym --release $mod+Shift+p exec "scrot --select ~/Pictures/screenshots/%Y-%m
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-bindsym $mod+Ctrl+m exec $terminal -e 'alsamixer'
+#bindsym $mod+Ctrl+m exec $terminal -e 'alsamixer'
 
 ################################################################################################
 
@@ -299,4 +299,4 @@ smart_borders on
 #######################
 #### STARTUP STUFF ####
 #######################
-#exec --no-startup-id ~/.scripts/on-startup
+exec --no-startup-id ~/bin/guinit

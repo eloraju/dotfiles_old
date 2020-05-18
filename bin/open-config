@@ -46,11 +46,12 @@ openInEditor() {
 
 main() {
     choice=$( (echo "scripts" && echo "confs") | dmenu -l 10 )
-
-    if [[ "$choice" == "scripts" ]]; then
-        openScripts
-    elif [[ "$choice" == "confs" ]]; then
-        openConfig
+    if [ -n "$choice" ]; then
+        if [[ "$choice" == "scripts" ]]; then
+            openScripts
+        elif [[ "$choice" == "confs" ]]; then
+            openConfig
+        fi
     fi
 
 }

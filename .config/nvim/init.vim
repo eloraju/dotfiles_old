@@ -25,7 +25,7 @@ call plug#end()
 
 syntax on
 
-let mapleader=" "
+let mapleader="_"
 filetype plugin on
 
 colorscheme codedark

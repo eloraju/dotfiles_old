@@ -4,26 +4,25 @@ WP_PATH=$HOME/.config/wallpaper
 
 setWP() {
     cp $1 $WP_PATH
-    pywalCheck
+    updateWP
 }
 
 setRandomWP() {
     cp "$(find "$1" -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -type f | shuf -n 1)" "$WP_PATH"
-    pywalCheck
+    updateWP
 }
 
-pywalCheck() {
-    walInstalled="$(which wal)"
-    if [ -z "$walInstalled" ]; then
-        feh --bg-scaled $WP_PATH
-    else
-        wal -c
-        wal -s -i "$WP_PATH" >> /dev/null
-    fi
-
-    notify-send -i $WP_PATH "Wallpaper changed"
+silentSet() {
+    echo "$1"
+    cp $1 $WP_PATH
+    updateWP -s
 }
 
+updateWP() {
+    /usr/bin/feh --bg-scale $WP_PATH
+    [[ -z "$1" ]] && notify-send -i $WP_PATH "Wallpaper changed"
+}
 
+[ "$1" == "-s" ] && silentSet $2
 [ -f "$1" ] && setWP $1
 [ -d "$1" ] && setRandomWP $1
