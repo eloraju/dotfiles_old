@@ -1,0 +1,23 @@
+#!/bin/env bash
+
+TERM='alacritty'
+BP=/home/juuso/bin
+declare -A CMDS
+
+# Open brave with certain flags to enable service worker on localhost
+SW_DEV_BRAVE='/usr/bin/brave --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure="https://localhost:9443"'
+
+
+CMDS=(
+        ["Brave"]="$SW_DEV_BRAVE"
+)
+
+cmdKeys() {
+    for c in "${!CMDS[@]}"
+    do
+        echo "$c"
+    done
+}
+
+SEL=$( $( cmdKeys ) | dmenu -l 10 )
+[ -n "$SEL" ] && $TERM -e $SEL
