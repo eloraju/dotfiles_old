@@ -1,7 +1,7 @@
 Config { 
 
    -- appearance
-     font =         "xft:JetBrainsMono Nerd Font Mono:size=9:bold:antialias=true"
+     font =         "xft:JetBrainsMono Nerd Font Mono:pixelsize=12:bold:antialias=true"
    , bgColor =      "black"
    , fgColor =      "#646464"
    , position =     Top
@@ -38,7 +38,7 @@ Config {
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands = 
         -- cpu activity monitor
-        [Run Cpu       [ "--template" , "  <bar><total>%"
+        [Run Cpu       [ "--template" , " <bar><total>%"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
                              , "--low"      , "darkgreen"

@@ -1,4 +1,3 @@
-
 -- Imports
 
 -- Base stuff
@@ -11,7 +10,7 @@ import qualified XMonad.StackSet as W
 
 -- Hooks
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, defaultPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
-import XMonad.Hooks.ManageDocks (avoidStruts, docksStartupHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (avoidStruts, docks, docksStartupHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog,  doFullFloat, doCenterFloat) 
 import XMonad.Hooks.Place (placeHook, withGaps, smart)
 import XMonad.Hooks.SetWMName
@@ -20,35 +19,32 @@ import XMonad.Hooks.EwmhDesktops   -- required for xcomposite in obs to work
 -- Actions
 import XMonad.Actions.CycleWS
 import XMonad.Actions.MouseResize
-
-
+import XMonad.Actions.UpdatePointer
 
 -- Layout modifiers
 import XMonad.Layout.PerWorkspace (onWorkspace) 
 import XMonad.Layout.Renamed (renamed, Rename(CutWordsLeft, Replace))
 import XMonad.Layout.WorkspaceDir
-import XMonad.Layout.Spacing (spacing) 
+import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.Reflect (reflectVert, reflectHoriz, REFLECTX(..), REFLECTY(..))
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), Toggle(..), (??))
-import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, FULL, MIRROR, NOBORDERS))
 import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
-
 
 -- New layouts
 import XMonad.Layout.SimplestFloat
-
+import XMonad.Layout.Grid
 
 -- Utilities
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 import XMonad.Util.EZConfig
 
-
 -- Variable declarations
-modKey       = mod4Mask
+modKey = mod4Mask
 myTerminal = "alacritty"
 myTextEditor = "nvim"
 myFocusFollowsMouse :: Bool
@@ -58,32 +54,37 @@ myClickJustFocuses = False
 myBrowser = "brave"
 -- windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
--- Workspaces
-myWorkspaces    = ["0","1","2","3","4","5","6","7","8","9"]
-numbKeys        = [xK_0..xK_9]
-
 --Borders
-myNormalBorderColor  = "#000000"
+myNormalBorderColor  = "#000"
 myBorderWidth   = 2
-myFocusedBorderColor = "#fff"
+myFocusedBorderColor = "#45633d"
 
+recompileCmd = "alacritty -e /bin/sh -c '/usr/bin/xmonad --recompile || read'"
+restartCmd = "alacritty -e /bin/sh -c '(/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart) || read'"
+
+-- Wrappers to make it easier to call some functions. I'm a noob. Please dont hurt me
+
+toggleGaps = do
+    toggleWindowSpacingEnabled
+    toggleScreenSpacingEnabled
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
+hyper = "M4-M1-C-S-"
 myKeys =
     [ 
         -- Monad control
-        ("M-C-r", spawn "xmonad --recompile"),
-        ("M-C-S-r", spawn "xmonad --recompile; xmonad --restart"),
+        ("M-C-r", spawn recompileCmd),
+        ("M-C-S-r", spawn restartCmd),
         ("M-C-S-q", io exitSuccess),
-        ("M-<F12>", setLayout myLayoutHook),
+        (hyper ++ "s", spawn "systemctl suspend"),
+        ("M-<F12>", spawn "~/bin/setwp -r"),
 
         -- Core stuff
         ("M-<Return>", spawn myTerminal),
         ("M-S-<Return>", spawn "dmenu_run"),
         ("M-S-q", kill),
-        ("M-S-<Tab>", sendMessage NextLayout),              -- Rotate through the available layout algorithms
 
         -- Navigation and window manipulation
         ("M-j", windows W.focusDown),                       -- Move focus down the stack
@@ -94,7 +95,6 @@ myKeys =
         ("M-S-m", windows W.swapMaster),                    -- Swap focused window with the window at the master area
         ("M-u", sendMessage Shrink),                        -- Shrink the master area
         ("M-o", sendMessage Expand),                        -- Expand the master area
-        ("M-<Delete>", withFocused $ windows . W.sink),            -- Push window back into tiling
         ("M-+", sendMessage (IncMasterN 1)),                -- Increment the number of windows in the master area
         ("M--", sendMessage (IncMasterN (-1))),             -- Deincrement the number of windows in the master area
 
@@ -102,6 +102,16 @@ myKeys =
         ("M-l", nextWS),                                    -- Next workspace
         ("M-h", prevWS),                                    -- Previous workspace
         ("M-<Tab>", nextScreen),                            -- Toggle screen (on 2 monitor systems)
+        ("M-S-<Tab>", shiftNextScreen),                     -- Send selected window to next screen
+
+        -- Layouts
+        ("M-f", sendMessage $ Toggle FULL),                 -- Toggle selected window to fullscreen
+        ("M-<Delete>", withFocused $ windows . W.sink),     -- Push floating window back into tiling mode
+        ("M-<Backspace>", sendMessage $ NextLayout),        -- Switch to next layout algorithm
+        ("M-g M-g", toggleGaps),                            -- Toggle window gaps
+        ("M-g M-+", incScreenWindowSpacing 3),              -- Increase screen and window spacing by 3 pixels
+        ("M-g M--", decScreenWindowSpacing 3),              -- Decrease screen and window spacing by 3 pixels
+        ("M-g M-0", setScreenWindowSpacing 5),              -- Reset screen and window spacing to 5 pixels
 
         -- My own stuff
         ("M-S-e", spawn "~/bin/emenu"),                     -- Emoji selector
@@ -111,7 +121,7 @@ myKeys =
     ++  -- M-[0..9] --> switch to workspace
         -- M-S-[0..9] --> move view to workspace
     [("M-" ++ modifier ++ key, windows $ function i) |
-        (i, key) <- zip myWorkspaces ([0..9] >>= return.show),
+        (i, key) <- zip myWorkspaces (([1..9] ++ [0])>>= return.show),
         (function, modifier) <- [(W.greedyView, ""), (W.shift, "S-")]]
 
 myMouseBindings (XConfig {XMonad.modMask = modKey}) = M.fromList $
@@ -123,19 +133,46 @@ myMouseBindings (XConfig {XMonad.modMask = modKey}) = M.fromList $
 
     , ((modKey, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    -- scroll wheel (button4 and button5)
     ]
 
-myLayoutHook = avoidStruts $ myDefaultLayout
-             where 
-                 myDefaultLayout = tall ||| Full
 
-tall = renamed [Replace "tall"]     $ limitWindows 8 $ spacing 3 $ Tall 1 (3/100) (1/2) 
+-- Workspaces
+-- Clickable workspaces by DT :)
+xmobarEscape = concatMap doubleLts
+    where
+        doubleLts '<' = "<<"
+        doubleLts x   = [x]
+
+myWorkspaces :: [String]
+myWorkspaces = clickable . (map xmobarEscape) 
+                $ ["I","II","III","IV","V","VI","VII","VIII","IX","X"]
+            where
+                clickable l = ["<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
+                    (i, ws) <- zip ([1..9] ++ [0]) l,
+                    let n = i ]
+
+-- Layouts
+winSpace = 5
+scrSpace = 5
+smarterSpacing = spacingRaw True (Border scrSpace scrSpace scrSpace scrSpace) True (Border winSpace winSpace winSpace winSpace) True
+
+myLayoutHook =  mkToggle (NOBORDERS ?? FULL ?? EOT)
+                $ myDefaultLayout
+            where 
+                myDefaultLayout =  smartBorders $ (tall ||| grid)
+
+tall = renamed [Replace "tall"]     $ avoidStruts $ smarterSpacing $ limitWindows 8 $ Tall 1 (3/100) (1/2)
+grid = renamed [Replace "grid"]     $ avoidStruts $ smarterSpacing $ limitWindows 9 $ GridRatio (3/3)
 
 -- Window rules be here
-myManageHook = mempty
+myManageHook = composeAll
+    [
+        isFullscreen --> doFloat,
+        manageDocks
+    ]
 
-myEventHook = mempty
+-- myEventHook = mempty
 
 -- Autostart
 myStartupHook = do
@@ -144,9 +181,9 @@ myStartupHook = do
 main = do
     xmproc0 <- spawnPipe "xmobar -x 0 /home/juuso/.config/xmobar/xmobarrc"
     xmproc1 <- spawnPipe "xmobar -x 1 /home/juuso/.config/xmobar/xmobarrc"
-    xmonad $ ewmh desktopConfig
+    xmonad $ docks $ ewmh desktopConfig
         {   
-            manageHook = myManageHook <+> manageHook desktopConfig <+> manageDocks,
+            manageHook = myManageHook,
             logHook = dynamicLogWithPP xmobarPP
                 {
                     ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x,
@@ -154,11 +191,11 @@ main = do
                     ppVisible = xmobarColor "#c3e88d" "",                 -- Visible but not current workspace
                     ppHidden = xmobarColor "#82AAFF" "" . wrap "*" "",    -- Hidden workspaces in xmobar
                     ppHiddenNoWindows = xmobarColor "#F07178" "",         -- Hidden workspaces (no windows)
-                    ppTitle = xmobarColor "#d0d0d0" "" . shorten 30,      -- Title of active window in xmobar
+                    ppTitle = mempty, --xmobarColor "#d0d0d0" "" . shorten 30,      -- Title of active window in xmobar
                     ppSep =  "<fc=#666666> | </fc>",                      -- Separators in xmobar
                     ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!",   -- Urgent workspace
                     ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-                },
+                } >> updatePointer (0.5,0.5) (0, 0),
 
             -- simple stuff
             modMask            = modKey,
@@ -175,6 +212,6 @@ main = do
       
             -- hooks, layouts
             layoutHook         = myLayoutHook,
-            handleEventHook    = myEventHook,
+            handleEventHook    = fullscreenEventHook,
             startupHook        = myStartupHook
         } `additionalKeysP` myKeys

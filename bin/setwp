@@ -8,12 +8,13 @@ setWP() {
 }
 
 setRandomWP() {
-    cp "$(find "$1" -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -type f | shuf -n 1)" "$WP_PATH"
+    wpDir=$1
+    [ -z "$wpDir" ] && wpDir="$HOME/Pictures/wallpapers"
+    cp "$(find "$wpDir" -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -type f | shuf -n 1)" "$WP_PATH"
     updateWP
 }
 
 silentSet() {
-    echo "$1"
     cp $1 $WP_PATH
     updateWP -s
 }
@@ -23,6 +24,11 @@ updateWP() {
     [[ -z "$1" ]] && notify-send -i $WP_PATH "Wallpaper changed"
 }
 
+# No output
 [ "$1" == "-s" ] && silentSet $2
+# Set the given file as wallpaper
+# Error handling is for the weak
 [ -f "$1" ] && setWP $1
-[ -d "$1" ] && setRandomWP $1
+# Nab a random wallpaper
+# Second argument because if there's a dir there we'll use it!
+[ "$1" == "-r" ] && setRandomWP $2
