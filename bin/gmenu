@@ -1,0 +1,61 @@
+#!/bin/sh
+
+declare -A COMMANDS
+TERM='alacritty'
+
+COMMANDS=(
+        ["Push"]="git push"
+        ["Pull"]="git pull"
+        ["Checkout"]="git checkout"
+        ["Merge"]="git merge"
+        ["New Branch"]="git checkout -b"
+)
+
+PUSH_NEW="git push --set-upstream origin "
+
+getCommands() {
+    for c in "${!COMMANDS[@]}"
+    do
+        echo "$c"
+    done
+}
+
+askCommand() {
+    CMD=$(getCommands | dmenu -l 10 -i)
+    [ -z "$CMD" ] && exit 1
+    SEL_CMD=${COMMANDS[$CMD]}
+}
+
+selectBranch() {
+    echo $(git branch -l | grep -v '*' | sort | dmenu -l 10 -i)
+}
+
+git status -s 1>/dev/null || exit 1;
+CUR_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+askCommand
+
+case $SEL_CMD in
+    ${COMMANDS["Push"]})
+        $SEL_CMD 2>/dev/null || $PUSH_NEW $CUR_BRANCH
+        ;;
+
+    ${COMMANDS["Pull"]})
+        $SEL_CMD
+        ;;
+
+    ${COMMANDS["Checkout"]})
+        selection=$(selectBranch)
+        $SEL_CMD $selection
+        ;;
+
+    ${COMMANDS["Merge"]})
+        selection=$(selectBranch)
+        git checkout $selection && git pull && git checkout $CUR_BRANCH && git merge $selection
+        ;;
+
+    ${COMMANDS["New Branch"]})
+        newB=$(echo | dmenu -p "New branch name: ")
+        echo $newB
+        ;;
+esac
+

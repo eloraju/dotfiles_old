@@ -160,7 +160,7 @@ smarterSpacing = spacingRaw True (Border scrSpace scrSpace scrSpace scrSpace) Tr
 myLayoutHook =  mkToggle (NOBORDERS ?? FULL ?? EOT)
                 $ myDefaultLayout
             where 
-                myDefaultLayout =  smartBorders $ (tall ||| grid)
+                myDefaultLayout =  tall ||| grid
 
 tall = renamed [Replace "tall"]     $ avoidStruts $ smarterSpacing $ limitWindows 8 $ Tall 1 (3/100) (1/2)
 grid = renamed [Replace "grid"]     $ avoidStruts $ smarterSpacing $ limitWindows 9 $ GridRatio (3/3)
