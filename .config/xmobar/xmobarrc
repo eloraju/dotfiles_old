@@ -19,7 +19,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%UnsafeStdinReader%}%date%{%cpu% | %memory% "
+   , template = "%UnsafeStdinReader%}%date%{%updates% | %cpu% | %memory% "
 
 
    -- plugins
@@ -38,25 +38,26 @@ Config {
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands = 
         -- cpu activity monitor
-        [Run Cpu       [ "--template" , " <bar><total>%"
-                             , "--Low"      , "50"         -- units: %
-                             , "--High"     , "85"         -- units: %
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
-                             ] 10
+        [Run Cpu            [ "--template" , " <bar><total>%"
+                            , "--Low"      , "50"         -- units: %
+                            , "--High"     , "85"         -- units: %
+                            , "--low"      , "darkgreen"
+                            , "--normal"   , "darkorange"
+                            , "--high"     , "darkred"
+                            ] 10
 
         -- memory usage monitor
-        , Run Memory         [ "--template" ," <usedbar><usedratio>%"
-                             , "--Low"      , "35"        -- units: %
-                             , "--High"     , "80"        -- units: %
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
-                             ] 10
+        , Run Memory        [ "--template" ," <usedbar><usedratio>%"
+                            , "--Low"      , "35"        -- units: %
+                            , "--High"     , "80"        -- units: %
+                            , "--low"      , "darkgreen"
+                            , "--normal"   , "darkorange"
+                            , "--high"     , "darkred"
+                            ] 10
         -- time and date indicator 
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
         , Run Date           "<fc=#ABABAB>%a %d.%m. %H:%M</fc>" "date" 10
         , Run UnsafeStdinReader
+        , Run Com "/home/juuso/bin/update-count" [] "updates" 600
        ]
    }

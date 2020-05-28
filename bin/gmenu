@@ -1,17 +1,14 @@
 #!/bin/sh
 
 declare -A COMMANDS
-TERM='alacritty'
-
 COMMANDS=(
         ["Push"]="git push"
         ["Pull"]="git pull"
         ["Checkout"]="git checkout"
         ["Merge"]="git merge"
-        ["New Branch"]="git checkout -b"
 )
 
-PUSH_NEW="git push --set-upstream origin "
+PUSH_NEW="git push --set-upstream origin"
 
 getCommands() {
     for c in "${!COMMANDS[@]}"
@@ -51,11 +48,6 @@ case $SEL_CMD in
     ${COMMANDS["Merge"]})
         selection=$(selectBranch)
         git checkout $selection && git pull && git checkout $CUR_BRANCH && git merge $selection
-        ;;
-
-    ${COMMANDS["New Branch"]})
-        newB=$(echo | dmenu -p "New branch name: ")
-        echo $newB
         ;;
 esac
 
