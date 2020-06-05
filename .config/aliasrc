@@ -3,8 +3,6 @@
 alias ls="ls --color=auto"
 alias la="ls -la --color=auto"
 alias ll="ls -l --color=auto"
-alias pacman="sudo pacman"
-alias update="sudo pacman -Suy"
 
 # You never know what you might type
 alias v="nvim"
