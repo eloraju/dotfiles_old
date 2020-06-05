@@ -1,5 +1,5 @@
 #!/bin/sh
-
+pacman -Syyup
 OFFICIAL="$(yay -Qu --repo | wc -l)"
 AUR="$(yay -Qua | wc -l)"
 echo "$OFFICIAL <up> $AUR"
