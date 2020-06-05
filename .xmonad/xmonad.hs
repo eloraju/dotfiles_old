@@ -169,6 +169,7 @@ grid = renamed [Replace "grid"]     $ avoidStruts $ smarterSpacing $ limitWindow
 myManageHook = composeAll
     [
         isFullscreen --> doFloat,
+        className =? "Gimp" --> doFloat,
         manageDocks
     ]
 
@@ -195,7 +196,7 @@ main = do
                     ppSep =  "<fc=#666666> | </fc>",                      -- Separators in xmobar
                     ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!",   -- Urgent workspace
                     ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-                } >> updatePointer (0.5,0.5) (0, 0),
+                },
 
             -- simple stuff
             modMask            = modKey,

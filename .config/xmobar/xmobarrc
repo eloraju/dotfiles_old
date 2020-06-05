@@ -2,11 +2,12 @@ Config {
 
    -- appearance
      font =         "xft:JetBrainsMono Nerd Font Mono:pixelsize=12:bold:antialias=true"
-   , bgColor =      "black"
-   , fgColor =      "#646464"
-   , position =     Top
-   , border =       BottomB
-   , borderColor =  "#646464"
+   , additionalFonts= ["xft:JetBrainsMono Nerd Font Mono:pixelsize=18:antialias=true"]
+   , bgColor = "black"
+   , fgColor = "#cecece"
+   , position = TopSize C 100 20
+   -- , border =       BottomB
+   -- , borderColor =  "#ababab"
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -38,7 +39,8 @@ Config {
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands = 
         -- cpu activity monitor
-        [Run Cpu            [ "--template" , " <bar><total>%"
+        [Run Cpu            [ "--template" , "cpu <bar><total>%"
+        -- "--template" , "<fn=1></fn> <bar><total>%"
                             , "--Low"      , "50"         -- units: %
                             , "--High"     , "85"         -- units: %
                             , "--low"      , "darkgreen"
@@ -47,7 +49,8 @@ Config {
                             ] 10
 
         -- memory usage monitor
-        , Run Memory        [ "--template" ," <usedbar><usedratio>%"
+        , Run Memory        [ "--template" ,"mem <usedbar><usedratio>%"
+        -- "--template" ,"<fn=1></fn> <usedbar><usedratio>%"
                             , "--Low"      , "35"        -- units: %
                             , "--High"     , "80"        -- units: %
                             , "--low"      , "darkgreen"
@@ -55,9 +58,10 @@ Config {
                             , "--high"     , "darkred"
                             ] 10
         -- time and date indicator 
-        --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-        , Run Date           "<fc=#ABABAB>%a %d.%m. %H:%M</fc>" "date" 10
+        , Run Date           "<fc=#cecece>%a %d.%m. %H:%M</fc>" "date" 10
+        -- workspaces
         , Run UnsafeStdinReader
+        -- updates in aur and official repos
         , Run Com "/home/juuso/bin/update-count" [] "updates" 600
        ]
    }
