@@ -1,6 +1,7 @@
 #!/bin/sh
-pacman -Syyup
+sudo pacman -Syyup 1>/dev/null 2>/dev/null
 OFFICIAL="$(yay -Qu --repo | wc -l)"
 AUR="$(yay -Qua | wc -l)"
-echo "$OFFICIAL <up> $AUR"
+COUNTS="{$OFFICIAL} ~~ [$AUR]"
+echo "<action=xdotool key super+alt+shift+control+u>$COUNTS</action>"
 #echo "$OFFICIAL <fn=1></fn> $AUR"

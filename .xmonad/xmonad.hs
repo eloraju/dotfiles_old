@@ -61,6 +61,7 @@ myFocusedBorderColor = "#45633d"
 
 recompileCmd = "alacritty -e /bin/sh -c '/usr/bin/xmonad --recompile || read'"
 restartCmd = "alacritty -e /bin/sh -c '(/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart) || read'"
+updateCmd = "alacritty -e /bin/sh -c '/usr/bin/yay -Suy'"
 
 -- Wrappers to make it easier to call some functions. I'm a noob. Please dont hurt me
 
@@ -82,6 +83,7 @@ myKeys =
         ("M-<F12>", spawn "~/bin/setwp -r"),
 
         -- Core stuff
+        ("M4-M1-C-S-u", spawn updateCmd),
         ("M-<Return>", spawn myTerminal),
         ("M-S-<Return>", spawn "dmenu_run"),
         ("M-S-q", kill),

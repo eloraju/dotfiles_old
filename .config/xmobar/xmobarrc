@@ -62,6 +62,6 @@ Config {
         -- workspaces
         , Run UnsafeStdinReader
         -- updates in aur and official repos
-        , Run Com "/home/juuso/bin/update-count" [] "updates" 600
+        , Run Com "/home/juuso/bin/update-count" [] "updates" 60 -- once every hour
        ]
    }
