@@ -1,0 +1,8 @@
+[Unit]
+Description=Checks for updates in the official repos or in the AUR
+
+[Service]
+Type=oneshot
+ExecStart=/home/juuso/bin/update-count auto
+
+

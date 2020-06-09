@@ -3,5 +3,6 @@ sudo pacman -Syyup 1>/dev/null 2>/dev/null
 OFFICIAL="$(yay -Qu --repo | wc -l)"
 AUR="$(yay -Qua | wc -l)"
 COUNTS="{$OFFICIAL} ~~ [$AUR]"
-echo "<action=xdotool key super+alt+shift+control+u>$COUNTS</action>"
+[ -z $1 ] && (echo  "[MANUAL]: $(date '+%d.%m.%Y %H:%M')" >> /home/juuso/.local/cache/updates) || echo "[AUTO]: $(date '+%d.%m.%Y %H:%M')" >> /home/juuso/.local/cache/updates
+echo "<action=xdotool key super+alt+shift+control+u>$COUNTS</action>" >> /home/juuso/.local/cache/updates
 #echo "$OFFICIAL <fn=1></fn> $AUR"

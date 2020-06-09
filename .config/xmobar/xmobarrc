@@ -61,7 +61,7 @@ Config {
         , Run Date           "<fc=#cecece>%a %d.%m. %H:%M</fc>" "date" 10
         -- workspaces
         , Run UnsafeStdinReader
-        -- updates in aur and official repos
-        , Run Com "/home/juuso/bin/update-count" [] "updates" 60 -- once every hour
+        -- updates in official repos and aur
+        , Run Com "/usr/bin/tail" [ "/home/juuso/.local/cache/updates", "-n1"] "updates" 3600 -- once in a hour
        ]
    }
