@@ -62,6 +62,6 @@ Config {
         -- workspaces
         , Run UnsafeStdinReader
         -- updates in official repos and aur
-        , Run Com "/usr/bin/tail" [ "/home/juuso/.local/cache/updates", "-n1"] "updates" 3600 -- once in a hour
+        , Run Com "/usr/bin/tail" [ "/home/juuso/.local/cache/updates", "-n1"] "updates" 60 -- every minute
        ]
    }

@@ -61,7 +61,7 @@ myFocusedBorderColor = "#45633d"
 
 recompileCmd = "alacritty -e /bin/sh -c '/usr/bin/xmonad --recompile || read'"
 restartCmd = "alacritty -e /bin/sh -c '(/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart) || read'"
-updateCmd = "alacritty -e /bin/sh -c '/usr/bin/yay -Suy'"
+updateCmd = "alacritty -e /bin/sh -c '/usr/bin/yay -Suy && /home/juuso/bin/update-count'"
 
 -- Wrappers to make it easier to call some functions. I'm a noob. Please dont hurt me
 
@@ -103,6 +103,8 @@ myKeys =
         -- Workspace and screeens
         ("M-l", nextWS),                                    -- Next workspace
         ("M-h", prevWS),                                    -- Previous workspace
+        ("M-S-l", shiftToNext >> nextWS),                                    -- Next workspace
+        ("M-S-h", shiftToPrev >> prevWS),                                    -- Next workspace
         ("M-<Tab>", nextScreen),                            -- Toggle screen (on 2 monitor systems)
         ("M-S-<Tab>", shiftNextScreen),                     -- Send selected window to next screen
 
