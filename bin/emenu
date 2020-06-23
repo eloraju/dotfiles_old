@@ -11,12 +11,10 @@ prompt_emoji() {
 
 get_active_window() {
     PASTE_TARGET=$(xdotool getactivewindow)
-    echo $PASTE_TARGET
 }
 
 paste_to_window() {
     xdotool windowactivate $PASTE_TARGET
-    i3-msg "[id=\"$PASTE_TARGET\"] focus"
     xdotool type --window $PASTE_TARGET --clearmodifiers $(xclip -o -selection clipboard)
 }
 

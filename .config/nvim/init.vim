@@ -21,6 +21,7 @@ if !exists('g:vscode')
     Plug 'sinetoami/lightline-hunks'
     Plug 'lokikl/vim-ctrlp-ag'
     Plug 'preservim/nerdcommenter'
+    "Plug 'thaerkh/vim-indentguides'
 
     call plug#end()
 
@@ -53,7 +54,6 @@ if !exists('g:vscode')
     let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
     " ctrlp and ag bindings
-
     nnoremap <c-f> :CtrlPag<cr>
     vnoremap <c-f> :CtrlPagVisual<cr>
     let g:ctrlp_ag_ignores = '--ignore .git

@@ -142,8 +142,21 @@ bindkey '^e' edit-command-line
 compinit
 _comp_options+=(globdots)
 
-# Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+# lf to cd around by LukeSmith
+lfcd() {
+    tmp=$(mktemp)
+    lf -last-dir-path=$tmp "$@"
+    if [ -f $tmp ]; then
+        dir="$(cat $tmp)"
+        rm -rf $tmp
+        [ -d $dir ] && [ $dir != $(pwd) ] && cd $dir
+    fi
+}
+
+bindkey -s '^o' 'lfcd\n'
+
+
 ###-begin-npm-completion-###
 #
 # npm command completion script
@@ -204,3 +217,6 @@ elif type compctl &>/dev/null; then
   compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
+
+# Load zsh-syntax-highlighting; should be last.
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

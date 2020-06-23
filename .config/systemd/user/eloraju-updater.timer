@@ -2,10 +2,8 @@
 Description=Check for updates couple of times a day
 
 [Timer]
-OnCalendar=*-*-* 09:00
 OnCalendar=*-*-* 13:00
-OnCalendar=*-*-* 17:00
-OnCalendar=*-*-* 21:00
+OnCalendar=*-*-* 01:00
 Persistent=true
 
 [Install]

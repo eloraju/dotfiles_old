@@ -120,7 +120,10 @@ myKeys =
         -- My own stuff
         ("M-S-e", spawn "~/bin/emenu"),                     -- Emoji selector
         ("M-<F1>", spawn myBrowser),                        -- Start browser
-        ("M-S-p", spawn "sleep 0.2;scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'")
+        ("M-S-p", spawn "sleep 0.2;scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"),
+
+        -- Download shit
+        ("M-w w", spawn "~/repos/suckless/dwm/patches/get")
     ]
     ++  -- M-[0..9] --> switch to workspace
         -- M-S-[0..9] --> move view to workspace
