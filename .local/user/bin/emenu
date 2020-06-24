@@ -1,9 +1,5 @@
 #!/bin/sh
 
-LRU=""
-[ -f ~/.cache/emenu_lru ] && LRU=$(tail ~/.cache/emenu_lru)
-
-
 prompt_emoji() {
     cut -d ';' -f1 ~/.local/share/emoji | dmenu -l 15 -i | awk '{print $1}'| tr -d '\n' | xclip -selection clipboard
     notify-send "$(xclip -o -selection clipboard) copied to clipboard" 

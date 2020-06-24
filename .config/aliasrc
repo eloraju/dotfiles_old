@@ -20,6 +20,8 @@ alias grubdate="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
 alias sw-brave='brave --user-data-dir=/tmp/foo --unsafely-treat-insecure-origin-as-secure="https://localhost:9443" --ignore-certificate-errors'
 
+alias apicall="curl -X POST -H 'Content-type: application/json' https://eloraju.xyz/api -d"
+
 alias refresh-mirrors="sudo echo 'Refreshing mirrors...' &&\
                 sudo reflector --country Finland \
                 --country Sweden \

@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# A script that searcher for occurances for <input> and pipes them to fzf so the user
+# can then select an entry and open that entry up in the $EDITOR
+
+fileTypeFilter='';
+regexPattern='';
+path='';
+
+# Parse arguments
+while [ ! -z "$1" ]
+do
+    cur=$1
+    shift
+    case $cur in
+        -f | --filetype)
+            fileTypeFilter=$1
+            shift
+            ;;
+
+        -p | --path)
+            $path=$1;
+            shift;
+            ;;
+
+        *)
+            regexPattern=$cur;
+            ;;
+    esac
+done
+
+agCmd='';
+
+[ ! -z "$fileTypeFilter" ] && agCmd=$agCmd" -G '$fileTypeFilter'"
+([ -z "$regexPattern" ] && (echo "ERR: No search pattern provided"; exit 1)) || agCmd="$agCmd '$regexPattern'"
+[ ! -z "$path" ] &&  agCmd="$agCmd '$path'"
+echo $agCmd
+res=$(ag $agCmd)
+echo $res
