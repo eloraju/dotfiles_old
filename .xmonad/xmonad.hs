@@ -51,13 +51,14 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
-myBrowser = "brave"
+myBrowser = "firefox"
 -- windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 --Borders
 myNormalBorderColor  = "#000"
 myBorderWidth   = 2
-myFocusedBorderColor = "#45633d"
+myFocusedBorderColor = "#28bd68"
+--"#45633d"
 
 recompileCmd = "alacritty -e /bin/sh -c '/usr/bin/xmonad --recompile || read'"
 restartCmd = "alacritty -e /bin/sh -c '(/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart) || read'"
