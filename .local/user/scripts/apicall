@@ -1,0 +1,37 @@
+#!/bin/env 'deno run --allow-net=eloraju.xyz'
+import { soxa } from 'https://deno.land/x/soxa/mod.ts'
+
+try {
+    const data: { [key: string]: any } = {};
+
+    Deno.args.forEach((arg: string, index: number) => {
+        if (index === 0) {
+
+            if (!arg.match(/[a-z]+\.[a-z]+/)) {
+                console.log('Command in invalid format.');
+                Deno.exit(1);
+            }
+            data.command = arg;
+
+        } else {
+
+            if (!arg.match(/^[a-z]+=/)) {
+                console.log('Argument in invalid format.')
+                Deno.exit(1);
+            }
+
+            const key = arg.split('=')[0] as string;
+            const value = arg.split('=')[1] as any;
+
+            data[key] = value as any;
+        }
+    });
+
+
+    const res = await soxa.post('https://eloraju.xyz/api', {}, { data });
+
+    console.log(res.data.data)
+} catch (err) {
+    console.log(err)
+}
+
