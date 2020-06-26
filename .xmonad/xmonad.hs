@@ -60,9 +60,11 @@ myBorderWidth   = 2
 myFocusedBorderColor = "#28bd68"
 --"#45633d"
 
+-- Commands
 recompileCmd = "alacritty -e /bin/sh -c '/usr/bin/xmonad --recompile || read'"
 restartCmd = "alacritty -e /bin/sh -c '(/usr/bin/xmonad --recompile && /usr/bin/xmonad --restart) || read'"
-updateCmd = "alacritty -e /bin/sh -c '/usr/bin/yay -Suy && /home/juuso/bin/update-count'"
+updateCmd = "alacritty -e /bin/sh -c '/usr/bin/yay -Suy && /home/juuso/.local/user/scripts/update-count'"
+emojiCmd = "rofimoji -c --skin-tone neutral --max-recent 0" --"~/.local/user/scripts/emenu"
 
 -- Wrappers to make it easier to call some functions. I'm a noob. Please dont hurt me
 
@@ -84,7 +86,7 @@ myKeys =
         ("M-<F12>", spawn "~/bin/setwp -r"),
 
         -- Core stuff
-        ("M4-M1-C-S-u", spawn updateCmd),
+        (hyper ++ "u", spawn updateCmd),
         ("M-<Return>", spawn myTerminal),
         ("M-S-<Return>", spawn "dmenu_run"),
         ("M-S-q", kill),
@@ -119,7 +121,7 @@ myKeys =
         ("M-g M-0", setScreenWindowSpacing 5),              -- Reset screen and window spacing to 5 pixels
 
         -- My own stuff
-        ("M-S-e", spawn "~/bin/emenu"),                     -- Emoji selector
+        ("M-S-e", spawn emojiCmd),                          -- Emoji selector
         ("M-<F1>", spawn myBrowser),                        -- Start browser
         ("M-S-p", spawn "sleep 0.2;scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"),
 

@@ -1,12 +1,15 @@
 #!/bin/sh
 export USER_BIN=$HOME/.local/user/bin
 export USER_SCRIPTS=$HOME/.local/user/scripts
-export PATH=$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$HOME/.emacs.d/bin/:$PATH
 
 # XDG DIRS
 export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
+export XDG_CACHE_HOME=$HOME/.local/cache
 export XDG_DATA_HOME=$HOME/.local/share
+
+# Rust packages
+
+export CARGO_INSTALL_ROOT=$XDG_DATA_HOME/cargo
 
 # zsh
 export ZDOTDIR=$HOME/.config/zsh
@@ -29,3 +32,6 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export SUDO_EDITOR=$VISUAL
+
+
+export PATH=$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$CARGO_INSTALL_ROOT/bin:$PATH

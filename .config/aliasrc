@@ -1,8 +1,12 @@
 #!/bin/sh
 
-alias ls="ls --color=auto"
-alias la="ls -la --color=auto"
-alias ll="ls -l --color=auto"
+#alias ls="ls --color=auto"
+#alias la="ls -la --color=auto"
+#alias ll="ls -l --color=auto"
+alias ls="exa -l"
+alias la="exa -la"
+alias ll="exa -l"
+alias lt="exa -l --tree"
 
 alias pacman="sudo pacman"
 
@@ -22,7 +26,13 @@ alias sw-brave='brave --user-data-dir=/tmp/foo --unsafely-treat-insecure-origin-
 
 alias apicall="curl -X POST -H 'Content-type: application/json' https://eloraju.xyz/api -d"
 
-alias refresh-mirrors="sudo echo 'Refreshing mirrors...' &&\
+# Git stuff
+alias gpl="git pull"
+alias gps="git push"
+alias gco="git checkout"
+alias gcom="git commit -am" 
+
+alias refresh-mirrors="echo 'Refreshing mirrors...' &&\
                 sudo reflector --country Finland \
                 --country Sweden \
                 --country Germany \
