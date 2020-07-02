@@ -21,13 +21,15 @@ if !exists('g:vscode')
     Plug 'sinetoami/lightline-hunks'
     Plug 'lokikl/vim-ctrlp-ag'
     Plug 'preservim/nerdcommenter'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'dhruvasagar/vim-table-mode'
     "Plug 'thaerkh/vim-indentguides'
 
     call plug#end()
 
     syntax on
 
-    let mapleader="_"
+    let mapleader=" "
     filetype plugin on
 
     colorscheme codedark

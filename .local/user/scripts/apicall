@@ -1,8 +1,7 @@
-#!/bin/env 'deno run --allow-net=eloraju.xyz'
-import { soxa } from 'https://deno.land/x/soxa/mod.ts'
-
+#!/usr/bin/env deno --allow-net
 try {
-    const data: { [key: string]: any } = {};
+    const data: { command?: string, data?: any } = {};
+    const innerData: any = {};
 
     Deno.args.forEach((arg: string, index: number) => {
         if (index === 0) {
@@ -23,14 +22,29 @@ try {
             const key = arg.split('=')[0] as string;
             const value = arg.split('=')[1] as any;
 
-            data[key] = value as any;
+            innerData[key] = value as any;
         }
     });
 
+    data.data = innerData;
 
-    const res = await soxa.post('https://eloraju.xyz/api', {}, { data });
+    const url = 'https://eloraju.xyz/api';
+    const res = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+            'content-type': 'application/json'
+        },
+        redirect: 'follow',
+        body: JSON.stringify(data)
+    });
 
-    console.log(res.data.data)
+    if (res.ok) {
+        console.log(await res.json());
+    } else {
+        console.log(await res.text());
+    }
 } catch (err) {
     console.log(err)
 }

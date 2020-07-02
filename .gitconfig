@@ -1,0 +1,12 @@
+[user]
+	email = juuso.er@gmail.com
+	name = Juuso Elo-Rauta
+[pull]
+    rebase = false
+[diff]
+    tool = vimdiff
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+[mergetool "vimdiff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'

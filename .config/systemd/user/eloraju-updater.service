@@ -3,6 +3,6 @@ Description=Checks for updates in the official repos or in the AUR
 
 [Service]
 Type=oneshot
-ExecStart=/home/juuso/.local/user/bin/update-count auto
+ExecStart=/home/juuso/.local/user/scripts/update-count auto
 
 

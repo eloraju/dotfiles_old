@@ -2,7 +2,7 @@
 xrandr --output DP-0 --primary --mode 1920x1080 --pos 3840x0 --rate 144 --output HDMI-0 --mode 3840x2160 --left-of DP-0
 
 # Set wallpapers
-~/bin/setwp -r 1>/dev/null
+~/.local/share/user/scripts/setwp -r 1>/dev/null
 
 # Startup scripts 
 [[ "$DESKTOP_SESSION" != "xmonad" ]] && sh ~/bin/polystart

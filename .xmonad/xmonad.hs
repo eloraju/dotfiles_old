@@ -83,7 +83,6 @@ myKeys =
         ("M-C-S-r", spawn restartCmd),
         ("M-C-S-q", io exitSuccess),
         (hyper ++ "s", spawn "systemctl suspend"),
-        ("M-<F12>", spawn "~/bin/setwp -r"),
 
         -- Core stuff
         (hyper ++ "u", spawn updateCmd),
@@ -120,9 +119,12 @@ myKeys =
         ("M-g M--", decScreenWindowSpacing 3),              -- Decrease screen and window spacing by 3 pixels
         ("M-g M-0", setScreenWindowSpacing 5),              -- Reset screen and window spacing to 5 pixels
 
+        -- Fuynction keys
+        ("M-<F1>", spawn myBrowser),                        -- Start browser
+        ("M-<F12>", spawn "~/.local/user/scripts/setwp -r"),
+
         -- My own stuff
         ("M-S-e", spawn emojiCmd),                          -- Emoji selector
-        ("M-<F1>", spawn myBrowser),                        -- Start browser
         ("M-S-p", spawn "sleep 0.2;scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"),
 
         -- Download shit
@@ -187,7 +189,7 @@ myManageHook = composeAll
 
 -- Autostart
 myStartupHook = do
-    spawnOnce "sh ~/bin/guinit"
+    spawnOnce "sh ~/.local/user/scripts/guinit"
 
 main = do
     xmproc0 <- spawnPipe "xmobar -x 0 /home/juuso/.config/xmobar/xmobarrc"
