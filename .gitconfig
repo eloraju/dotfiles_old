@@ -7,6 +7,5 @@
     tool = vimdiff
 [merge]
     tool = vimdiff
-    conflictstyle = diff3
 [mergetool "vimdiff"]
-    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'colorscheme gruvbox' -c 'let diffing=1'

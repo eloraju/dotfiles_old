@@ -9,6 +9,7 @@ alias ll="exa -l"
 alias lt="exa -l --tree"
 
 alias pacman="sudo pacman"
+alias systemctl="sudo systemctl"
 
 # You never know what you might type
 alias v="nvim"

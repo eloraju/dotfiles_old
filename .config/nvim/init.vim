@@ -194,4 +194,5 @@ if !exists('g:vscode')
 
     " Automatically copy the saved file to the dist folder
     "autocmd BufWritePost /home/juuso/hailer/front/src/pwa/* !cp -a %:h/. ~/hailer/front/dist/hailer-frontend2/
+
 endif

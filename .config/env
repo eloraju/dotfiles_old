@@ -1,11 +1,16 @@
 #!/bin/sh
 export USER_BIN=$HOME/.local/user/bin
+export LOCAL_BIN=$HOME/.local/bin
 export USER_SCRIPTS=$HOME/.local/user/scripts
 
 # XDG DIRS
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.local/cache
 export XDG_DATA_HOME=$HOME/.local/share
+
+# GTK theme
+export GTK2_RC_FILES=/usr/share/themes/Arc-Dark/gtk-2.0/gtkrc
+export GTK_THEME=Arck-Dark
 
 # Rust packages
 
@@ -34,4 +39,4 @@ export EDITOR=$VISUAL
 export SUDO_EDITOR=$VISUAL
 
 
-export PATH=$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$CARGO_INSTALL_ROOT/bin:$PATH
+export PATH=$LOCAL_BIN:$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$CARGO_INSTALL_ROOT/bin:$PATH
