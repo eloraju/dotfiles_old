@@ -3,10 +3,11 @@
 #alias ls="ls --color=auto"
 #alias la="ls -la --color=auto"
 #alias ll="ls -l --color=auto"
-alias ls="exa -l"
+alias ls="exa"
 alias la="exa -la"
 alias ll="exa -l"
 alias lt="exa -l --tree"
+
 
 alias pacman="sudo pacman"
 alias systemctl="sudo systemctl"
@@ -22,8 +23,6 @@ alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias sysus="systemctl suspend"
 
 alias grubdate="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-
-alias sw-brave='brave --user-data-dir=/tmp/foo --unsafely-treat-insecure-origin-as-secure="https://localhost:9443" --ignore-certificate-errors'
 
 # Git stuff
 alias gpl="git pull"

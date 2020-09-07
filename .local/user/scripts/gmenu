@@ -24,7 +24,7 @@ askCommand() {
 }
 
 selectBranch() {
-    echo $(git branch -l | grep -v '*' | sort | dmenu -l 10 -i)
+    echo $(git branch -la | grep -v '*' | sed -E 's/remotes\/origin\///' | sort | dmenu -l 10 -i)
 }
 
 git status -s 1>/dev/null || exit 1;

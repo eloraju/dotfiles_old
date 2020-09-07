@@ -9,3 +9,7 @@
     tool = vimdiff
 [mergetool "vimdiff"]
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'colorscheme gruvbox' -c 'let diffing=1'
+[alias]
+	conflicts = diff --name-only --diff-filter=U
+[mergetool]
+	keepBackup = false
