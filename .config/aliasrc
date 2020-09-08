@@ -8,6 +8,7 @@ alias la="exa -la"
 alias ll="exa -l"
 alias lt="exa -l --tree"
 
+alias find=fd
 
 alias pacman="sudo pacman"
 alias systemctl="sudo systemctl"
