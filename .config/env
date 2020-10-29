@@ -15,6 +15,7 @@ export GTK_THEME=Arck-Dark
 # Rust packages
 
 export CARGO_INSTALL_ROOT=$XDG_DATA_HOME/cargo
+export RUSTPUP_ROOT=$HOME/.cargo/bin
 
 # zsh
 export ZDOTDIR=$HOME/.config/zsh
@@ -39,4 +40,4 @@ export EDITOR=$VISUAL
 export SUDO_EDITOR=$VISUAL
 
 
-export PATH=$LOCAL_BIN:$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$CARGO_INSTALL_ROOT/bin:$PATH
+export PATH=$LOCAL_BIN:$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$CARGO_INSTALL_ROOT/bin:$RUSTPUP_ROOT:$PATH

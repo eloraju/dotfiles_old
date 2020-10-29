@@ -100,6 +100,7 @@ export EDITOR=nvim
 
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 [ -f "$HOME/.config/exportrc" ] && source "$HOME/.config/exportrc"
+[ -f "$HOME/.config/env" ] && source "$HOME/.config/env"
 
 # Luke Smith's vim key navigation
 # # vi mode
@@ -137,6 +138,10 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+# custom completions
+fpath+=~/.config/completions
+
 
 # Add hidden files to autocomplete
 compinit
