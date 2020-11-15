@@ -51,7 +51,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
-myBrowser = "firefox"
+myBrowser = "brave"
 -- windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 --Borders
