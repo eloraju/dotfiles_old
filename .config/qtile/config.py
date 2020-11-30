@@ -1,15 +1,13 @@
-from libqtile import layout, hook, bar
-from libqtile.config import Key, Group, Drag, Click, Screen
+from libqtile import layout, hook
+from libqtile.config import Key, Group, Drag, Click
 from libqtile.lazy import lazy
-from libqtile import widget
 
 from os import environ
 from os import path, environ
-
 from typing import List
-from screenHelper import monitorCount
+from bar import screens
+from shared import colors, layout_theme, run_script, run_child_process
 
-import socket
 import subprocess
 import sys
 
@@ -25,13 +23,17 @@ TAB = 'Tab'
 WIN = 'mod4'
 HYPER = [WIN, ALT, SHIFT, CONTROL]
 
-# Switch the mods around if we're testing
+# For testing qtile cong with xephyr
 if environ.get('QTILE_XEPHYR'):
     MOD = ALT
     ALT = WIN
 else:
     MOD = WIN
 
+M = [MOD]
+M_Ctl_Sft = [MOD, CONTROL, SHIFT]
+M_Sft = [MOD, SHIFT]
+M_Ctl = [MOD, CONTROL]
 
 terminal = "alacritty"
 browser = "brave"
@@ -39,28 +41,11 @@ browser = "brave"
 #######################
 ####    SCRIPTS    ####
 #######################
-
-screenshot = ""
-
-################################
-####    COLORS AND FONTS    ####
-################################
-FONT = "JetBrainsMono Nerd Font Mono"
-
-colors = {
-        "normal": "#cecece",
-        "green": "82DF53",
-        "inactive": "3d3d3d",
-        "red": "D00000",
-        "yellow": "FFBA08", 
-        "background": "141214"
-        }
-
-shared_bar_confs = {
-        "background": colors["background"],
-        "font": FONT,
-        "foreground": colors["normal"],
-        }
+screenshot = "sleep 0.2;scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"
+suspend = "systemctl suspend"
+change_wallpaper = "~/.local/user/scripts/setwp -r"
+start_picom = "picom -b"
+emojiCmd = "rofimoji -c --skin-tone neutral --max-recent 0"
 
 ############################
 ####    KEY BINDINGS    ####
@@ -69,29 +54,51 @@ keys = [
         # WM control
         Key(HYPER, "r", lazy.restart()),
         Key(HYPER, "q", lazy.shutdown()),
+        Key(HYPER, "s", lazy.spawn(suspend)),
+
+        # Core stuff
+        Key(M, "Return", lazy.spawn(terminal)),
+        Key(M_Sft, "Return", lazy.spawn("dmenu_run")),
+        Key(M_Sft, "q", lazy.window.kill()),
 
         # Window controls
-        Key([MOD], "j", lazy.layout.down()),
-        Key([MOD], "k", lazy.layout.up()),
-        Key([MOD, SHIFT], "j", lazy.layout.shuffle_down()),
-        Key([MOD, SHIFT], "k", lazy.layout.shuffle_up()),
+        Key(M, "j", lazy.layout.down()),
+        Key(M, "k", lazy.layout.up()),
+        Key(M_Sft, "j", lazy.layout.shuffle_down()),
+        Key(M_Sft, "k", lazy.layout.shuffle_up()),
 
-        Key([MOD], "Return", lazy.spawn(terminal)),
-        Key([MOD], "Tab", lazy.next_layout()),
-        Key([MOD, SHIFT], "q", lazy.window.kill()),
+        Key(M, "o", lazy.layout.grow_main()),
+        Key(M, "u", lazy.layout.shrink_main()),
+        Key(M_Sft, "o", lazy.layout.grow()),
+        Key(M_Sft, "u", lazy.layout.shrink()),
 
-        Key([MOD, SHIFT],'b', lazy.hide_show_bar("bottom"))
+        Key(M, "Delete", lazy.window.disable_floating()),
+        Key(M, "f", lazy.window.toggle_fullscreen()),
+
+        # Workspaces and screens
+        Key(M, "h", lazy.screen.prev_group()),
+        Key(M, "l", lazy.screen.next_group()),
+        Key(M, "Tab", lazy.next_screen()),
+        Key(M_Ctl, "Tab", lazy.next_layout()),
+
+
+        # Spawn stuff and execute
+        Key(M_Sft,'b', lazy.hide_show_bar("top")),
+        Key(M_Sft, "p", run_script(screenshot)),
+        Key(M, "F1", lazy.spawn(browser)),
+        Key(M, "F12", run_script(change_wallpaper)),
+        Key(M_Sft, "e", run_script(emojiCmd)),
         ]
 
 ############################
 ####    MOUSE BINDINGS  ####
 ############################
 mouse = [
-        Drag([MOD], "Button1", lazy.window.set_position_floating(),
+        Drag(M, "Button1", lazy.window.set_position_floating(),
             start=lazy.window.get_position()),
-        Drag([MOD], "Button3", lazy.window.set_size_floating(),
+        Drag(M, "Button3", lazy.window.set_size_floating(),
             start=lazy.window.get_size()),
-        Click([MOD], "Button2", lazy.window.bring_to_front())
+        Click(M, "Button2", lazy.window.disable_floating())
         ]
 
 ####################
@@ -101,124 +108,35 @@ groupNames = ['I','II','III','IV','V','VI','VII','VIII','IX','X']
 groups = [Group(i) for i in groupNames]
 
 for i in groups:
-    numKey = groups.index(i)+1;
+    numKey = groups.index(i)+1
     if numKey == 10:
         numKey = 0
     keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([MOD], str(numKey), lazy.group[i.name].toscreen()),
-
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([MOD, "shift"], str(numKey), lazy.window.togroup(i.name, switch_group=True))
+        Key(M, str(numKey), lazy.group[i.name].toscreen()),
+        Key(M_Sft, str(numKey), lazy.window.togroup(i.name, switch_group=False)),
+        Key(M_Ctl_Sft, str(numKey), lazy.window.togroup(i.name, switch_group=True))
         ])
 
-    ########################
+
+########################
 ####    LAYOUTS     ####
 ########################
 layouts = [
-        layout.MonadTall(),
-        layout.Bsp(),
-        layout.Columns(),
-        layout.Matrix(),
-        layout.MonadWide(),
-        layout.RatioTile(),
-        layout.Tile(),
-        layout.TreeTab(),
-        layout.VerticalTile(),
-        layout.Zoomy(),
-        ]
-
-####################
-####    BARS    ####
-####################
-hostname = socket.gethostname()
-pipeSpacer = widget.TextBox(
-        **shared_bar_confs,
-        text = "|",
-        )
-
-left = [
-        widget.CurrentScreen(
-            **shared_bar_confs,
-            active_color = colors["green"],
-            active_text = "1",
-            inactive_text = "0",
-            inactive_color = colors["red"],
+        layout.MonadTall(
+            **layout_theme,
+            name="tall",
             ),
-        widget.GroupBox(
-            **shared_bar_confs,
-            active = colors["normal"],
-            inactive = colors["inactive"],
-            highlight_method = "text",
-            hide_unused = True,
-            rounded = False,
-            use_mouse_wheel = False
+        layout.MonadWide(
+            **layout_theme,
+            name="wide"
             ),
-        widget.CurrentLayoutIcon(
-            **shared_bar_confs,
-            scale = 0.6
+        layout.Matrix(
+            **layout_theme,
+            ),
+        layout.Max(
+            **layout_theme,
             ),
         ]
-
-middle = [
-        widget.Clock(
-            **shared_bar_confs,
-            format="%a %d.%m. %H:%M",
-            ),
-        ]
-
-right = [
-        widget.CPU(
-            **shared_bar_confs,
-            color_low=colors["green"],
-            color_medium=colors["yellow"],
-            color_high=colors["red"],
-            threshold_medium = 10,
-            threshold_high = 25,
-            format="cpu {load_bar} {load_percent}%"
-            ),
-        pipeSpacer,
-        widget.Memory(
-            **shared_bar_confs,
-            color_low=colors["green"],
-            format="mem {MemBar} {MemPercent}%"
-            )
-        ]
-
-mainWidgets = [
-        *left,
-        widget.Spacer(**shared_bar_confs),
-        * middle,
-        widget.Spacer(**shared_bar_confs),
-        *right
-    ]
-
-if hostname == "carbon":
-    mainWidgets.append([
-        widget.Wlan(
-            **shared_bar_confs,
-            disconnected_message = "No connection",
-            font = FONT,
-            )
-        ])
-#elif hostname == "asgard":
-#    mainWidgets.append([
-#            widget.Net(interface="enp7s0")
-#        ])
-
-primaryBar = bar.Bar(mainWidgets, 20)
-secondaryBar = bar.Bar([], 20)
-
-#######################
-####    SCREENS    ####
-#######################
-screens = [Screen(top=primaryBar)]
-mons = monitorCount()
-if mons > 1:
-    for mon in range(mons - 1):
-        screens.append(Screen(top=secondaryBar))
-
-
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
@@ -226,9 +144,12 @@ main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
+auto_fullscreen = False
+focus_on_window_activation = "smart"
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     {'wmclass': 'confirm'},
+    {'wmclass': 'Xephyr'},
     {'wmclass': 'dialog'},
     {'wmclass': 'download'},
     {'wmclass': 'error'},
@@ -242,9 +163,9 @@ floating_layout = layout.Floating(float_rules=[
     {'wname': 'branchdialog'},  # gitk
     {'wname': 'pinentry'},  # GPG key password entry
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
-])
-auto_fullscreen = True
-focus_on_window_activation = "smart"
+    {'wname': 'Open Files'},  # File opener
+    {'wname': 'Open Folder'},  # File opener
+    ])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
