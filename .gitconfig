@@ -1,15 +1,5 @@
+# This is Git's per-user configuration file.
 [user]
-	email = juuso.er@gmail.com
+# Please adapt and uncomment the following lines:
 	name = Juuso Elo-Rauta
-[pull]
-    rebase = false
-[diff]
-    tool = vimdiff
-[merge]
-    tool = vimdiff
-[mergetool "vimdiff"]
-    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'colorscheme gruvbox' -c 'let diffing=1'
-[alias]
-	conflicts = diff --name-only --diff-filter=U
-[mergetool]
-	keepBackup = false
+	email = juuso.eo-rauta@wunderdog.fi

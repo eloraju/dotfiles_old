@@ -2,29 +2,28 @@ if !exists('g:vscode')
     call plug#begin('~/.config/nvim/plugs')
 
     " vim plugins
-    Plug 'neoclide/coc.nvim', {'branch': 'release' }
-    " Git blame
     Plug 'APZelos/blamer.nvim'
-    Plug 'mattn/emmet-vim'
-    Plug 'tpope/vim-surround'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'easymotion/vim-easymotion'
-    Plug 'morhetz/gruvbox'
-    Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'jacoborus/tender.vim'
-    Plug 'tomasiser/vim-code-dark'
-    Plug 'itchyny/lightline.vim'
-    Plug 'ryanoasis/vim-devicons'
     Plug 'airblade/vim-gitgutter'
-    Plug 'tpope/vim-fugitive'
-    Plug 'sinetoami/lightline-hunks'
-    Plug 'lokikl/vim-ctrlp-ag'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'dhruvasagar/vim-table-mode'
-    "Plug 'thaerkh/vim-indentguides'
-    Plug 'voldikss/vim-floaterm'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'itchyny/lightline.vim'
+    Plug 'ianks/vim-tsx'
+    Plug 'jacoborus/tender.vim'
+    Plug 'kristijanhusak/vim-hybrid-material'
     Plug 'leafgarland/typescript-vim'
+    Plug 'lokikl/vim-ctrlp-ag'
+    Plug 'mattn/emmet-vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'neoclide/coc.nvim', {'branch': 'release' }
     Plug 'peitalin/vim-jsx-typescript'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'sinetoami/lightline-hunks'
+    Plug 'tomasiser/vim-code-dark'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'voldikss/vim-floaterm'
 
     " Color schemes
     Plug 'drewtempelmeyer/palenight.vim'
@@ -32,6 +31,13 @@ if !exists('g:vscode')
 
 
     call plug#end()
+
+    " CoC extensions
+    let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
+
+    " Filetype autocommands
+    au BufNewFile,BufRead *.ts setlocal filetype=typescript
+    au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 
     syntax on
 
@@ -97,8 +103,6 @@ if !exists('g:vscode')
 
     " Fold code
     nnoremap ff za 
-
-
     set noshowmode
 
     " Reload vimrc
@@ -154,24 +158,6 @@ if !exists('g:vscode')
     " Use `:Format` to format current buffer
     command! -nargs=0 Format :call CocAction('format')
     nnoremap <silent> <C-M-i> :call CocAction('format')<CR>
-
-    " Using CocList
-    " Show all diagnostics
-    nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
-    " Manage extensions
-    nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
-    " Show commands
-    nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
-    " Find symbol of current document
-    nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
-    " Search workspace symbols
-    nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
-    " Do default action for next item.
-    nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
-    " Do default action for previous item.
-    nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
-    " Resume latest coc list
-    nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
     nnoremap <silent> <M-f> :CocAction<CR>
 
