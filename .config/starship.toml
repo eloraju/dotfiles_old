@@ -1,0 +1,15 @@
+format="""
+$directory$git_branch$git_status
+$character
+"""
+
+scan_timeout=10
+
+[directory]
+truncation_symbol=".../"
+truncation_length=8
+
+[git_branch]
+format="[$symbol$branch]($style)"
+
+[git_status]
