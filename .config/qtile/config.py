@@ -10,6 +10,7 @@ from shared import colors, layout_theme, run_script, run_child_process
 
 import subprocess
 import sys
+import hooks
 
 #################################
 ####    DEFINING VARIABLES   ####
@@ -165,6 +166,9 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
     {'wname': 'Open Files'},  # File opener
     {'wname': 'Open Folder'},  # File opener
+    {'wname': 'Save File'},  # File opener
+    {'wmclass': 'timer-for-harvest'},  # File opener
+    {'wmclass': 'droidcam'},  # File opener
     ])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this

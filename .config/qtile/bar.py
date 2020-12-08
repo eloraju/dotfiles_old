@@ -19,9 +19,13 @@ left = [
         widget.GroupBox(
             **bar_theme,
             active = colors["light_gray"],
-            highlight_color= colors["dark_green"],
             inactive = colors["gray"],
-            highlight_method = "line",
+            highlight_method = "block",
+            highlight_color = colors["green"],
+            other_current_screen_border = colors["med_green"],
+            other_screen_border = colors["med_gray"],
+            this_current_screen_border = colors["med_green"],
+            this_screen_border = colors["med_gray"],
 
             rounded = False,
             use_mouse_wheel = False,
@@ -46,7 +50,7 @@ right = [
         pipeSpacer,
         widget.CPU(
             **bar_theme,
-            color_low=colors["green"],
+            color_low=colors["med_green"],
             color_medium=colors["yellow"],
             color_high=colors["red"],
             threshold_medium = 50,
@@ -56,7 +60,7 @@ right = [
         pipeSpacer,
         widget.Memory(
             **bar_theme,
-            color_low=colors["green"],
+            color_low=colors["med_green"],
             format="mem {MemBar} {MemPercent}%"
             )
         ]

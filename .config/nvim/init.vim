@@ -9,7 +9,6 @@ if !exists('g:vscode')
     Plug 'tpope/vim-surround'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'easymotion/vim-easymotion'
-    "Plug 'dracula/vim', {'as': 'dracula'}
     Plug 'morhetz/gruvbox'
     Plug 'kristijanhusak/vim-hybrid-material'
     Plug 'jacoborus/tender.vim'
@@ -27,6 +26,11 @@ if !exists('g:vscode')
     Plug 'leafgarland/typescript-vim'
     Plug 'peitalin/vim-jsx-typescript'
 
+    " Color schemes
+    Plug 'drewtempelmeyer/palenight.vim'
+    Plug 'dracula/vim', {'as': 'dracula'}
+
+
     call plug#end()
 
     syntax on
@@ -34,10 +38,17 @@ if !exists('g:vscode')
     let mapleader=" "
     filetype plugin on
 
-    colorscheme codedark
-    "colorscheme dracula 
+    "colorscheme codedark
+    colorscheme dracula 
     "colorscheme gruvbox 
     "colorscheme tender 
+    "colorscheme palenight
+
+    if (g:colors_name == "palenight")
+        set termguicolors
+    endif
+
+
 
     " Set relative linenumbers
     set relativenumber

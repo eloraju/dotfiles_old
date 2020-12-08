@@ -8,8 +8,10 @@ FONT = "JetBrainsMono Nerd Font Mono"
 
 colors = {
         "light_gray": "CECECE",
+        "med_gray": "868686",
         "gray": "3D3D3D",
         "green": "82DF53",
+        "med_green": "218230",
         "dark_green": "144D1D",
         "dark_red": "7A0000",
         "red": "D00000",
@@ -25,8 +27,8 @@ bar_theme = {
         }
 
 layout_theme = {
-        "border_width": 1,
-        "border_focus": colors["green"],
+        "border_width": 2,
+        "border_focus": colors["med_green"],
         "border_normal": colors["gray"],
         }
 
