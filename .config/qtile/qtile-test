@@ -2,7 +2,7 @@
 
 HERE=$(dirname $(readlink -f $0))
 SCREEN_SIZE=${SCREEN_SIZE:-1904x1071}
-XDISPLAY=${XDISPLAY:-:1}
+XDISPLAY=${XDISPLAY:-:2}
 LOG_LEVEL=${LOG_LEVEL:-INFO}
 APP=${APP:-alacritty}
 if [[ -z $PYTHON ]]; then
@@ -13,7 +13,7 @@ Xephyr +extension RANDR -screen ${SCREEN_SIZE} ${XDISPLAY} -ac &
 XEPHYR_PID=$!
 (
   sleep 1
-  env DISPLAY=${XDISPLAY} QTILE_XEPHYR=1 ${PYTHON} /home/juuso/.local/bin/qtile -c /home/juuso/.config/qtile/config.py -l ${LOG_LEVEL} $@ &
+  env DISPLAY=${XDISPLAY} QTILE_XEPHYR=1 ${PYTHON} /home/juuso/.local/bin/qtile start -c /home/juuso/.config/qtile/config.py -l ${LOG_LEVEL} $@ &
   QTILE_PID=$!
   env DISPLAY=${XDISPLAY} ${APP} &
   wait $QTILE_PID
