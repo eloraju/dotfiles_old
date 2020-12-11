@@ -1,5 +1,5 @@
 from libqtile import layout, hook
-from libqtile.config import Key, Group, Drag, Click
+from libqtile.config import Key, Group, Drag, Click, ScratchPad, DropDown
 from libqtile.lazy import lazy
 
 from os import environ
@@ -52,60 +52,64 @@ emojiCmd = "rofimoji -c --skin-tone neutral --max-recent 0"
 ####    KEY BINDINGS    ####
 ############################
 keys = [
-        # WM control
-        Key(HYPER, "r", lazy.restart()),
-        Key(HYPER, "q", lazy.shutdown()),
-        Key(HYPER, "s", lazy.spawn(suspend)),
+    # WM control
+    Key(HYPER, "r", lazy.restart()),
+    Key(HYPER, "q", lazy.shutdown()),
+    Key(HYPER, "s", lazy.spawn(suspend)),
 
-        # Core stuff
-        Key(M, "Return", lazy.spawn(terminal)),
-        Key(M_Sft, "Return", lazy.spawn("dmenu_run")),
-        Key(M_Sft, "q", lazy.window.kill()),
+    # Core stuff
+    Key(M, "Return", lazy.spawn(terminal)),
+    Key(M_Sft, "Return", lazy.spawn("dmenu_run")),
+    Key(M_Sft, "q", lazy.window.kill()),
 
-        # Window controls
-        Key(M, "j", lazy.layout.down()),
-        Key(M, "k", lazy.layout.up()),
-        Key(M_Sft, "j", lazy.layout.shuffle_down()),
-        Key(M_Sft, "k", lazy.layout.shuffle_up()),
+    # Window controls
+    Key(M, "j", lazy.layout.down()),
+    Key(M, "k", lazy.layout.up()),
+    Key(M_Sft, "j", lazy.layout.shuffle_down()),
+    Key(M_Sft, "k", lazy.layout.shuffle_up()),
 
-        Key(M, "o", lazy.layout.grow_main()),
-        Key(M, "u", lazy.layout.shrink_main()),
-        Key(M_Sft, "o", lazy.layout.grow()),
-        Key(M_Sft, "u", lazy.layout.shrink()),
+    Key(M, "o", lazy.layout.grow_main()),
+    Key(M, "u", lazy.layout.shrink_main()),
+    Key(M_Sft, "o", lazy.layout.grow()),
+    Key(M_Sft, "u", lazy.layout.shrink()),
 
-        Key(M, "Delete", lazy.window.disable_floating()),
-        Key(M, "f", lazy.window.toggle_fullscreen()),
+    Key(M, "Delete", lazy.window.disable_floating()),
+    Key(M, "f", lazy.window.toggle_fullscreen()),
 
-        # Workspaces and screens
-        Key(M, "h", lazy.screen.prev_group()),
-        Key(M, "l", lazy.screen.next_group()),
-        Key(M, "Tab", lazy.next_screen()),
-        Key(M_Ctl, "Tab", lazy.next_layout()),
+    # Workspaces and screens
+    Key(M, "h", lazy.screen.prev_group()),
+    Key(M, "l", lazy.screen.next_group()),
+    Key(M, "Tab", lazy.next_screen()),
+    Key(M_Ctl, "Tab", lazy.next_layout()),
 
 
-        # Spawn stuff and execute
-        Key(M_Sft,'b', lazy.hide_show_bar("top")),
-        Key(M_Sft, "p", run_script(screenshot)),
-        Key(M, "F1", lazy.spawn(browser)),
-        Key(M, "F12", run_script(change_wallpaper)),
-        Key(M_Sft, "e", run_script(emojiCmd)),
-        ]
+    # Spawn stuff and execute
+    Key(M_Sft, 'b', lazy.hide_show_bar("top")),
+    Key(M_Sft, "p", run_script(screenshot)),
+    Key(M, "F1", lazy.spawn(browser)),
+    Key(M, "F12", run_script(change_wallpaper)),
+    Key(M_Sft, "e", run_script(emojiCmd)),
+
+    # Testing shit out
+    Key(M_Sft, "F11", lazy.group['scratch'].dropdown_toggle('ala')),
+    Key(M_Sft, "F12", lazy.group['scratch'].dropdown_toggle('sla')),
+]
 
 ############################
 ####    MOUSE BINDINGS  ####
 ############################
 mouse = [
-        Drag(M, "Button1", lazy.window.set_position_floating(),
-            start=lazy.window.get_position()),
-        Drag(M, "Button3", lazy.window.set_size_floating(),
-            start=lazy.window.get_size()),
-        Click(M, "Button2", lazy.window.disable_floating())
-        ]
+    Drag(M, "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag(M, "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
+    Click(M, "Button2", lazy.window.disable_floating())
+]
 
 ####################
 ####    GROUPS  ####
 ####################
-groupNames = ['I','II','III','IV','V','VI','VII','VIII','IX','X']
+groupNames = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 groups = [Group(i) for i in groupNames]
 
 for i in groups:
@@ -116,28 +120,38 @@ for i in groups:
         Key(M, str(numKey), lazy.group[i.name].toscreen()),
         Key(M_Sft, str(numKey), lazy.window.togroup(i.name, switch_group=False)),
         Key(M_Ctl_Sft, str(numKey), lazy.window.togroup(i.name, switch_group=True))
-        ])
+    ])
 
+
+########################
+####    SCARTCH     ####
+########################
+groups.append(
+    ScratchPad("scratch", [
+               DropDown('ala', 'alacritty', on_focus_lost_hide=True),
+               DropDown('sla', 'chromium --app=https://app.slack.com/client/T02CLPH0M/unreads', on_focus_lost_hide=True)
+               ])
+)
 
 ########################
 ####    LAYOUTS     ####
 ########################
 layouts = [
-        layout.MonadTall(
-            **layout_theme,
-            name="tall",
-            ),
-        layout.MonadWide(
-            **layout_theme,
-            name="wide"
-            ),
-        layout.Matrix(
-            **layout_theme,
-            ),
-        layout.Max(
-            **layout_theme,
-            ),
-        ]
+    layout.MonadTall(
+        **layout_theme,
+        name="tall",
+    ),
+    layout.MonadWide(
+        **layout_theme,
+        name="wide"
+    ),
+    layout.Matrix(
+        **layout_theme,
+    ),
+    layout.Max(
+        **layout_theme,
+    ),
+]
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
@@ -169,7 +183,7 @@ floating_layout = layout.Floating(float_rules=[
     {'wname': 'Save File'},  # File opener
     {'wmclass': 'timer-for-harvest'},  # File opener
     {'wmclass': 'droidcam'},  # File opener
-    ])
+])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
