@@ -25,6 +25,19 @@ TAB = 'Tab'
 WIN = 'mod4'
 HYPER = [WIN, ALT, SHIFT, CONTROL]
 
+media_keys = {
+        "play":"XF86AudioPlay",
+        "pause":"XF86AudioStop",
+        "prev":"XF86AudioPrev",
+        "next":"XF86AudioNext",
+        "vol_up":"XF86AudioRaiseVolume",
+        "vol_down":"XF86AudioLowerVolume",
+        "mute":"XF86AudioMute",
+        "mic_mute":"XF86AudioMicMute",
+        "bright_down":"XF86MonBrightnessDown",
+        "bright_up":"XF86MonBrightnessUp",
+        }
+
 # For testing qtile cong with xephyr
 if environ.get('QTILE_XEPHYR'):
     MOD = ALT
@@ -48,6 +61,8 @@ suspend = "systemctl suspend"
 change_wallpaper = "~/.local/user/scripts/setwp -r"
 start_picom = "picom -b"
 emojiCmd = "rofimoji -c --skin-tone neutral --max-recent 0"
+inc_backlight = "sudo xbacklight -inc 10"
+dec_backlight = "sudo xbacklight -dec 10"
 
 ############################
 ####    KEY BINDINGS    ####
@@ -60,7 +75,7 @@ keys = [
 
     # Core stuff
     Key(M, "Return", lazy.spawn(terminal)),
-    Key(M_Sft, "Return", lazy.spawn("dmenu_run")),
+    Key(M_Sft, "Return", lazy.spawn("rofi -show run")),
     Key(M_Sft, "q", lazy.window.kill()),
 
     # Window controls
@@ -84,6 +99,10 @@ keys = [
     Key(M_Ctl, "Tab", lazy.next_layout()),
     Key(M_Sft, "Tab", lazy.function(window_to_next_screen)),
 
+    # Media key stuff
+    
+    Key([], media_keys["bright_down"], run_script(dec_backlight)),
+    Key([], media_keys["bright_up"], run_script(inc_backlight)),
 
     # Spawn stuff and execute
     Key(M_Sft, 'b', lazy.hide_show_bar("top")),
