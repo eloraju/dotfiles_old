@@ -7,6 +7,7 @@ from os import path, environ
 from typing import List
 from bar import screens
 from shared import colors, layout_theme, run_script, run_child_process
+from helpers import window_to_next_screen
 
 import subprocess
 import sys
@@ -81,6 +82,7 @@ keys = [
     Key(M, "l", lazy.screen.next_group()),
     Key(M, "Tab", lazy.next_screen()),
     Key(M_Ctl, "Tab", lazy.next_layout()),
+    Key(M_Sft, "Tab", lazy.function(window_to_next_screen)),
 
 
     # Spawn stuff and execute
@@ -89,10 +91,6 @@ keys = [
     Key(M, "F1", lazy.spawn(browser)),
     Key(M, "F12", run_script(change_wallpaper)),
     Key(M_Sft, "e", run_script(emojiCmd)),
-
-    # Testing shit out
-    Key(M_Sft, "F11", lazy.group['scratch'].dropdown_toggle('ala')),
-    Key(M_Sft, "F12", lazy.group['scratch'].dropdown_toggle('sla')),
 ]
 
 ############################

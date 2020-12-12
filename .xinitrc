@@ -34,5 +34,4 @@ fi
 
 xsetroot -cursor_name left_ptr &
 xbanish &
-#exec xmonad
 exec qtile start
