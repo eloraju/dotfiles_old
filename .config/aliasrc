@@ -32,6 +32,10 @@ alias gco="git checkout"
 alias gcom="git commit -am" 
 alias gslog="git log --abbrev-commit --oneline"
 
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
 alias refresh-mirrors="echo 'Refreshing mirrors...' &&\
                 sudo reflector --country Finland \
                 --country Sweden \
