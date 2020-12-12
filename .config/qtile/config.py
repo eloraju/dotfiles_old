@@ -59,7 +59,7 @@ keys = [
 
         # Core stuff
         Key(M, "Return", lazy.spawn(terminal)),
-        Key(M_Sft, "Return", lazy.spawn("dmenu_run")),
+        Key(M_Sft, "Return", lazy.spawn("rofi -show run")),
         Key(M_Sft, "q", lazy.window.kill()),
 
         # Window controls

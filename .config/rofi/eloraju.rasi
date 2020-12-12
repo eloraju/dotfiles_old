@@ -73,6 +73,7 @@ color: @gray;
 }
 #prompt {
     background-color: @black;
+    color: @gray;
 }
 #inputbar {
     background-color: @black;

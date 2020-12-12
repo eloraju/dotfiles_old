@@ -10,6 +10,7 @@ if !exists('g:vscode')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'itchyny/lightline.vim'
     Plug 'ianks/vim-tsx'
+    Plug 'jparise/vim-graphql'
     Plug 'jacoborus/tender.vim'
     Plug 'kristijanhusak/vim-hybrid-material'
     Plug 'leafgarland/typescript-vim'
