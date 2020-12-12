@@ -6,6 +6,19 @@ from libqtile.lazy import lazy
 ################################
 FONT = "JetBrainsMono Nerd Font Mono"
 
+media_keys = {
+        "play":"XF86AudioPlay",
+        "pause":"XF86AudioStop",
+        "prev":"XF86AudioPrev",
+        "next":"XF86AudioNext",
+        "vol_up":"XF86AudioRaiseVolume",
+        "vol_down":"XF86AudioLowerVolume",
+        "mute":"XF86AudioMute",
+        "mic_mute":"XF86AudioMicMute",
+        "bright_down":"XF86MonBrightnessDown",
+        "bright_up":"XF86MonBrightnessUp",
+        }
+
 colors = {
         "light_gray": "CECECE",
         "med_gray": "868686",
