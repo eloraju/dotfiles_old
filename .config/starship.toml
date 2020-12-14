@@ -7,7 +7,7 @@ scan_timeout=10
 
 [directory]
 truncation_symbol=".../"
-truncation_length=8
+truncation_length=4
 
 [git_branch]
 format="[$symbol$branch]($style)"

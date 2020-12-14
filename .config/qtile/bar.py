@@ -25,8 +25,8 @@ for mon in range(mons):
             inactive=colors["gray"],
             highlight_method="block",
             highlight_color=colors["green"],
-            other_current_screen_border=colors["med_green"],
-            other_screen_border=colors["med_gray"],
+            other_current_screen_border=colors["black"],
+            other_screen_border=colors["black"],
             this_current_screen_border=colors["med_green"],
             this_screen_border=colors["med_gray"],
 
