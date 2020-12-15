@@ -1,0 +1,7 @@
+#!/bin/sh
+
+pgrep -x transmission-da >/dev/null || (transmission-daemon && notify-send "Starting torrent daemon..." && sleep 3)
+
+echo "$(date): $@" >> /home/juuso/.torrents-history
+
+transmission-remote -a "$@" && notify-send 'Download daemon' 'Torrent added'
