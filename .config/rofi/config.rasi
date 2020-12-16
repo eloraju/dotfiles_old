@@ -1,4 +1,5 @@
 configuration {
     modi: "drun,run";
     theme: "eloraju";
+    matching: "fuzzy";
 }

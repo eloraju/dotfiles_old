@@ -75,7 +75,8 @@ keys = [
 
     # Core stuff
     Key(M, "Return", lazy.spawn(terminal)),
-    Key(M_Sft, "Return", lazy.spawn("rofi -show run")),
+    Key(M_Ctl, "Return", lazy.spawn("/home/juuso/.local/user/scripts/duplicate-term")),
+    Key(M_Sft, "Return", lazy.spawn("rofi -show run -display-run ''")),
     Key(M_Sft, "q", lazy.window.kill()),
 
     # Window controls
