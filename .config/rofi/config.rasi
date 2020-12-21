@@ -3,4 +3,5 @@ configuration {
     theme: "eloraju";
     matching: "fuzzy";
     sort: true;
+    sorting-method: "fzf";
 }
