@@ -10,6 +10,10 @@ def floating_dialogs(window):
     if dialog or transient:
         window.floating = True
 
+#@hook.subscribe.client_managed
+#def handle(window):
+#    if "Minecraft" in window.name:
+#        window.enable_fullscreen();
 
 @hook.subscribe.startup
 def startup():
