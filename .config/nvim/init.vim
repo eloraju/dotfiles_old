@@ -25,6 +25,8 @@ if !exists('g:vscode')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'voldikss/vim-floaterm'
+    Plug 'preservim/nerdtree'
+
 
     " Color schemes
     Plug 'drewtempelmeyer/palenight.vim'
@@ -55,7 +57,9 @@ if !exists('g:vscode')
         set termguicolors
     endif
 
-
+    " NerdTree confs
+    nnoremap <C-t> :NERDTreeToggle<CR>
+    nnoremap <C-f> :NERDTreeFind<CR>
 
     " Set relative linenumbers
     set relativenumber
