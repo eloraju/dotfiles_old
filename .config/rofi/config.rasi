@@ -1,4 +1,7 @@
 configuration {
     modi: "drun,run";
     theme: "eloraju";
+    matching: "fuzzy";
+    sort: true;
+    sorting-method: "fzf";
 }

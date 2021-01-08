@@ -9,11 +9,8 @@ if !exists('g:vscode')
     Plug 'easymotion/vim-easymotion'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'itchyny/lightline.vim'
-    Plug 'ianks/vim-tsx'
-    Plug 'jparise/vim-graphql'
     Plug 'jacoborus/tender.vim'
     Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'leafgarland/typescript-vim'
     Plug 'lokikl/vim-ctrlp-ag'
     Plug 'mattn/emmet-vim'
     Plug 'morhetz/gruvbox'
@@ -28,6 +25,16 @@ if !exists('g:vscode')
     Plug 'preservim/nerdtree'
 
 
+    " Debugger
+    Plug 'puremourning/vimspector'
+
+    " Languages
+    Plug 'cespare/vim-toml'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'ianks/vim-tsx'
+    Plug 'jparise/vim-graphql'
+    Plug 'rust-lang/rust.vim'
+
     " Color schemes
     Plug 'drewtempelmeyer/palenight.vim'
     Plug 'dracula/vim', {'as': 'dracula'}
@@ -36,8 +43,7 @@ if !exists('g:vscode')
     call plug#end()
 
     " CoC extensions
-    let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier']
-
+ let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank']
     " Filetype autocommands
     au BufNewFile,BufRead *.ts setlocal filetype=typescript
     au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
