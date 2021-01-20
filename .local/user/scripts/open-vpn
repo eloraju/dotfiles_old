@@ -1,0 +1,37 @@
+#!/bin/sh
+echo $OP_SESSION_my
+vpn_barona() {
+    vpn_json=$(op get item "Barona VPN")
+    export username=$(echo $vpn_json | jq ".details.fields[0].value" | sed 's/"//g')
+    export password=$(echo $vpn_json | jq ".details.fields[1].value" | sed 's/"//g')
+    export group=$(echo $vpn_json | jq ".details.sections[0].fields[0].v" |  sed 's/"//g')
+    export uri="sslvpn.barona.fi"
+}
+
+if [[ -z $1 ]]; then
+    echo "No vpn target provided. Exiting"
+    exit 1
+fi
+
+eval $(op signin my)
+
+case "$1" in
+    barona)
+        vpn_barona
+        ;;
+        *)
+        echo "Unknown option $1"
+        exit 2
+        ;;
+esac
+
+echo $password | sudo openconnect --authgroup $group --user $username --passwd-on-stdin --background --quiet $uri
+
+pgrep openconnect 1>/dev/null 2>&1
+if [ $? ]; then
+    touch /tmp/vpn_$1_connected
+    exit 0
+fi
+
+echo "Problem starting connection 🤷"
+exit 3

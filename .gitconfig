@@ -3,7 +3,7 @@
 	name = Juuso Elo-Rauta
 	email = juuso.er@gmail.com
 [pull]
-	rebase = false
+	rebase = true
 [status]
     showUntrackedFiles = no
 [merge]
@@ -18,6 +18,5 @@
   tool = vimdiff
 [core]
 	editor = nvim
-
 [init]
 	defaultBranch = master

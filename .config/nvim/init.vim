@@ -24,6 +24,10 @@ if !exists('g:vscode')
     Plug 'voldikss/vim-floaterm'
     Plug 'preservim/nerdtree'
 
+    " Tagging requires 'ctag' package to be installed
+    Plug 'xolox/vim-easytags'
+    Plug 'xolox/vim-misc'
+
 
     " Debugger
     Plug 'puremourning/vimspector'
@@ -60,14 +64,12 @@ if !exists('g:vscode')
     filetype plugin on
 
     "colorscheme codedark
-    colorscheme dracula 
+    "colorscheme dracula 
     "colorscheme gruvbox 
-    "colorscheme tender 
+    colorscheme tender 
     "colorscheme palenight
 
-    if (g:colors_name == "palenight")
-        set termguicolors
-    endif
+    set termguicolors
 
     " NerdTree confs
     nnoremap <C-t> :NERDTreeToggle<CR>
