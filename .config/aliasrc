@@ -25,12 +25,16 @@ alias sysus="systemctl suspend"
 
 alias grubdate="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
-# Git stuff
+### Git stuff
 alias gpl="git pull"
 alias gps="git push"
 alias gco="git checkout"
-alias gcom="git commit -am" 
 alias gslog="git log --abbrev-commit --oneline"
+
+# Create new branch
+alias gnb="git checkout -b"
+# Commit all with comment
+alias gcam="git commit -am" 
 
 alias ..="cd .."
 alias ...="cd ../.."
