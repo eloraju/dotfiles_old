@@ -1,0 +1,20 @@
+#!/bin/sh
+
+prompt_folder() {
+    if [ -d $1 ]; then
+        if [[ $(ls -1d $1/.*/ | egrep "git/$" ) ]]; then
+            $TERM --working-directory=$1
+            exit 0
+        fi
+        selection=$(ls -1 $1 | rofi -show run -dmenu)
+        if [ -z $selection ]; then 
+            exit 1
+        fi
+        prompt_folder $1/$selection
+    fi
+}
+
+repos=${REPODIR-"$HOME/repos"}
+
+prompt_folder $repos
+

@@ -23,6 +23,8 @@ if !exists('g:vscode')
     Plug 'tpope/vim-surround'
     Plug 'voldikss/vim-floaterm'
     Plug 'preservim/nerdtree'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
     " Tagging requires 'ctag' package to be installed
     Plug 'xolox/vim-easytags'
@@ -47,7 +49,7 @@ if !exists('g:vscode')
     call plug#end()
 
     " CoC extensions
-    let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank']
+    let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank', 'coc-fzf-preview']
 
     " Vimspector debug adapters
     let g:vimspector_install_gadgets = [ 'debugpy' ]

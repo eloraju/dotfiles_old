@@ -30,6 +30,7 @@ echo $password | sudo openconnect --authgroup $group --user $username --passwd-o
 pgrep openconnect 1>/dev/null 2>&1
 if [ $? ]; then
     touch /tmp/vpn_$1_connected
+    echo "Connected to $1 - $uri"
     exit 0
 fi
 
