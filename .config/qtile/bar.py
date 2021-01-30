@@ -52,18 +52,12 @@ for mon in range(mons):
     right = [
         widget.CPU(
             **bar_theme,
-            color_low=colors["med_green"],
-            color_medium=colors["yellow"],
-            color_high=colors["red"],
-            threshold_medium=50,
-            threshold_high=75,
-            format="cpu {load_bar} {load_percent}%"
+            format="cpu {load_percent}%"
         ),
         pipeSpacer,
         widget.Memory(
             **bar_theme,
-            color_low=colors["med_green"],
-            format="mem {MemBar} {MemPercent}%"
+            format="mem {MemPercent}%"
         )
     ]
 
