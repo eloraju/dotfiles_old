@@ -50,6 +50,7 @@ fpath+=~/.config/completions
 
 
 # Add hidden files to autocomplete
+autoload -Uz compinit
 compinit
 _comp_options+=(globdots)
 
@@ -131,5 +132,17 @@ fi
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+# Load nvm
+# nvm
+#export NVM_DIR="$XDG_DATA_HOME/nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# NEW!! nvm from aur
+source /usr/share/nvm/init-nvm.sh
+
+# Plugins
+source $HOME/.config/zsh/zsh-nvm-plugin.zsh
+source $HOME/.config/zsh/zsh-npm-completion.zsh
 
 eval "$(starship init zsh)"

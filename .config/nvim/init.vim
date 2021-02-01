@@ -1,55 +1,13 @@
 if !exists('g:vscode')
-    call plug#begin('~/.config/nvim/plugs')
-
-    " vim plugins
-    Plug 'APZelos/blamer.nvim'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'dhruvasagar/vim-table-mode'
-    Plug 'easymotion/vim-easymotion'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-    Plug 'itchyny/lightline.vim'
-    Plug 'jacoborus/tender.vim'
-    Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'lokikl/vim-ctrlp-ag'
-    Plug 'mattn/emmet-vim'
-    Plug 'morhetz/gruvbox'
-    Plug 'neoclide/coc.nvim', {'branch': 'release' }
-    Plug 'peitalin/vim-jsx-typescript'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'sinetoami/lightline-hunks'
-    Plug 'tomasiser/vim-code-dark'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-surround'
-    Plug 'voldikss/vim-floaterm'
-    Plug 'preservim/nerdtree'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
-
-    " Tagging requires 'ctag' package to be installed
-    Plug 'xolox/vim-easytags'
-    Plug 'xolox/vim-misc'
+    source ./plugins.vim
+    source ./theme.vim
+    source ./netwr-conf.vim
+    source ./coc-conf.vim
+    source ./lightline-conf.vim
+    source ./floaterm-conf.vim
 
 
-    " Debugger
-    Plug 'puremourning/vimspector'
-
-    " Languages
-    Plug 'cespare/vim-toml'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'ianks/vim-tsx'
-    Plug 'jparise/vim-graphql'
-    Plug 'rust-lang/rust.vim'
-
-    " Color schemes
-    Plug 'drewtempelmeyer/palenight.vim'
-    Plug 'dracula/vim', {'as': 'dracula'}
-
-
-    call plug#end()
-
-    " CoC extensions
-    let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank', 'coc-fzf-preview']
+    " MIGRATE SHIT BELOW THIS LINE TO THEIR OWN FILES!
 
     " Vimspector debug adapters
     let g:vimspector_install_gadgets = [ 'debugpy' ]
@@ -64,18 +22,6 @@ if !exists('g:vscode')
 
     let mapleader=" "
     filetype plugin on
-
-    "colorscheme codedark
-    "colorscheme dracula 
-    "colorscheme gruvbox 
-    colorscheme tender 
-    "colorscheme palenight
-
-    set termguicolors
-
-    " NerdTree confs
-    nnoremap <C-t> :NERDTreeToggle<CR>
-    nnoremap <C-f> :NERDTreeFind<CR>
 
     " Set relative linenumbers
     set relativenumber
@@ -110,144 +56,19 @@ if !exists('g:vscode')
     " let g:ctrlp_ag_search_base = 'current-file-dir'
     " let g:ctrlp_ag_search_base = 'app/controllers' " both relative and absolute path supported
 
-    let g:neosnippet#enable_complete_snippet = 1
 
+    " Git blame confs
     let g:blamer_enabled = 1
     let g:blamer_delay = 250
 
 
-    inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-    inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-    inoremap jk <esc>
-
-
-    " Fold code
-    nnoremap ff za 
+    " Hide normal insert mode indicator
     set noshowmode
 
-    " Reload vimrc
-    nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
-
-    " Lightline + CoC
-    function! CocCurrentFunction()
-        return get(b:, 'coc_current_function', '')
-    endfunction
-
-    " Lighline filepath
-    function! LightlineFilePath()
-        let path = expand("%")
-        let splitPath = split(path,"/")
-        let size = len(splitPath)
-        if size > 3
-            let newArray = ["..."] + splitPath[-3:]
-            return join(newArray, "/")
-        endif
-
-        return path
-    endfunction
-
-    let g:lightline = {
-                \ 'colorscheme': 'one',
-                \ 'active': {
-                \   'left': [ ['mode', 'paste'],
-                \             ['filepath', 'modified']],
-                \  'right': [['lineinfo'],
-                \           ['filetype'],
-                \           ['lightline_hunks']]
-                \ },
-                \ 'component_function': {
-                \   'currentfunction': 'CocCurrentFunction',
-                \   'lightline_hunks': 'lightline#hunks#composer',
-                \   'filepath': 'LightlineFilePath'
-                \ },
-                \ 'mode_map': {
-                    \ 'n' : 'N',
-                    \ 'i' : 'I',
-                    \ 'R' : 'R',
-                    \ 'v' : 'V',
-                    \ 'V' : 'VL',
-                    \ "\<C-v>": 'VB',
-                    \ 'c' : 'C',
-                    \ 's' : 'S',
-                    \ 'S' : 'SL',
-                    \ "\<C-s>": 'SB',
-                    \ 't': 'T',
-                    \ },
-                \ }
-
-    let g:lightline#hunks#only_branch = 1
-
-    " CoC stuff
-    inoremap <silent><expr> <C-space> coc#refresh()
-    " Remap goto
-    nmap <silent> gd :call CocAction('jumpDefinition', 'tab drop')<CR>
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-
-    nmap gn <Plug>(coc-diagnostic-next)
-    nmap gp <Plug>(coc-diagnostic-prev)
-
-    nnoremap sag :w<CR>:!git add %<CR>
-
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
-
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-    " Remap for rename current word
-    nmap <F2> <Plug>(coc-rename)
-    " Use `:Format` to format current buffer
-    command! -nargs=0 Format :call CocAction('format')
-    nnoremap <silent> <C-M-i> :call CocAction('format')<CR>
-
-    nnoremap <silent> <M-f> :CocAction<CR>
-
-    " from readme
-    " if hidden is not set, TextEdit might fail.
-    " Some servers have issues with backup files, see #649 set nobackup set nowritebackup 
-    set hidden 
-    " Better display for messages
-    set cmdheight=2 
-    " You will have bad experience for diagnostic messages when it's default 4000.
-    set updatetime=300
-
-    " don't give |ins-completion-menu| messages.
-    set shortmess+=c
-
-    " always show signcolumns
-    set signcolumn=yes
 
     " Mouse scrolling
     set mouse=a
 
-    " Floaterm stuff
-    let g:floaterm_keymap_new    = '<leader><F1>'
-    let g:floaterm_keymap_toggle = '<leader><F2>'
-    let g:floaterm_keymap_kill   = '<leader><F3>'
-
-    " Floaterm
-    let g:floaterm_width=0.8
-    let g:floaterm_height=0.8
-    let g:floaterm_autoclose=1
 endif
 
-
-" Move lines up and down
-nnoremap <C-M-j> :m+<cr>
-nnoremap <C-M-k> :m-2<cr>
-
-" Tab movement and creation
-noremap <M-k> :tabn<CR>
-noremap <M-j> :tabp<CR>
-noremap <M-t> :tabnew<CR>:CtrlP<CR>
-
-" Split creation
-noremap <C-s>j :split<CR><C-w>j:CtrlP<CR>
-noremap <C-s>l :vsplit<CR><C-w>l:CtrlP<CR>
+source ./remaps.vim

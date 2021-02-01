@@ -9,7 +9,7 @@ setWP() {
 
 setRandomWP() {
     wpDir=$1
-    [ -z "$wpDir" ] && wpDir="$HOME/Pictures/wallpapers"
+    [ -z "$wpDir" ] && wpDir="$HOME/pictures/wallpapers"
     cp "$(find "$wpDir" -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -type f | shuf -n 1)" "$WP_PATH"
     updateWP
 }

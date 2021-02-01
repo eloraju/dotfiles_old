@@ -56,7 +56,7 @@ browser = "brave"
 #######################
 ####    SCRIPTS    ####
 #######################
-screenshot = "sleep 0.2;scrot -s ~/Pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"
+screenshot = "sleep 0.2;scrot -s ~/pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"
 suspend = "systemctl suspend"
 change_wallpaper = "~/.local/user/scripts/setwp -r"
 start_picom = "picom -b"
