@@ -1,18 +1,15 @@
 if !exists('g:vscode')
-    source ./plugins.vim
-    source ./theme.vim
-    source ./netwr-conf.vim
-    source ./coc-conf.vim
-    source ./lightline-conf.vim
-    source ./floaterm-conf.vim
+    " Source everything in config folder
+    " without causing an infinite loop
+    let term = "/init.vim"
+    for f in split(glob('~/.config/nvim/*.vim'),'\n')
+        if stridx(f, term) < 0
+            exec 'source' f
+        endif
+    endfor
 
-
-    " MIGRATE SHIT BELOW THIS LINE TO THEIR OWN FILES!
-
-    " Vimspector debug adapters
-    let g:vimspector_install_gadgets = [ 'debugpy' ]
-    " Other Vimspector stuff
-
+    " Leader char
+    let mapleader="-"
 
     " Filetype autocommands
     au BufNewFile,BufRead *.ts setlocal filetype=typescript
@@ -20,7 +17,6 @@ if !exists('g:vscode')
 
     syntax on
 
-    let mapleader=" "
     filetype plugin on
 
     " Set relative linenumbers
@@ -38,37 +34,12 @@ if !exists('g:vscode')
     " set automatic folding
     set foldmethod=syntax
 
-    " Set ctrlp to skip files in .gitignore
-    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-    " ctrlp and ag bindings
-    nnoremap <c-f> :CtrlPag<cr>
-    vnoremap <c-f> :CtrlPagVisual<cr>
-    let g:ctrlp_ag_ignores = '--ignore .git
-                \ --ignore "deps/*"
-                \ --ignore "_build/*"
-                \ --ignore "dist/*"
-                \ --ignore "node_modules/*"
-                \ --ignore "node/*"'
-    " By default ag will search from PWD
-    " But you may enable one of below line to use an arbitrary directory or,
-    " Using the magic word 'current-file-dir' to use current file base directory
-    " let g:ctrlp_ag_search_base = 'current-file-dir'
-    " let g:ctrlp_ag_search_base = 'app/controllers' " both relative and absolute path supported
-
-
-    " Git blame confs
-    let g:blamer_enabled = 1
-    let g:blamer_delay = 250
-
-
     " Hide normal insert mode indicator
     set noshowmode
-
 
     " Mouse scrolling
     set mouse=a
 
 endif
 
-source ./remaps.vim
+source ~/.config/nvim/remaps.vim
