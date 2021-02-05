@@ -8,6 +8,7 @@ from typing import List
 from bar import screens
 from shared import colors, layout_theme, run_script, run_child_process
 from helpers import window_to_next_screen
+from program_maps import programs
 
 import subprocess
 import sys
@@ -51,7 +52,6 @@ M_Sft = [MOD, SHIFT]
 M_Ctl = [MOD, CONTROL]
 
 terminal = "alacritty"
-browser = "brave"
 
 #######################
 ####    SCRIPTS    ####
@@ -105,13 +105,17 @@ keys = [
     Key([], media_keys["bright_down"], run_script(dec_backlight)),
     Key([], media_keys["bright_up"], run_script(inc_backlight)),
 
-    # Spawn stuff and execute
-    Key(M_Sft, 'b', lazy.hide_show_bar("top")),
+    # Run scripts
     Key(M_Sft, "p", run_script(screenshot)),
-    Key(M, "F1", lazy.spawn(browser)),
-    Key(M, "F12", run_script(change_wallpaper)),
     Key(M_Sft, "e", run_script(emojiCmd)),
+    Key(M, "F12", run_script(change_wallpaper)),
 ]
+
+##############################
+####    PROGRAM BINDINGS  ####
+##############################
+keys.extend([Key(M,key,action) for key, action in programs.items()])
+
 
 ############################
 ####    MOUSE BINDINGS  ####
