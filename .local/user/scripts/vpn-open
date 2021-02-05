@@ -1,5 +1,4 @@
 #!/bin/sh
-echo $OP_SESSION_my
 vpn_barona() {
     vpn_json=$(op get item "Barona VPN")
     export username=$(echo $vpn_json | jq ".details.fields[0].value" | sed 's/"//g')
@@ -13,7 +12,9 @@ if [[ -z $1 ]]; then
     exit 1
 fi
 
-eval $(op signin my)
+if [ -z $OP_SESSION_my ]; then
+    eval $(op signin my)
+fi
 
 case "$1" in
     barona)
