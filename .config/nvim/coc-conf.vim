@@ -1,5 +1,5 @@
 " Extensions
-let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank', 'coc-fzf-preview']
+let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank', 'coc-fzf-preview', 'coc-json']
 
 inoremap <silent><expr> <C-space> coc#refresh()
 " Remap goto

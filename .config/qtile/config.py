@@ -121,10 +121,11 @@ keys.extend([Key(M,key,action) for key, action in programs.items()])
 ####    MOUSE BINDINGS  ####
 ############################
 mouse = [
-    Drag(M, "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag(M, "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size()),
+    Drag(M, "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag(M, "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    # Use mouse back and forward to interract with floating windows without mod key
+#    Drag([], "Button8", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+#    Drag([], "Button9", lazy.window.set_position_floating(), start=lazy.window.get_position()),
     Click(M, "Button2", lazy.window.disable_floating())
 ]
 

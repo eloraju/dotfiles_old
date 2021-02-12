@@ -103,8 +103,8 @@
 font:
   # Normal (roman) font face
   normal:
-    family: JetBrainsMono Nerd Font Mono
-    style: Regular
+    family: DejaVuSansMono Nerd Font Mono
+    #style: Regular
     # Font family
     #
     # Default:
@@ -116,9 +116,9 @@ font:
     #style: Regular
 
   # Bold font face
-  bold:
-    family: JetBrainsMono Nerd Font Mono
-    style: Bold
+  #bold:
+  #family: JetBrainsMono Nerd Font Mono
+  #style: Bold
     # Font family
     #
     # If the bold family is not specified, it will fall back to the
@@ -129,9 +129,9 @@ font:
     # style: Bold
 
   # Italic font face
-  italic:
-    family: JetBrainsMono Nerd Font Mono
-    style: Italic
+  # italic:
+  #   family: JetBrainsMono Nerd Font Mono
+  #   style: Italic
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
@@ -142,9 +142,9 @@ font:
     #style: Italic
 
   # Bold italic font face
-  bold_italic:
-    family: JetBrainsMono Nerd Font Mono
-    style: Bold Italic
+  # bold_italic:
+  #   family: JetBrainsMono Nerd Font Mono
+  #   style: Bold Italic
     # Font family
     #
     # If the bold italic family is not specified, it will fall back to the
@@ -155,7 +155,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 8.5
+  size: 10
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.

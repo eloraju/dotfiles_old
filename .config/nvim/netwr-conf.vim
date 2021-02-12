@@ -14,6 +14,7 @@ function! ToggleVExplorer()
     else
         exec '1wincmd w'
         Vexplore
+        " Set the explorer width
         vertical resize 50
         let t:expl_buf_num = bufnr("%")
     endif
@@ -22,10 +23,12 @@ map <silent> <C-t> :call ToggleVExplorer()<CR>
 
 " Hit enter in the file browser to open the selected
 " file with :vsplit to the right of browser
-let g:netrw_brows_split = 4
 let g:netrow_altv = 1
 
 " Default to tree mode
 let g:netrw_liststyle = 3
+
+" Hide banner
+let g:netrw_banner = 0
 
 
