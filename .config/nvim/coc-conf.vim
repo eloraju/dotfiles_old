@@ -1,5 +1,5 @@
 " Extensions
-let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank', 'coc-fzf-preview', 'coc-json']
+let g:coc_global_extensions = [ 'coc-actions', 'coc-css', 'coc-emmet', 'coc-eslint', 'coc-html', 'coc-jedi', 'coc-json', 'coc-markdownlint', 'coc-prettier', 'coc-python', 'coc-react-refactor', 'coc-rls', 'coc-styled-components', 'coc-toml', 'coc-tsserver', 'coc-yaml', 'coc-yank', 'coc-fzf-preview', 'coc-json', 'coc-prettier', 'coc-eslint']
 
 inoremap <silent><expr> <C-space> coc#refresh()
 " Remap goto
@@ -27,8 +27,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <F2> <Plug>(coc-rename)
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
-nnoremap <silent> <C-M-i> :call CocAction('format')<CR>
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nnoremap <silent> <C-M-f> :Prettier<CR>
 nnoremap <silent> <M-f> :CocAction<CR>
 
 " from readme

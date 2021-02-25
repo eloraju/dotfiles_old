@@ -26,8 +26,9 @@ if !exists('g:vscode')
     " Copied from https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f
     set smarttab
     set cindent
-    set tabstop=4
-    set shiftwidth=4
+    set tabstop=2
+    set softtabstop=2
+    set shiftwidth=2
     " always uses spaces instead of tab characters
     set expandtab
 

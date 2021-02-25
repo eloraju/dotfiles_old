@@ -18,10 +18,6 @@ Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 " Not sure if i wanna use these or not
 " Plug 'preservim/nerdtree'
 
-" Tagging requires 'ctag' package to be installed
-Plug 'xolox/vim-easytags'
-Plug 'xolox/vim-misc'
-
 " Debugger
 Plug 'puremourning/vimspector'
 
@@ -39,7 +35,7 @@ Plug 'dhruvasagar/vim-table-mode'
 
 " Motions
 Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 
 " Color schemes
 Plug 'tomasiser/vim-code-dark'

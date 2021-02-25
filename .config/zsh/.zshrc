@@ -144,5 +144,9 @@ source /usr/share/nvm/init-nvm.sh
 # Plugins
 source $HOME/.config/zsh/zsh-nvm-plugin.zsh
 source $HOME/.config/zsh/zsh-npm-completion.zsh
+source $HOME/.config/zsh/zsh-aws-completion.zsh
+
+export MANPAGER="sh -c 'col -bx |bat -l man -p'"
+#export MANPAGER="nvim -c 'set ft=man'"
 
 eval "$(starship init zsh)"
