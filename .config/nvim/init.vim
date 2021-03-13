@@ -1,45 +1,48 @@
 if !exists('g:vscode')
-    " Source everything in config folder
-    " without causing an infinite loop
-    let term = "/init.vim"
-    for f in split(glob('~/.config/nvim/*.vim'),'\n')
-        if stridx(f, term) < 0
-            exec 'source' f
-        endif
-    endfor
+  source ~/.config/nvim/plugins.vim
+  source ~/.config/nvim/remaps.vim
+  source ~/.config/nvim/theme.vim
 
-    " Leader char
-    let mapleader="-"
+  " Source everything in config folder
+  for f in split(glob('~/.config/nvim/configs/*.vim'),'\n')
+    exec 'source' f
+  endfor
 
-    " Filetype autocommands
-    au BufNewFile,BufRead *.ts setlocal filetype=typescript
-    au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+  " Load lsp configs
+  luafile ~/.config/nvim/configs/lsp-confs.lua
 
-    syntax on
+  " Leader char
+  let mapleader="-"
 
-    filetype plugin on
+  " Filetype autocommands
+  au BufNewFile,BufRead *.ts setlocal filetype=typescript
+  au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
 
-    " Set relative linenumbers
-    set relativenumber
-    set number
+  syntax on
 
-    " Copied from https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f
-    set smarttab
-    set cindent
-    set tabstop=2
-    set softtabstop=2
-    set shiftwidth=2
-    " always uses spaces instead of tab characters
-    set expandtab
+  filetype plugin on
 
-    " set automatic folding
-    set foldmethod=syntax
+  " Set relative linenumbers
+  set relativenumber
+  set number
 
-    " Hide normal insert mode indicator
-    set noshowmode
+  " Copied from https://gist.github.com/benawad/b768f5a5bbd92c8baabd363b7e79786f
+  set smarttab
+  set cindent
+  set tabstop=2
+  set softtabstop=2
+  set shiftwidth=2
+  " always uses spaces instead of tab characters
+  set expandtab
 
-    " Mouse scrolling
-    set mouse=a
+  " set automatic folding
+  set foldmethod=syntax
+
+  " Hide normal insert mode indicator
+  set noshowmode
+
+  " Mouse scrolling
+  set mouse=a
 
 endif
 

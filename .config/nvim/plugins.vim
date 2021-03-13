@@ -7,7 +7,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'lokikl/vim-ctrlp-ag'
 Plug 'mattn/emmet-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release' }
+"Plug 'neoclide/coc.nvim', {'branch': 'release' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'sinetoami/lightline-hunks'
 Plug 'tpope/vim-fugitive'
@@ -16,7 +16,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
 " Not sure if i wanna use these or not
-" Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Debugger
 Plug 'puremourning/vimspector'
@@ -28,6 +29,13 @@ Plug 'ianks/vim-tsx'
 Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
 Plug 'peitalin/vim-jsx-typescript'
+
+" Better syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+" For native LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 
 " Markdown stuff
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}

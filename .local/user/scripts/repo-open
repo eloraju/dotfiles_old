@@ -6,8 +6,8 @@ prompt_folder() {
             $TERM --working-directory=$1
             exit 0
         fi
-        selection=$(ls -1 $1 | rofi -show run -dmenu)
-        if [ -z $selection ]; then 
+        selection=$(ls -1 $1 | rofi -dmenu)
+        if [ -z $selection ]; then
             exit 1
         fi
         prompt_folder $1/$selection
