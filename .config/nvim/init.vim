@@ -8,8 +8,10 @@ if !exists('g:vscode')
     exec 'source' f
   endfor
 
-  " Load lsp configs
-  luafile ~/.config/nvim/configs/lsp-confs.lua
+  " Source all lua files
+  for luaf in split(glob('~/.config/nvim/configs/*.lua'),'\n')
+    exec 'luafile' luaf
+  endfor
 
   " Leader char
   let mapleader="-"

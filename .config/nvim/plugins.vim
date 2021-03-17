@@ -7,7 +7,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'lokikl/vim-ctrlp-ag'
 Plug 'mattn/emmet-vim'
-"Plug 'neoclide/coc.nvim', {'branch': 'release' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'sinetoami/lightline-hunks'
 Plug 'tpope/vim-fugitive'
@@ -16,8 +15,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
 " Not sure if i wanna use these or not
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 
 " Debugger
 Plug 'puremourning/vimspector'
