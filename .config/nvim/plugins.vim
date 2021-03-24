@@ -3,18 +3,20 @@ call plug#begin('~/.config/nvim/plugs')
 " ????? vim plugins
 Plug 'APZelos/blamer.nvim'
 Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
+
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'lokikl/vim-ctrlp-ag'
+
 Plug 'itchyny/lightline.vim'
-Plug 'lokikl/vim-ctrlp-ag'
 Plug 'mattn/emmet-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sinetoami/lightline-hunks'
 Plug 'tpope/vim-fugitive'
 Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+Plug 'junegunn/fzf.vim'
 
-" Not sure if i wanna use these or not
+" File browsing
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 
@@ -22,12 +24,12 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'puremourning/vimspector'
 
 " Languages
-Plug 'cespare/vim-toml'
-Plug 'leafgarland/typescript-vim'
-Plug 'ianks/vim-tsx'
-Plug 'jparise/vim-graphql'
-Plug 'rust-lang/rust.vim'
-Plug 'peitalin/vim-jsx-typescript'
+"Plug 'cespare/vim-toml'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'ianks/vim-tsx'
+"Plug 'jparise/vim-graphql'
+"Plug 'rust-lang/rust.vim'
+"Plug 'peitalin/vim-jsx-typescript'
 
 " Better syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update

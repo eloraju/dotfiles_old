@@ -1,7 +1,7 @@
     "colorscheme codedark
-    colorscheme dracula 
+    "colorscheme dracula 
     "colorscheme gruvbox 
     "colorscheme tender 
-    "colorscheme palenight
+    colorscheme palenight
 
     set termguicolors

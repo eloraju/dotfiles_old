@@ -1,12 +1,19 @@
 format="""
 $directory$git_branch$git_status
-$character
+$hostname$character
 """
 
 scan_timeout=10
 
+[hostname]
+ssh_only=true
+format='\([$hostname](green bold)\): '
+
+[username]
+show_always=false
+
 [directory]
-truncation_symbol=".../"
+truncation_symbol='.../'
 truncation_length=4
 
 [git_branch]
