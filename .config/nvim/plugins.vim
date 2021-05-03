@@ -20,8 +20,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 
+" COC
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " Debugger
-Plug 'puremourning/vimspector'
+"Plug 'puremourning/vimspector'
 
 " Languages
 "Plug 'cespare/vim-toml'
@@ -35,8 +38,12 @@ Plug 'puremourning/vimspector'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 " For native LSP
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'hrsh7th/nvim-compe'
+
+" For better LSP :)
+"Plug 'RishabhRD/popfix'
+"Plug 'RishabhRD/nvim-lsputils'
 
 " Markdown stuff
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -44,7 +51,7 @@ Plug 'dhruvasagar/vim-table-mode'
 
 " Motions
 Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
+"Plug 'justinmk/vim-sneak'
 
 " Color schemes
 Plug 'tomasiser/vim-code-dark'
@@ -53,6 +60,7 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'morhetz/gruvbox'
+Plug 'fenetikm/falcon'
 
 
 call plug#end()
