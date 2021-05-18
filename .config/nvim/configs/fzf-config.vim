@@ -11,3 +11,6 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 nmap <silent> <C-f> :RG<CR>
 nnoremap <silent> <C-p> :Files<CR>
 
+" Search selected text
+vnoremap <silent> <C-f> y:RG <C-R>"<CR>
+
