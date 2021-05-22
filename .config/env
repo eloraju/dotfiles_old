@@ -37,7 +37,8 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 export SUDO_EDITOR=$VISUAL
 
-# 1Password 
+# FZF
+export FZF_DEFAULT_COMMAND="ag -g ''"
 
 
 export PATH=$LOCAL_BIN:$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$CARGO_INSTALL_ROOT/bin:$RUSTPUP_ROOT:$PATH

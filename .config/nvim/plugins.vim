@@ -18,7 +18,7 @@ Plug 'junegunn/fzf.vim'
 
 " File browsing
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'preservim/nerdtree'
 
 " COC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

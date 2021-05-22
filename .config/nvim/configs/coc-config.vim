@@ -17,6 +17,8 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <C-g>p  <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-g>n <Plug>(coc-diagnostic-next)
 
+nmap <silent> <C-k> <Plug>(coc-codeaction-line)
+
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

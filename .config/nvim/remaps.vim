@@ -8,8 +8,8 @@ noremap <M-j> :tabp<CR>
 noremap <M-t> :tabnew<CR>
 
 " Split creation
-noremap <C-s>j :split<CR><C-w>j:CtrlP<CR>
-noremap <C-s>l :vsplit<CR><C-w>l:CtrlP<CR>
+noremap <C-s>j :split<CR><C-w>j:Files<CR>
+noremap <C-s>l :vsplit<CR><C-w>l:Files<CR>
 
 " Reload vimrc
 nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
