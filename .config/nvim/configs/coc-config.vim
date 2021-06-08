@@ -19,6 +19,9 @@ nmap <silent> <C-g>n <Plug>(coc-diagnostic-next)
 
 nmap <silent> <C-k> <Plug>(coc-codeaction-line)
 
+" Visual remap
+xmap <c-k>  <Plug>(coc-codeaction-selected)
+
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

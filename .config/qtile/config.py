@@ -60,7 +60,7 @@ screenshot = "sleep 0.2;scrot -s ~/pictures/screenshots/$(date +%F_%T).png -e 'x
 suspend = "systemctl suspend"
 change_wallpaper = "~/.local/user/scripts/setwp -r"
 start_picom = "picom -b"
-emojiCmd = "rofimoji -c --skin-tone neutral --max-recent 0"
+emojiCmd = "rofimoji --skin-tone neutral --max-recent 0 --prompt ''"
 inc_backlight = "sudo xbacklight -inc 10"
 dec_backlight = "sudo xbacklight -dec 10"
 
