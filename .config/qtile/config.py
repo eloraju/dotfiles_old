@@ -56,7 +56,8 @@ terminal = "alacritty"
 #######################
 ####    SCRIPTS    ####
 #######################
-screenshot = "sleep 0.2;scrot -s ~/pictures/screenshots/$(date +%F_%T).png -e 'xclip -selection clipboard -t image/png < $f'"
+screenshot = "~/.local/user/scripts/screenshot"
+fullscreen_screenshot = f"{screenshot} -f"
 suspend = "systemctl suspend"
 change_wallpaper = "~/.local/user/scripts/setwp -r"
 start_picom = "picom -b"
@@ -107,6 +108,7 @@ keys = [
 
     # Run scripts
     Key(M_Sft, "p", run_script(screenshot)),
+    Key(M, "F6", run_script(fullscreen_screenshot)),
     Key(M_Sft, "e", run_script(emojiCmd)),
     Key(M, "F12", run_script(change_wallpaper)),
 ]

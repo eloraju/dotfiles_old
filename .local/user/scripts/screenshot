@@ -1,0 +1,32 @@
+#!/bin/sh
+
+SCROONSHOT_PATH=$HOME/pictures/screenshots
+COPY_TO_CLIPBOARD='xclip -selection clipboard -t image/png'
+
+cropped() {
+  SHOT_PATH="$SCROONSHOT_PATH/$(date +%F_%T).png"
+  sleep 0.2
+  scrot -s $SHOT_PATH -e "$COPY_TO_CLIPBOARD < $SHOT_PATH"
+  notfify $SHOT_PATH
+}
+
+fullscreen() {
+  SHOT_PATH="$SCROONSHOT_PATH/$(date +%F_%T).png"
+  sleep 0.2
+  scrot $SHOT_PATH -e "$COPY_TO_CLIPBOARD < $SHOT_PATH"
+  notfify $SHOT_PATH
+}
+
+notfify() {
+    notify-send -i $1 "Screenshot captured"
+}
+
+case "$1" in
+  -f)
+    fullscreen
+    ;;
+
+  *)
+    cropped
+    ;;
+esac
