@@ -1,0 +1,46 @@
+/**
+ * ROFI Color theme
+ * User: Eloraju
+ * Copyright: Juuso Elo-Rauta
+ */
+
+* {
+black: #141214;
+dark-green: #144d1d;
+light-green: #82df53;
+green: #218230;
+gray: #cecece;
+
+background-color: @black;
+text-color: @gray;
+}
+
+window {
+border: 2px;
+border-color: @dark-green;
+
+padding: 5px;
+
+width: 20%;
+font: "JetBrainsMono Nerd Font Mono 10";
+background-color: @black;
+children: [entry, listview];
+}
+
+
+entry {
+background-color: @black;
+text-color: @gray;
+expand: false;
+lines: 1;
+}
+
+listview {
+layout: vertical;
+lines: 10;
+background-color: inherit;
+}
+
+element-text selected{
+background-color: @dark-green;
+}
