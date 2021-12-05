@@ -13,9 +13,16 @@ export EDITOR=nvim
 bindkey -v
 export KEYTIMEOUT=1
 
+# History stuff
 HISTFILE="$HOME/.local/share/zsh/history"
-HISTSIZE=1000
-SAVEHIST=1
+HISTSIZE=10000
+SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_ALL_DUPS     # Delete old recorded entry if new entry is a duplicate.
+setopt INC_APPEND_HISTORY       # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY            # Share history between all sessions.
+
+
+
 # Use vim keys in tab complete menu:
 #bindkey -M menuselect 'h' vi-backward-char
 #bindkey -M menuselect 'k' vi-up-line-or-history

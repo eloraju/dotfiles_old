@@ -1,8 +1,8 @@
 configuration {
     modi: "drun,run";
-    theme: "live-iron";
     matching: "fuzzy";
     sort: true;
     sorting-method: "fzf";
 }
 
+@theme "live-iron"

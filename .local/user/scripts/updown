@@ -1,0 +1,9 @@
+if [[ ! id -u ]]; then 
+  echo "must be run as root. 'sudo !!' maybe ?"
+  exit 1
+fi
+
+# turn the screens off
+xset dpms force off
+
+paru -Syyu --noconfirm && shutdown now

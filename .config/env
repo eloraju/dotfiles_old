@@ -40,5 +40,8 @@ export SUDO_EDITOR=$VISUAL
 # FZF
 export FZF_DEFAULT_COMMAND="ag -g ''"
 
+# IntelliJ Idea Ultimate needs java 11 to run properly
+export IDEA_JDK=/usr/lib/jvm/java-11-openjdk
+
 
 export PATH=$LOCAL_BIN:$USER_SCRIPTS:$USER_BIN:/usr/local/bin:$CARGO_INSTALL_ROOT/bin:$RUSTPUP_ROOT:$PATH

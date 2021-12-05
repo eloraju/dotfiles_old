@@ -44,7 +44,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.EZConfig
 
 -- Variable declarations
-modKey = mod4Mask
+modKey = mod1Mask
 myTerminal = "alacritty"
 myTextEditor = "nvim"
 myFocusFollowsMouse :: Bool
@@ -56,7 +56,7 @@ myBrowser = "brave"
 
 --Borders
 myNormalBorderColor  = "#000"
-myBorderWidth   = 2
+myBorderWidth   = 1
 myFocusedBorderColor = "#28bd68"
 --"#45633d"
 
@@ -141,7 +141,8 @@ myMouseBindings (XConfig {XMonad.modMask = modKey}) = M.fromList $
     [ ((modKey, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
 
-    , ((modKey, button2), (\w -> focus w >> windows W.shiftMaster))
+    , ((modKey, button2), (\w -> focus w >> w W.sink
+                                         >> windows W.shiftMaster))
 
     , ((modKey, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
