@@ -149,16 +149,6 @@ for i in groups:
 
 
 ########################
-####    SCARTCH     ####
-########################
-groups.append(
-    ScratchPad("scratch", [
-               DropDown('ala', 'alacritty', on_focus_lost_hide=True),
-               DropDown('sla', 'chromium --app=https://app.slack.com/client/T02CLPH0M/unreads', on_focus_lost_hide=True)
-               ])
-)
-
-########################
 ####    LAYOUTS     ####
 ########################
 layouts = [
@@ -183,14 +173,15 @@ dgroups_app_rules = []  # type: List
 main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = False
-cursor_warp = False
+cursor_warp = True
 auto_fullscreen = False
 focus_on_window_activation = "smart"
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
-    {'wmclass': 'timer-for-harvest'},  # File opener
-    {'wmclass': 'droidcam'},  # File opener
+    {'wmclass': 'timer-for-harvest'},
+    {'wmclass': 'droidcam'},
+    {'wmclass': '1password'},
 ])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this

@@ -3,7 +3,8 @@
 from libqtile import widget, bar
 from libqtile.config import Screen
 from libqtile.widget import net
-from shared import monitorCount, FONT, colors, bar_theme
+from helpers import monitorCount
+from shared import FONT, colors, bar_theme
 from socket import gethostname
 
 screens = []

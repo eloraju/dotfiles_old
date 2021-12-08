@@ -1,4 +1,4 @@
-if [[ ! id -u ]]; then 
+if [[ ! $(id -u) ]]; then 
   echo "must be run as root. 'sudo !!' maybe ?"
   exit 1
 fi

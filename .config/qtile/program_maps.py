@@ -1,7 +1,7 @@
 from libqtile.lazy import lazy
 
 browser = "brave"
-gui_editor = "code"
+gui_editor = "intellij-idea-ultimate-edition"
 
 programs = {
         "F1":lazy.spawn(browser),
