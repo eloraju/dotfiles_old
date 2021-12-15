@@ -173,7 +173,7 @@ dgroups_app_rules = []  # type: List
 main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = False
-cursor_warp = True
+#cursor_warp = True
 auto_fullscreen = False
 focus_on_window_activation = "smart"
 floating_layout = layout.Floating(float_rules=[
@@ -182,6 +182,7 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'timer-for-harvest'},
     {'wmclass': 'droidcam'},
     {'wmclass': '1password'},
+    {'wmclass': 'net.battlescribe.desktop.rostereditor.RosterEditorApplication'}
 ])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this

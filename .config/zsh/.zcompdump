@@ -264,6 +264,7 @@ _comps=(
 'dockerd' '_docker'
 'domainname' '_yp'
 'dos2unix' '_dos2unix'
+'downgrade' '_downgrade'
 'drill' '_drill'
 'dropdb' '_postgresql'
 'dropuser' '_postgresql'
@@ -743,7 +744,6 @@ _comps=(
 'mencal' '_mencal'
 'mere' '_mere'
 'merge' '_rcs'
-'meson' '_meson'
 'metaflac' '_flac'
 'mformat' '_mtools'
 'mgv' '_pspdf'
@@ -1637,10 +1637,10 @@ bindkey '^[~' _bash_complete-word
 
 autoload -Uz _alacritty _bat _bluetoothctl _bootctl _busctl \
             _bw _bwrap _cargo _code _code-oss \
-            _coredumpctl _curl _deno _docker _exa \
-            _gh _hostnamectl _journalctl _kernel-install _libinput \
-            _localectl _loginctl _luarocks _luarocks-admin _machinectl \
-            _meson _mkinitcpio _networkctl _ninja _pacman \
+            _coredumpctl _curl _deno _docker _downgrade \
+            _exa _gh _hostnamectl _journalctl _kernel-install \
+            _libinput _localectl _loginctl _luarocks _luarocks-admin \
+            _machinectl _mkinitcpio _networkctl _ninja _pacman \
             _paru _pulseaudio _qpdf _resolvectl _rg \
             _rustup _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files \
             _starship _systemctl _systemd _systemd-analyze _systemd-delta \

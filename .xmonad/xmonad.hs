@@ -44,7 +44,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.EZConfig
 
 -- Variable declarations
-modKey = mod1Mask
+modKey = mod4Mask
 myTerminal = "alacritty"
 myTextEditor = "nvim"
 myFocusFollowsMouse :: Bool
@@ -136,18 +136,18 @@ myKeys =
         (i, key) <- zip myWorkspaces (([1..9] ++ [0])>>= return.show),
         (function, modifier) <- [(W.greedyView, ""), (W.shift, "S-")]]
 
-myMouseBindings (XConfig {XMonad.modMask = modKey}) = M.fromList $
-
-    [ ((modKey, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-
-    , ((modKey, button2), (\w -> focus w >> w W.sink
-                                         >> windows W.shiftMaster))
-
-    , ((modKey, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-    -- scroll wheel (button4 and button5)
-    ]
+--myMouseBindings (XConfig {XMonad.modMask = modKey}) = M.fromList $
+--
+--    [ ((modKey, button1), (\w -> focus w >> mouseMoveWindow w
+--                                       >> windows W.shiftMaster))
+--
+--    , ((modKey, button2), (\w -> focus w >> w W.sink
+--                                         >> windows W.shiftMaster))
+--
+--    , ((modKey, button3), (\w -> focus w >> mouseResizeWindow w
+--                                       >> windows W.shiftMaster))
+--    -- scroll wheel (button4 and button5)
+--    ]
 
 
 -- Workspaces
@@ -222,7 +222,7 @@ main = do
             focusedBorderColor = myFocusedBorderColor,
      
             -- bindings
-            mouseBindings      = myMouseBindings,
+           -- mouseBindings      = myMouseBindings,
       
             -- hooks, layouts
             layoutHook         = myLayoutHook,
