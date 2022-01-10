@@ -59,7 +59,9 @@ for mon in range(mons):
         widget.Memory(
             **bar_theme,
             format="mem {MemPercent}%"
-        )
+        ),
+        pipeSpacer,
+        widget.Systray(**bar_theme)
     ]
 
     if gethostname() == "carbon":

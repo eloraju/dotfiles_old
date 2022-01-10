@@ -1,5 +1,5 @@
 from libqtile import layout, hook
-from libqtile.config import Key, Group, Drag, Click, ScratchPad, DropDown
+from libqtile.config import Key, Group, Drag, Click, ScratchPad, DropDown, Match
 from libqtile.lazy import lazy
 
 from os import environ
@@ -179,10 +179,10 @@ focus_on_window_activation = "smart"
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
-    {'wmclass': 'timer-for-harvest'},
-    {'wmclass': 'droidcam'},
-    {'wmclass': '1password'},
-    {'wmclass': 'net.battlescribe.desktop.rostereditor.RosterEditorApplication'}
+    Match(wm_class= 'timer-for-harvest'),
+    Match(wm_class= 'droidcam'),
+    Match(wm_class= '1password'),
+    Match(wm_class= 'net.battlescribe.desktop.rostereditor.RosterEditorApplication')
 ])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
