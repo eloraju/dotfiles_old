@@ -13,6 +13,7 @@ shared.conf.wp_dir = "~/pictures/wallpapers"
 shared.scripts.screenshot = "~/.local/user/scripts/screenshot"
 shared.scripts.fs_screenshot = "~/.local/user/scripts/screenshot -f"
 shared.scripts.randomWP = "~/.local/user/scripts/setwp -r"
+shared.scripts.suspend = "systemctl suspend"
 -- sudo is conffed not to ask password for this command
 shared.scripts.inc_backlight = "sudo xbacklight -inc 10"
 shared.scripts.dec_backlight = "sudo xbacklight -dec 10"

@@ -14,11 +14,8 @@ utils.spawnTerm = function ()
   awful.spawn(conf.terminal)
 end
 
-utils.dupTemr = function ()
-  local client = awful.client.focus
-  if client and client.class == 'Alacritty' then
-    
-  end
+utils.suspend = function()
+  awful.spawn.with_shell(scripts.suspend)
 end
 
 utils.focusNext = function()

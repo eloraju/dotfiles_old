@@ -28,7 +28,7 @@ colors = {
 
 theme.font          = "JetBrainsMono Nerd Font Mono 10"
 
-theme.bg_normal     = "#222222"
+theme.bg_normal     = colors.black
 theme.bg_focus      = colors.dark_green
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
@@ -72,6 +72,10 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
+
+theme.notification_max_width = dpi(720)
+theme.notification_max_height = dpi(720)
+theme.notification_icon_size = dpi(275)
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]

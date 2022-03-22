@@ -49,6 +49,7 @@ local globalkeys = gears.table.join(
     -- Basic controls
     awful.key(HYPER, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
     awful.key(HYPER, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
+    awful.key(HYPER, "s", util.suspend, {description = "quit awesome", group = "awesome"}),
     awful.key(M, "Return", util.spawnTerm, {description = "open a terminal", group = "launcher"}),
     awful.key(M, "s", hotkeys_popup.show_help, {description="show help", group="awesome"}),
     awful.key(M, "Escape", awful.tag.history.restore, {description = "return to previously selected", group = "tag"}),

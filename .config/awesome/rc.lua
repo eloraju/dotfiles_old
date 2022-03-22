@@ -129,13 +129,13 @@ local tasklist_buttons = gears.table.join(
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", utils.setWallpaper)
+utils.setWallpaper(s)
 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock('%a %d.%m %H:%M')
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    utils.setWallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
@@ -172,6 +172,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.align.horizontal,
             { -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
+                spacing = 5,
                 s.mylayoutbox,
                 s.mytaglist,
                 s.mytasklist,
