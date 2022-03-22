@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+HERE=$(dirname $(readlink -f $0))
+SCREEN_SIZE=${SCREEN_SIZE:-1904x1071}
+XDISPLAY=${XDISPLAY:-:2}
+LOG_LEVEL=${LOG_LEVEL:-INFO}
+
+Xephyr +extension RANDR -screen ${SCREEN_SIZE} ${XDISPLAY} -ac &
+XEPHYR_PID=$!
+(
+  sleep 1
+  env DISPLAY=${XDISPLAY} WM_TESTING=1 /usr/bin/awesome  $@ &
+  AWE_PID=$!
+  env DISPLAY=${XDISPLAY} ${APP} &
+  wait $AWE_PID
+  kill $XEPHYR_PID
+)

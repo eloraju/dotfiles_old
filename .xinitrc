@@ -5,6 +5,10 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
+# UNCOMMENT TO USE PLASMA
+#export DESKTOP_SESSION=plasma
+
+
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
@@ -35,4 +39,6 @@ fi
 xsetroot -cursor_name left_ptr &
 xbanish &
 #exec qtile start
-exec xmonad
+#exec startplasma-x11
+#exec xmonad
+exec awesome
