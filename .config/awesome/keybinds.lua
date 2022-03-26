@@ -45,7 +45,7 @@ M_Ctl = {MOD, CONTROL}
 ----    END VARIABLES     ----
 ------------------------------
 
-local globalkeys = gears.table.join(
+local globalkeys = {
     -- Basic controls
     awful.key(HYPER, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
     awful.key(HYPER, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
@@ -83,94 +83,79 @@ local globalkeys = gears.table.join(
     awful.key(M, "F1", util.openBrowser, {description = "open browser", group = "launcher"}),
     awful.key(M_Sft, "F1", util.openBrowserIncog, {description = "open browser in incognito", group = "launcher"}),
     awful.key(M, "F2", util.openIde, {description = "open ide", group = "launcher"}),
-    awful.key(M, "F12", util.setWallpaper, {description = "open ide", group = "launcher"})
-)
+    awful.key(M, "F12", util.setWallpaper, {description = "open ide", group = "launcher"}),
 
-local clientkeys = gears.table.join(
+    -- Tag keys
+    awful.key {
+        modifiers   = M,
+        keygroup    = "numrow",
+        description = "only view tag",
+        group       = "tag",
+        on_press    = function (index)
+            local screen = awful.screen.focused()
+            local tag = screen.tags[index]
+            if tag then
+                tag:view_only()
+            end
+        end,
+    },
+    awful.key {
+        modifiers   = M_Ctl,
+        keygroup    = "numrow",
+        description = "toggle tag",
+        group       = "tag",
+        on_press    = function (index)
+            local screen = awful.screen.focused()
+            local tag = screen.tags[index]
+            if tag then
+                awful.tag.viewtoggle(tag)
+            end
+        end,
+    },
+    awful.key {
+        modifiers = M_Sft,
+        keygroup    = "numrow",
+        description = "move focused client to tag",
+        group       = "tag",
+        on_press    = function (index)
+            if client.focus then
+                local tag = client.focus.screen.tags[index]
+                if tag then
+                    client.focus:move_to_tag(tag)
+                end
+            end
+        end,
+    },
+    awful.key {
+        modifiers   = M_Ctl_Sft,
+        keygroup    = "numrow",
+        description = "toggle focused client on tag",
+        group       = "tag",
+        on_press    = function (index)
+            if client.focus then
+                local tag = client.focus.screen.tags[index]
+                if tag then
+                    client.focus:toggle_tag(tag)
+                end
+            end
+        end,
+    },
+}
+
+local clientkeys = {
     awful.key(M_Ctl, "Return", util.moveToMaster, {description = "duplicate current terminal", group = "launcher"}),
     awful.key(M, "f", util.toggleFullscreen, {description = "toggle fullscreen", group = "client"}),
     awful.key(M_Sft, "q", util.killClient, {description = "close", group = "client"}),
     awful.key(M, "o", util.moveToScreen, {description = "move to screen", group = "client"}),
     awful.key(M, "t", util.toggleKeepOnTop, {description = "toggle keep on top", group = "client"}),
-    awful.key(M, "n", util.minimizeClient, {description = "minimize", group = "client"})--,
---    awful.key({ MOD,           }, "m",
---        function (c)
---            c.maximized = not c.maximized
---            c:raise()
---        end ,
---        {description = "(un)maximize", group = "client"}),
---    awful.key({ MOD, "Control" }, "m",
---        function (c)
---            c.maximized_vertical = not c.maximized_vertical
---            c:raise()
---        end ,
---        {description = "(un)maximize vertically", group = "client"}),
---    awful.key({ MOD, "Shift"   }, "m",
---        function (c)
---            c.maximized_horizontal = not c.maximized_horizontal
---            c:raise()
---        end ,
---        {description = "(un)maximize horizontally", group = "client"})
-)
+    awful.key(M, "n", util.minimizeClient, {description = "minimize", group = "client"}),
+}
 
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it work on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
-    globalkeys = gears.table.join(globalkeys,
-        -- View tag only.
-        awful.key(M, "#" .. i + 9,
-                  function ()
-                        local screen = awful.screen.focused()
-                        local tag = screen.tags[i]
-                        if tag then
-                           tag:view_only()
-                        end
-                  end,
-                  {description = "view tag #"..i, group = "tag"}),
-
-        -- Toggle tag display.
-        awful.key(M_Ctl, "#" .. i + 9,
-                  function ()
-                      local screen = awful.screen.focused()
-                      local tag = screen.tags[i]
-                      if tag then
-                         awful.tag.viewtoggle(tag)
-                      end
-                  end,
-                  {description = "toggle tag #" .. i, group = "tag"}),
-
-        -- Move client to tag.
-        awful.key(M_Sft, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = client.focus.screen.tags[i]
-                          if tag then
-                              client.focus:move_to_tag(tag)
-                          end
-                     end
-                  end,
-                  {description = "move focused client to tag #"..i, group = "tag"}),
-
-        -- Toggle tag on focused client.
-        awful.key(M_Ctl_Sft, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = client.focus.screen.tags[i]
-                          if tag then
-                              client.focus:toggle_tag(tag)
-                          end
-                      end
-                  end,
-                  {description = "toggle focused client on tag #" .. i, group = "tag"})
-    )
-end
-
-local clientbuttons = gears.table.join(
+local clientbuttons = {
     awful.button({ }, 1, util.activateClient),
     awful.button(M, 1, util.dragClient),
     awful.button(M, 2, util.toggleFloating),
     awful.button(M, 3, util.resizeClient)
-)
+}
 
 return {globalkeys = globalkeys, clientkeys = clientkeys, clientbuttons = clientbuttons}
