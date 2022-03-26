@@ -264,6 +264,17 @@ ruled.client.connect_signal("request::rules", function()
         properties = { titlebars_enabled = false }
     }
 
+    -- Make steam games fullscreen automatically
+    ruled.client.append_rule {
+        id = "fullscreen",
+        rule_any = {
+            class = {
+                "steam_app_*"
+            }
+        },
+        properties = {fullscreen = true}
+    }
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- ruled.client.append_rule {
     --     rule       = { class = "Firefox"     },
@@ -273,7 +284,6 @@ end)
 
 -- }}}
 
--- {{{ Titlebars
 
 -- {{{ Notifications
 
