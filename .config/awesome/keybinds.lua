@@ -80,6 +80,9 @@ local globalkeys = {
 
     -- Launcher and apps
     awful.key(M_Sft, "Return", util.spawnRofi, {description = "run rofi", group = "launcher"}),
+    awful.key(M_Sft, "p", util.screenshot, {description = "run flameshot", group = "launcher"}),
+    awful.key(M, "p", util.screenshotQuick, {description = "run flameshot", group = "launcher"}),
+        
     awful.key(M, "F1", util.openBrowser, {description = "open browser", group = "launcher"}),
     awful.key(M_Sft, "F1", util.openBrowserIncog, {description = "open browser in incognito", group = "launcher"}),
     awful.key(M, "F2", util.openIde, {description = "open ide", group = "launcher"}),

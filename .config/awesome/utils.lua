@@ -117,6 +117,14 @@ utils.spawnRofi = function()
   awful.spawn(scripts.run_rofi)
 end
 
+utils.screenshotQuick = function()
+  awful.spawn("flameshot gui")
+end
+
+utils.screenshot = function()
+  awful.spawn("flameshot launcher")
+end
+
 utils.openBrowser = function()
   awful.spawn(conf.browser)
 end
