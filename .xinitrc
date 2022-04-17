@@ -38,6 +38,8 @@ fi
 
 xsetroot -cursor_name left_ptr &
 xbanish &
+nm-applet &
+1password --silent &
 #exec qtile start
 #exec startplasma-x11
 #exec xmonad
