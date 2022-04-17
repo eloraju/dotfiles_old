@@ -3,7 +3,7 @@
 font:
   # Normal (roman) font face
   normal:
-    family: DejaVuSansMono Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
   size: 9
 window:
   opacity: 0.8
