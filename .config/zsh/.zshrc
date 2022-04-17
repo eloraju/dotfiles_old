@@ -140,6 +140,9 @@ elif type compctl &>/dev/null; then
 fi
 ###-end-npm-completion-###
 
+# Load dotbare plugin
+source /home/juuso/.local/user/plugins/dotbare/dotbare.plugin.zsh
+
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
