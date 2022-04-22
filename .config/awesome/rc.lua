@@ -28,6 +28,10 @@ local utils = require("utils")
 local conf = require("shared").conf
 local clientRules = require("clientRules")
 
+-- Aesome widget collection widgets
+local cal_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -95,8 +99,19 @@ end)
 
 -- {{{ Wibar
 
+-- Create calendar widget
+calendar = cal_widget({
+  placement = "top_middle",
+  theme = "dark"
+})
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock('%a %d.%m %H:%M')
+
+-- Connect calendar widget to click
+mytextclock:connect_signal("button::press", function(_, _, _, btn)
+  if btn == 1 then calendar.toggle() end
+end)
 
 screen.connect_signal("request::wallpaper", utils.setWallpaper)
 screen.connect_signal("request::desktop_decoration", function(s)
@@ -242,4 +257,3 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 -- Autostart stuff
-awful.spawn.with_shell("picom -b")
