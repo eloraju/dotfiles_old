@@ -105,6 +105,9 @@ calendar = cal_widget({
   theme = "dark"
 })
 
+-- Get hostname and check if we're running on the laptop
+hasBattery = io.popen("uname -n"):read() == "jankha"
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock('%a %d.%m %H:%M')
 
@@ -187,7 +190,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         nil,
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
-          require("battery-widget") {},
+          (hasBattery and ("battery-widget") {} or nil),
           wibox.widget.systray(),
         },
       },
