@@ -1,0 +1,27 @@
+#!/bin/bash
+
+TRANSPARENT=00000000
+WRONGC=ff0000ff
+VERFC=0000ffff
+
+BACKGROUND=$(mktemp /tmp/pixelbg.XXXXX)
+import -window root jpeg:"$BACKGROUND"
+SIZE=$(identify -format "%[fx:w]x%[fx:h]" "$BACKGROUND")
+convert jpeg:"$BACKGROUND" -scale 4% $GRAYSCALE -sample $SIZE\! -quality 11 png24:"$BACKGROUND"
+FONT="JetBrainsMono Nerd Font Mono"
+
+i3lock \
+  --image $BACKGROUND \
+  --force-clock \
+  --bar-indicator \
+  --time-color=ffffffff \
+  --date-color=ffffffff \
+  --time-size=65 \
+  --date-size=35 \
+  --time-font="$FONT" \
+  --date-font="$FONT" \
+  --wrong-text="" \
+  --verif-text="" \
+  --noinput-text="" \
+  --wrong-color=ff0000ff \
+

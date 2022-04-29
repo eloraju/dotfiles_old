@@ -6,11 +6,11 @@ local scripts = shared.scripts
 local utils = {}
 
 function runScript(script)
-  print("Trying to execute "..script)
+  print("Trying to execute " .. script)
   awful.spawn.with_shell(script)
 end
 
-utils.spawnTerm = function ()
+utils.spawnTerm = function()
   awful.spawn(conf.terminal)
 end
 
@@ -26,7 +26,7 @@ utils.focusPrevious = function()
   awful.client.focus.byidx(-1)
 end
 
-utils.moveClientUp = function ()
+utils.moveClientUp = function()
   awful.client.swap.byidx(1)
 end
 
@@ -42,11 +42,11 @@ utils.prevScreen = function()
   awful.screen.focus_relative(-1)
 end
 
-utils.increaseMasterFactor = function ()
+utils.increaseMasterFactor = function()
   awful.tag.incmwfact(0.05)
 end
 
-utils.decreaseMasterFactor = function ()
+utils.decreaseMasterFactor = function()
   awful.tag.incmwfact(-0.05)
 end
 
@@ -58,11 +58,11 @@ utils.decreaseMasterCount = function()
   awful.tag.incnmaster(-1, nil, true)
 end
 
-utils.increaseColCount = function ()
+utils.increaseColCount = function()
   awful.tag.incncol(1, nil, true)
 end
 
-utils.decreaseColCount = function ()
+utils.decreaseColCount = function()
   awful.tag.incncol(-1, nil, true)
 end
 
@@ -76,7 +76,7 @@ end
 
 -- Client helpers
 
-utils.toggleFullscreen = function (client)
+utils.toggleFullscreen = function(client)
   client.fullscreen = not client.fullscreen
   client:raise()
 end
@@ -90,7 +90,7 @@ utils.restoreMinimized = function()
   -- Focus restored client
   if c then
     c:emit_signal(
-        "request::activate", "key.unminimize", {raise = true}
+      "request::activate", "key.unminimize", { raise = true }
     )
   end
 end
@@ -140,7 +140,7 @@ end
 -- Mouse button helpers
 
 utils.activateClient = function(client)
-  client:emit_signal("request::activate", "mouse_click", {raise=true})
+  client:emit_signal("request::activate", "mouse_click", { raise = true })
 end
 
 utils.dragClient = function(client)
@@ -167,20 +167,24 @@ end
 
 -- Bar mous bindings
 
-utils.taskListToggleMinimized = function (client)
+utils.taskListToggleMinimized = function(client)
   if client == client.focus then
-      client.minimized = true
+    client.minimized = true
   else
-      client:emit_signal(
-          "request::activate",
-          "tasklist",
-          {raise = true}
-      )
+    client:emit_signal(
+      "request::activate",
+      "tasklist",
+      { raise = true }
+    )
   end
 end
 
 utils.showTasklist = function()
   awful.menu.client_list({ theme = { width = 250 } })
+end
+
+utils.lock = function()
+  awful.spawn.with_shell("/home/juuso/.local/user/scripts/pixellock")
 end
 
 return utils
