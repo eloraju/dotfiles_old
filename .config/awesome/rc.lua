@@ -190,7 +190,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         nil,
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
-          (hasBattery and ("battery-widget") {} or nil),
+          (hasBattery and require("battery-widget") {} or nil),
           wibox.widget.systray(),
         },
       },
