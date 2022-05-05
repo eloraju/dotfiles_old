@@ -1,7 +1,7 @@
 local leader = require("awesome-leader")
 local util = require("utils")
 
-
+local chords = {}
 local wallpaperKeys = leader.bind_actions({
   {
     "e",
@@ -20,7 +20,7 @@ local wallpaperKeys = leader.bind_actions({
   }
 })
 
+chords.wallpaperKeys = leader.leader(wallpaperKeys, "Chords");
 leader.set_timeout(10)
-local chords = leader.leader(wallpaperKeys, "Chords");
 
 return chords

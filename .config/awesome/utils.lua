@@ -187,4 +187,14 @@ utils.lock = function()
   awful.spawn.with_shell("/home/juuso/.local/user/scripts/pixellock")
 end
 
+utils.nextWP = function()
+  awful.spawn.with_shell("variety --next")
+end
+utils.prevWP = function()
+  awful.spawn.with_shell("variety --previous")
+end
+utils.favWP = function()
+  awful.spawn.with_shell("variety --favourite")
+end
+
 return utils
