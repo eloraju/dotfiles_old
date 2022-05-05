@@ -1,7 +1,7 @@
 local awful = require("awful")
-local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local util = require("utils")
+local chords = require("chords")
 
 ---------------------------------
 ----    DEFINING VARIABLES   ----
@@ -88,6 +88,7 @@ local globalkeys = {
   awful.key(M_Sft, "F1", util.openBrowserIncog, { description = "open browser in incognito", group = "launcher" }),
   awful.key(M, "F2", util.openIde, { description = "open ide", group = "launcher" }),
   awful.key(M, "F12", util.setWallpaper, { description = "open ide", group = "launcher" }),
+  awful.key(M, "w", chords, { description = "leader functions" }),
 
   -- Tag keys
   awful.key {
@@ -163,4 +164,3 @@ local clientbuttons = {
 }
 
 return { globalkeys = globalkeys, clientkeys = clientkeys, clientbuttons = clientbuttons }
-
