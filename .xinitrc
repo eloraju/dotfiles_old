@@ -42,6 +42,7 @@ nm-applet &
 blueman-applet & 
 1password --silent &
 variety &
+picom -b
 #exec qtile start
 #exec startplasma-x11
 #exec xmonad

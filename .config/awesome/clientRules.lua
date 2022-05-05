@@ -67,7 +67,7 @@ local clienRules = function()
         "steam_app_*"
       }
     },
-    properties = { fullscreen = true, ontop = true }
+    properties = { floating = true, fullscreen = true, ontop = true }
   }
 
   ruled.client.append_rule {
@@ -79,4 +79,3 @@ local clienRules = function()
 end
 
 return clienRules
-
