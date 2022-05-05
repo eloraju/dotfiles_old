@@ -194,7 +194,7 @@ utils.prevWP = function()
   awful.spawn.with_shell("variety --previous")
 end
 utils.favWP = function()
-  awful.spawn.with_shell("variety --favourite")
+  awful.spawn.with_shell("variety --favorite")
 end
 
 return utils
