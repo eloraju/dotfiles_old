@@ -21,7 +21,7 @@ endif
   endfor
 
   " Leader char
-  let mapleader="-"
+  let mapleader=" "
 
   " Filetype autocommands
   au BufNewFile,BufRead *.ts setlocal filetype=typescript
