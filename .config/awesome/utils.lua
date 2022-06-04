@@ -81,6 +81,11 @@ utils.toggleFullscreen = function(client)
   client:raise()
 end
 
+utils.toggleMaximize = function(client)
+  client.maximized = not client.maximized
+  client:raise()
+end
+
 utils.minimizeClient = function(client)
   client.minimized = true
 end

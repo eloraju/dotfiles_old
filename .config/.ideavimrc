@@ -24,7 +24,7 @@ map Q gq
 " Find more examples here: https://jb.gg/share-ideavimrc
 
 " Personal config
-let mapleader="\<space>"
+let mapleader="-"
 
 set relativenumber
 set number
@@ -33,6 +33,4 @@ set number
 " https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
 set easymotion
 set surround
-
-let g:EasyMotion_do_mapping=0
 

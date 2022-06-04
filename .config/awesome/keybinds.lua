@@ -154,6 +154,7 @@ local clientkeys = {
   awful.key(M, "o", util.moveToScreen, { description = "move to screen", group = "client" }),
   awful.key(M, "t", util.toggleKeepOnTop, { description = "toggle keep on top", group = "client" }),
   awful.key(M, "n", util.minimizeClient, { description = "minimize", group = "client" }),
+  awful.key(M, "m", util.toggleMaximize, { description = "toggle maximize", group = "client" }),
 }
 
 local clientbuttons = {
